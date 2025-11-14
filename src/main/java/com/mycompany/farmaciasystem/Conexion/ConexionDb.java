@@ -19,24 +19,17 @@ public class ConexionDb {
     private Connection conexion;
 
     private final String user = "fvelasquezl";
-    private final String password = "admin123";
-    private final String ip = "localhost";
-    private final String puerto = "1433";
-    private final String database = "farmaciaDB";
-    private final String url = "jdbc:sqlserver://" + ip + ":" + puerto
-            + ";databaseName=" + database
-            + ";encrypt=true;trustServerCertificate=true;";
+    private final String password = "140120";
+    private final String url = "jdbc:postgresql://localhost/farmacia_db";
 
     /**
      * Constructor privado para evitar instanciación directa
      */
     private ConexionDb() {
-        // Constructor vacío privado
     }
 
     /**
      * Método sincronizado para obtener la instancia única
-     *
      * @return Instancia única de ConexionDb
      */
     public static synchronized ConexionDb getInstancia() {
@@ -99,19 +92,4 @@ public class ConexionDb {
     }
 }
 
-/* 
- * EJEMPLO DE USO:
- * 
- * // Obtener la instancia única
- * ConexionDb db = ConexionDb.getInstancia();
- * 
- * // Obtener la conexión
- * Connection conn = db.getConexion();
- * 
- * // Usar la conexión para ejecutar queries
- * Statement stmt = conn.createStatement();
- * ResultSet rs = stmt.executeQuery("SELECT * FROM tabla");
- * 
- * // Cerrar la conexión cuando ya no se necesite
- * db.cerrarConexion();
- */
+
