@@ -12,6 +12,7 @@ import com.mycompany.farmaciasystem.Presentacion.Modulos.Productos;
 import com.mycompany.farmaciasystem.Presentacion.Modulos.Promociones;
 import com.mycompany.farmaciasystem.Presentacion.Modulos.Proveedores;
 import com.mycompany.farmaciasystem.Presentacion.Modulos.Ventas;
+import com.mycompany.farmaciasystem.modelo.entidades.Usuario;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,10 +23,12 @@ import javax.swing.JPanel;
  */
 public class Principal extends javax.swing.JFrame {
 
+    Usuario usuarioActual;
 
-    public Principal() {
+    public Principal(Usuario usuario) {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.usuarioActual = usuario;
         LblMenu.setText("INICIO");
     }
 

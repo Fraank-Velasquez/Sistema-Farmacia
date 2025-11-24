@@ -27,32 +27,35 @@
 -version
 -windowtitle
 'FarmaciaSystem 1.0-SNAPSHOT API'
-com.mycompany.farmaciasystem.Conexion
+com.mycompany.farmaciasystem.configuración
 com.mycompany.farmaciasystem
-com.mycompany.farmaciasystem.Presentacion.FormsADD
-com.mycompany.farmaciasystem.Presentacion.FormsEditar
-com.mycompany.farmaciasystem.Presentacion.Login
-com.mycompany.farmaciasystem.Presentacion.Modulos
-com.mycompany.farmaciasystem.Presentacion.Principal
+com.mycompany.farmaciasystem.modelo.entidades
+com.mycompany.farmaciasystem.presentacion.FormsADD
+com.mycompany.farmaciasystem.presentacion.FormsEditar
+com.mycompany.farmaciasystem.presentacion.Login
+com.mycompany.farmaciasystem.presentacion.Modulos
+com.mycompany.farmaciasystem.presentacion.Principal
+com.mycompany.farmaciasystem.repository.Implementaciones
+com.mycompany.farmaciasystem.repository.Interfaces
 C:\Users\Frank\.m2\repository\com\formdev\flatlaf\3.6\flatlaf-3.6.jar = 1746429355923
 C:\Users\Frank\.m2\repository\org\netbeans\external\AbsoluteLayout\RELEASE270\AbsoluteLayout-RELEASE270.jar = 1761796263560
 C:\Users\Frank\.m2\repository\com\microsoft\sqlserver\mssql-jdbc\13.2.0.jre11\mssql-jdbc-13.2.0.jre11.jar = 1762924158199
 C:\Users\Frank\.m2\repository\net\bytebuddy\byte-buddy\1.15.11\byte-buddy-1.15.11.jar = 1762924159063
 C:\Users\Frank\.m2\repository\org\postgresql\postgresql\42.7.8\postgresql-42.7.8.jar = 1763085173687
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java = 1761790213288
-C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\generated-sources\annotations = 1763085346388
-C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\allclasses-index.html = 1763085360411
-C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\allpackages-index.html = 1763085360419
-C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\element-list = 1763085359615
-C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\help-doc.html = 1763085360489
-C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\index-all.html = 1763085360469
-C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\index.html = 1763085360363
-C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\member-search-index.js = 1763085360431
-C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\module-search-index.js = 1763085360422
-C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\overview-summary.html = 1763085360481
-C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\overview-tree.html = 1763085360337
-C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\package-search-index.js = 1763085360425
-C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\search.html = 1763085360475
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\generated-sources\annotations = 1763955353625
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\allclasses-index.html = 1763955369585
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\allpackages-index.html = 1763955369607
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\element-list = 1763955368695
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\help-doc.html = 1763955369804
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\index-all.html = 1763955369783
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\index.html = 1763955369474
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\member-search-index.js = 1763955369701
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\module-search-index.js = 1763955369618
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\overview-summary.html = 1763955369793
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\overview-tree.html = 1763955369460
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\package-search-index.js = 1763955369640
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\search.html = 1763955369788
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\serialized-form.html = 1763085360067
-C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\tag-search-index.js = 1763085360434
-C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\type-search-index.js = 1763085360428
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\tag-search-index.js = 1763955369705
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\target\reports\apidocs\type-search-index.js = 1763955369644

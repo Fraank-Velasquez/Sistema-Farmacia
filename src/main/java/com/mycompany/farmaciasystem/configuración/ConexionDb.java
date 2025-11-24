@@ -30,6 +30,7 @@ public class ConexionDb {
 
     /**
      * Método sincronizado para obtener la instancia única
+     *
      * @return Instancia única de ConexionDb
      */
     public static synchronized ConexionDb getInstancia() {
@@ -50,13 +51,16 @@ public class ConexionDb {
             // Verifica si la conexión existe y está activa
             if (conexion == null || conexion.isClosed()) {
                 conexion = DriverManager.getConnection(url, user, password);
-                JOptionPane.showMessageDialog(null,"Conexión establecida con la base de datos",
-                        "Exitoso",JOptionPane.INFORMATION_MESSAGE);
+                System.out.println("Conexión establecida con la base de datos");
+//                JOptionPane.showMessageDialog(null,"Conexión establecida con la base de datos",
+//                        "Exitoso",JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,
-                    "Error al conectar: " + e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error al conectar: " + e.getMessage());
+
+//            JOptionPane.showMessageDialog(null,
+//                    "Error al conectar: " + e.getMessage(),
+//                    "Error", JOptionPane.ERROR_MESSAGE);
         }
         return conexion;
     }
@@ -71,10 +75,10 @@ public class ConexionDb {
                 System.out.println("Conexión cerrada exitosamente");
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,
-                    "Error al cerrar conexión: " + e.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
+//            JOptionPane.showMessageDialog(null,
+//                    "Error al cerrar conexión: " + e.getMessage(),
+//                    "Error",
+//                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -91,5 +95,3 @@ public class ConexionDb {
         }
     }
 }
-
-

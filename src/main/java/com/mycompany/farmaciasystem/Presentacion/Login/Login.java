@@ -2,7 +2,12 @@ package com.mycompany.farmaciasystem.Presentacion.Login;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.mycompany.farmaciasystem.Presentacion.Principal.Principal;
+import com.mycompany.farmaciasystem.modelo.entidades.Usuario;
+import com.mycompany.farmaciasystem.repository.Implementaciones.UsuarioRepositoryImpl;
+import com.mycompany.farmaciasystem.repository.Interfaces.IUsuarioRepository;
 import java.awt.Color;
+import java.awt.HeadlessException;
+import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
@@ -94,7 +99,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 361, -1));
 
         btnVerContrasena.setBackground(new java.awt.Color(238, 251, 253));
-        btnVerContrasena.setText("ojo");
+        btnVerContrasena.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/IconoirEye.png"))); // NOI18N
         btnVerContrasena.setBorder(null);
         btnVerContrasena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,9 +148,34 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIniciaSesionMouseClicked
 
     private void btnIniciaSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciaSesionActionPerformed
-        Principal pantallaPrincipal = new Principal();
-        pantallaPrincipal.setVisible(true);
-        this.dispose();
+
+        String usuario = txtUsuario.getText().trim();
+        char[] contraseniaChar = txtContrasenia.getPassword();
+        String contrasenia = new String(contraseniaChar).trim();
+
+        if (usuario.isEmpty() || contrasenia.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Complete todos los campos", " ❌ Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+
+            IUsuarioRepository UserRepos = new UsuarioRepositoryImpl();
+            Usuario Usuario = UserRepos.ValidarLogin(usuario, contrasenia);
+
+            if (Usuario != null) {
+
+                new Principal(Usuario).setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Nombre de usuario o Contraseña incorrectos", " ❌ Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+
+            }
+        } catch (HeadlessException e) {
+            System.out.println(e.toString());
+
+        }
+
 
     }//GEN-LAST:event_btnIniciaSesionActionPerformed
 
@@ -156,7 +186,7 @@ public class Login extends javax.swing.JFrame {
     private void btnVerContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerContrasenaActionPerformed
 
         if (txtContrasenia.getEchoChar() == 0) {
-            txtContrasenia.setEchoChar('*'); 
+            txtContrasenia.setEchoChar('*');
         } else {
             txtContrasenia.setEchoChar((char) 0);
         }
