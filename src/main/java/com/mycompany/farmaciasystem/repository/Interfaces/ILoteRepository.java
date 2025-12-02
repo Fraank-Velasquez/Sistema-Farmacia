@@ -13,12 +13,12 @@ import java.util.List;
  */
 public interface ILoteRepository extends IRepository<Lote> {
 
-    List<Lote> ListarPorProducto(int idProducto);
-
     List<Lote> ListarProximosVencer(int dias);
 
     List<Lote> ListarVencidos();
 
-    List<Lote> ObtenerLotesAntiguosDisp(int idProducto);
+    List<Lote> listarPorProducto(int idProducto);
+
+    public Lote obtenerLoteMasAntiguoDisponible(int idProducto);
 
 }

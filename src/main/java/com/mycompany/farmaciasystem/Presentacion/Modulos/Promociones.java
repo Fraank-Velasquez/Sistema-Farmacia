@@ -124,7 +124,7 @@ public class Promociones extends javax.swing.JPanel {
         btnEliminar.setBackground(new java.awt.Color(242, 242, 242));
         btnEliminar.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         btnEliminar.setForeground(new java.awt.Color(51, 51, 51));
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/delete_30dp_RGB(220, 53, 69)_FILL0_wght400_GRAD0_opsz24.png"))); // NOI18N
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/Elimar.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.setBorder(null);
         btnEliminar.setFocusPainted(false);

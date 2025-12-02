@@ -4,6 +4,7 @@
  */
 package com.mycompany.farmaciasystem.modelo.entidades;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
@@ -20,13 +21,13 @@ public class Empresa {
     private String ciudad;
     private String ruc;
     private String tipoEmpresa;
-    private LocalDateTime fechaRegistro;
+    private Timestamp fechaRegistro;
     private boolean activo;
 
     public Empresa() {
     }
 
-    public Empresa(int idEmpresa, String nombre, String telefono, String email, String direccion, String ciudad, String ruc, String tipoEmpresa, LocalDateTime fechaRegistro, boolean activo) {
+    public Empresa(int idEmpresa, String nombre, String telefono, String email, String direccion, String ciudad, String ruc, String tipoEmpresa, Timestamp fechaRegistro, boolean activo) {
         this.idEmpresa = idEmpresa;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -103,11 +104,11 @@ public class Empresa {
         this.tipoEmpresa = tipoEmpresa;
     }
 
-    public LocalDateTime getFechaRegistro() {
+    public Timestamp getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+    public void setFechaRegistro(Timestamp fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 

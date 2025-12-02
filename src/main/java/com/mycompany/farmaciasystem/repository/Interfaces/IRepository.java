@@ -19,7 +19,7 @@ public interface IRepository<T> {
 
     boolean insertar(T entidad);
 
-    boolean actualizar(T entidad);
+    boolean actualizar(int id_entidad, T entidad);
 
     boolean eliminar(int id);
     

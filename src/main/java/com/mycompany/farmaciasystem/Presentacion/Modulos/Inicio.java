@@ -27,19 +27,48 @@ public class Inicio extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         lblProdBajS = new javax.swing.JButton();
         lblProductosMasVendidos = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbMasVendidos = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbStockBajo = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        lblTotalProductos = new javax.swing.JLabel();
+        lblProductosBajoStock = new javax.swing.JLabel();
+        lblLotesVencidos = new javax.swing.JLabel();
+        lblTotalClientes = new javax.swing.JLabel();
+        lblTotalProveedores = new javax.swing.JLabel();
+        lblVentasDelDia = new javax.swing.JLabel();
+        lblUsuario3 = new javax.swing.JLabel();
+        lblUsuario7 = new javax.swing.JLabel();
+        lblUsuario8 = new javax.swing.JLabel();
+        lblUsuario9 = new javax.swing.JLabel();
+        lblUsuario10 = new javax.swing.JLabel();
+        lblUsuario11 = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(232, 232, 245));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        lblProdBajS.setBackground(new java.awt.Color(255, 204, 204));
+        jButton1.setBackground(new java.awt.Color(17, 53, 87));
+        jButton1.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Actualizar datos");
+        jButton1.setBorderPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblProdBajS.setBackground(new java.awt.Color(255, 255, 255));
         lblProdBajS.setFont(new java.awt.Font("Poppins SemiBold", 0, 24)); // NOI18N
         lblProdBajS.setForeground(new java.awt.Color(51, 51, 51));
+        lblProdBajS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/bajoStock.png"))); // NOI18N
         lblProdBajS.setText("Productos con bajo stock !!");
         lblProdBajS.setBorder(null);
         lblProdBajS.setIconTextGap(15);
@@ -61,9 +90,10 @@ public class Inicio extends javax.swing.JPanel {
             }
         });
 
-        lblProductosMasVendidos.setBackground(new java.awt.Color(204, 255, 204));
+        lblProductosMasVendidos.setBackground(new java.awt.Color(255, 255, 255));
         lblProductosMasVendidos.setFont(new java.awt.Font("Poppins SemiBold", 0, 24)); // NOI18N
         lblProductosMasVendidos.setForeground(new java.awt.Color(51, 51, 51));
+        lblProductosMasVendidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/masVendidos.png"))); // NOI18N
         lblProductosMasVendidos.setText("Productos más vendidos");
         lblProductosMasVendidos.setBorder(null);
         lblProductosMasVendidos.setIconTextGap(15);
@@ -110,33 +140,163 @@ public class Inicio extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tbStockBajo);
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(lblProdBajS, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblProductosMasVendidos, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProdBajS)
+                    .addComponent(lblProductosMasVendidos))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblTotalProductos.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblTotalProductos.setForeground(new java.awt.Color(29, 82, 109));
+        lblTotalProductos.setText("Total de Productos:");
+
+        lblProductosBajoStock.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblProductosBajoStock.setForeground(new java.awt.Color(29, 82, 109));
+        lblProductosBajoStock.setText("Bajo Stock:");
+
+        lblLotesVencidos.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblLotesVencidos.setForeground(new java.awt.Color(29, 82, 109));
+        lblLotesVencidos.setText("Lotes Vencidos:");
+
+        lblTotalClientes.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblTotalClientes.setForeground(new java.awt.Color(29, 82, 109));
+        lblTotalClientes.setText("Clientes:");
+
+        lblTotalProveedores.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblTotalProveedores.setForeground(new java.awt.Color(29, 82, 109));
+        lblTotalProveedores.setText("Proveedores:");
+
+        lblVentasDelDia.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblVentasDelDia.setForeground(new java.awt.Color(29, 82, 109));
+        lblVentasDelDia.setText("Ventas de Hoy: ");
+
+        lblUsuario3.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblUsuario3.setForeground(new java.awt.Color(51, 51, 51));
+        lblUsuario3.setText("0000000");
+
+        lblUsuario7.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblUsuario7.setForeground(new java.awt.Color(51, 51, 51));
+        lblUsuario7.setText("0000000");
+
+        lblUsuario8.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblUsuario8.setForeground(new java.awt.Color(51, 51, 51));
+        lblUsuario8.setText("0000000");
+
+        lblUsuario9.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblUsuario9.setForeground(new java.awt.Color(51, 51, 51));
+        lblUsuario9.setText("0000000");
+
+        lblUsuario10.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblUsuario10.setForeground(new java.awt.Color(51, 51, 51));
+        lblUsuario10.setText("0000000");
+
+        lblUsuario11.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblUsuario11.setForeground(new java.awt.Color(51, 51, 51));
+        lblUsuario11.setText("0000000");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblTotalProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblLotesVencidos, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addComponent(lblProductosBajoStock, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsuario7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsuario8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lblTotalClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblUsuario10, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lblTotalProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblUsuario11, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lblVentasDelDia, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblUsuario9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(89, 89, 89))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTotalProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblVentasDelDia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsuario9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProductosBajoStock, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTotalClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsuario7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsuario10, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLotesVencidos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTotalProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsuario8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsuario11, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(lblProdBajS, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblProductosMasVendidos, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblProdBajS)
-                    .addComponent(lblProductosMasVendidos))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(49, 49, 49))
+                .addGap(12, 12, 12)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -185,13 +345,32 @@ public class Inicio extends javax.swing.JPanel {
 
     }//GEN-LAST:event_lblProductosMasVendidosActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblLotesVencidos;
     private javax.swing.JButton lblProdBajS;
+    private javax.swing.JLabel lblProductosBajoStock;
     private javax.swing.JButton lblProductosMasVendidos;
+    private javax.swing.JLabel lblTotalClientes;
+    private javax.swing.JLabel lblTotalProductos;
+    private javax.swing.JLabel lblTotalProveedores;
+    private javax.swing.JLabel lblUsuario10;
+    private javax.swing.JLabel lblUsuario11;
+    private javax.swing.JLabel lblUsuario3;
+    private javax.swing.JLabel lblUsuario7;
+    private javax.swing.JLabel lblUsuario8;
+    private javax.swing.JLabel lblUsuario9;
+    private javax.swing.JLabel lblVentasDelDia;
     private javax.swing.JTable tbMasVendidos;
     private javax.swing.JTable tbStockBajo;
     // End of variables declaration//GEN-END:variables

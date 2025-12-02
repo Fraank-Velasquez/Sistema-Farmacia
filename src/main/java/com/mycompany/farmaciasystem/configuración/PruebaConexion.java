@@ -1,4 +1,4 @@
-package com.mycompany.farmaciasystem.Conexion;
+package com.mycompany.farmaciasystem.configuración;
 
 
 /**

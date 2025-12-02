@@ -14,12 +14,12 @@ import java.util.List;
  */
 public interface ICompraRepository extends IRepository<Compra> {
 
-    int insertarYRetornarId(Compra compra);
-
     List<Compra> listarPorFecha(LocalDate fechaInicio, LocalDate fechaFin);
 
     List<Compra> listarPorProveedor(int idProveedor);
 
     Compra buscarPorNumeroFactura(String numeroFactura);
+
+    int insertarYRetornarId(Compra compra);
 
 }

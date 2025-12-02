@@ -76,6 +76,9 @@ public class Productos extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbProductos = new javax.swing.JTable();
+        btnRepInvent = new javax.swing.JButton();
+        btnRepoBajoStock = new javax.swing.JButton();
+        btnUltimaOper = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -132,7 +135,7 @@ public class Productos extends javax.swing.JPanel {
         btnEliminar.setBackground(new java.awt.Color(242, 242, 242));
         btnEliminar.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         btnEliminar.setForeground(new java.awt.Color(51, 51, 51));
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/delete_30dp_RGB(220, 53, 69)_FILL0_wght400_GRAD0_opsz24.png"))); // NOI18N
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/Elimar.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.setBorder(null);
         btnEliminar.setFocusPainted(false);
@@ -160,18 +163,73 @@ public class Productos extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tbProductos);
 
+        btnRepInvent.setBackground(new java.awt.Color(242, 242, 242));
+        btnRepInvent.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        btnRepInvent.setForeground(new java.awt.Color(51, 51, 51));
+        btnRepInvent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/edit_square_30dp_5084C1_FILL0_wght400_GRAD0_opsz24.png"))); // NOI18N
+        btnRepInvent.setText("Generar reporte inventario");
+        btnRepInvent.setBorder(null);
+        btnRepInvent.setBorderPainted(false);
+        btnRepInvent.setFocusPainted(false);
+        btnRepInvent.setFocusable(false);
+        btnRepInvent.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnRepInvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRepInventActionPerformed(evt);
+            }
+        });
+
+        btnRepoBajoStock.setBackground(new java.awt.Color(242, 242, 242));
+        btnRepoBajoStock.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        btnRepoBajoStock.setForeground(new java.awt.Color(51, 51, 51));
+        btnRepoBajoStock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/edit_square_30dp_5084C1_FILL0_wght400_GRAD0_opsz24.png"))); // NOI18N
+        btnRepoBajoStock.setText("Generar reporte bajo stock");
+        btnRepoBajoStock.setBorder(null);
+        btnRepoBajoStock.setBorderPainted(false);
+        btnRepoBajoStock.setFocusPainted(false);
+        btnRepoBajoStock.setFocusable(false);
+        btnRepoBajoStock.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnRepoBajoStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRepoBajoStockActionPerformed(evt);
+            }
+        });
+
+        btnUltimaOper.setBackground(new java.awt.Color(242, 242, 242));
+        btnUltimaOper.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        btnUltimaOper.setForeground(new java.awt.Color(51, 51, 51));
+        btnUltimaOper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/edit_square_30dp_5084C1_FILL0_wght400_GRAD0_opsz24.png"))); // NOI18N
+        btnUltimaOper.setText("Deshacer ultima operacion");
+        btnUltimaOper.setBorder(null);
+        btnUltimaOper.setBorderPainted(false);
+        btnUltimaOper.setFocusPainted(false);
+        btnUltimaOper.setFocusable(false);
+        btnUltimaOper.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnUltimaOper.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUltimaOperActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnUltimaOper, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(btnRepInvent, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnRepoBajoStock, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAgregarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
@@ -206,8 +264,13 @@ public class Productos extends javax.swing.JPanel {
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                .addGap(15, 15, 15))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRepInvent, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRepoBajoStock, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUltimaOper, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -245,11 +308,26 @@ public class Productos extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void btnRepInventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRepInventActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRepInventActionPerformed
+
+    private void btnRepoBajoStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRepoBajoStockActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRepoBajoStockActionPerformed
+
+    private void btnUltimaOperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimaOperActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUltimaOperActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarProductos;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnRepInvent;
+    private javax.swing.JButton btnRepoBajoStock;
+    private javax.swing.JButton btnUltimaOper;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

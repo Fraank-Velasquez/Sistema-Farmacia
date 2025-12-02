@@ -1,12 +1,10 @@
-package com.mycompany.farmaciasystem.Conexion;
+package com.mycompany.farmaciasystem.configuración;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 
 /**
- * Clase Singleton para gestionar la conexión a la base de datos
  *
  * @author Frank
  */
@@ -15,7 +13,6 @@ public class ConexionDb {
     // Instancia única de la clase
     private static ConexionDb instancia;
 
-    // Conexión a la base de datos
     private Connection conexion;
 
     private final String user = "fvelasquezl";

@@ -14,6 +14,9 @@ import com.mycompany.farmaciasystem.Presentacion.Modulos.Proveedores;
 import com.mycompany.farmaciasystem.Presentacion.Modulos.Ventas;
 import com.mycompany.farmaciasystem.modelo.entidades.Usuario;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -27,9 +30,9 @@ public class Principal extends javax.swing.JFrame {
 
     public Principal(Usuario usuario) {
         initComponents();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.usuarioActual = usuario;
-        LblMenu.setText("INICIO");
+        otrosComponentes();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     Inicio inicio = new Inicio();
@@ -40,11 +43,39 @@ public class Principal extends javax.swing.JFrame {
     Promociones promos = new Promociones();
     Perfil perfil = new Perfil();
 
+    private void otrosComponentes() {
+
+        GettexIcon(btnInicio);
+        InsetarNuevoIcon("/resources_img/Home1.png");
+        cambiarPanel(inicio);
+
+        if (usuarioActual != null) {
+            LblTipoUsuario.setText(usuarioActual.getRol());
+        } else {
+            LblTipoUsuario.setText(usuarioActual.getRol());
+        }
+
+    }
+
     public void cambiarPanel(JPanel nuevoPanel) {
         contenido.removeAll();
         contenido.add(nuevoPanel, BorderLayout.CENTER);
         contenido.revalidate();
         contenido.repaint();
+    }
+
+    private void GettexIcon(JButton buton) {
+
+        String textto = buton.getText();
+        LblMenu.setText(textto);
+        LblMenu.setForeground(new Color(44, 62, 80));
+    }
+
+    private void InsetarNuevoIcon(String rutaIcon) {
+
+        ImageIcon newIcon = new ImageIcon(getClass().getResource(rutaIcon));
+        LblMenu.setIcon(newIcon);
+
     }
 
     /**
@@ -72,13 +103,13 @@ public class Principal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
+        Separador1 = new javax.swing.JLabel();
         panelEstatico = new javax.swing.JPanel();
         LblMenu = new javax.swing.JLabel();
         LblTipoUsuario = new javax.swing.JLabel();
         LogoUsuario = new javax.swing.JLabel();
         contenido = new javax.swing.JPanel();
-        separador = new javax.swing.JSeparator();
+        Separador2 = new javax.swing.JLabel();
 
         Perfil.setText("   Perfil");
         Perfil.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +137,7 @@ public class Principal extends javax.swing.JFrame {
         btnProductos.setBackground(new java.awt.Color(17, 53, 87));
         btnProductos.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
         btnProductos.setForeground(new java.awt.Color(255, 255, 255));
-        btnProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/pastillas-30.png"))); // NOI18N
+        btnProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/medicamentos1.png"))); // NOI18N
         btnProductos.setText("   Productos");
         btnProductos.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 3, 0, 0, new java.awt.Color(17, 53, 87)));
         btnProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -121,7 +152,7 @@ public class Principal extends javax.swing.JFrame {
         btnVentas.setBackground(new java.awt.Color(17, 53, 87));
         btnVentas.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
         btnVentas.setForeground(new java.awt.Color(255, 255, 255));
-        btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/ventas.png"))); // NOI18N
+        btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/ventas1.png"))); // NOI18N
         btnVentas.setText("   Ventas");
         btnVentas.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 3, 0, 0, new java.awt.Color(17, 53, 87)));
         btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -135,12 +166,11 @@ public class Principal extends javax.swing.JFrame {
         btnInicio.setBackground(new java.awt.Color(17, 53, 87));
         btnInicio.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
         btnInicio.setForeground(new java.awt.Color(255, 255, 255));
-        btnInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/Home.png"))); // NOI18N
+        btnInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/Home2.png"))); // NOI18N
         btnInicio.setText("   Inicio");
         btnInicio.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 3, 0, 0, new java.awt.Color(17, 53, 87)));
         btnInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnInicio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnInicio.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInicioActionPerformed(evt);
@@ -150,7 +180,7 @@ public class Principal extends javax.swing.JFrame {
         btnPromociones.setBackground(new java.awt.Color(17, 53, 87));
         btnPromociones.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
         btnPromociones.setForeground(new java.awt.Color(255, 255, 255));
-        btnPromociones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/Promocion.png"))); // NOI18N
+        btnPromociones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/promos1.png"))); // NOI18N
         btnPromociones.setText("   Promociones");
         btnPromociones.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 3, 0, 0, new java.awt.Color(17, 53, 87)));
         btnPromociones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -164,7 +194,7 @@ public class Principal extends javax.swing.JFrame {
         btnProveedores.setBackground(new java.awt.Color(17, 53, 87));
         btnProveedores.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
         btnProveedores.setForeground(new java.awt.Color(255, 255, 255));
-        btnProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/laboratorios.png"))); // NOI18N
+        btnProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/proveedores1.png"))); // NOI18N
         btnProveedores.setText("   Proveedores");
         btnProveedores.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 3, 0, 0, new java.awt.Color(17, 53, 87)));
         btnProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -178,7 +208,7 @@ public class Principal extends javax.swing.JFrame {
         btnClientes.setBackground(new java.awt.Color(17, 53, 87));
         btnClientes.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
         btnClientes.setForeground(new java.awt.Color(255, 255, 255));
-        btnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/clientes-30.png"))); // NOI18N
+        btnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/clientes1.png"))); // NOI18N
         btnClientes.setText("   Clientes");
         btnClientes.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 3, 0, 0, new java.awt.Color(17, 53, 87)));
         btnClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -192,7 +222,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("          Farmacia VIda Sana");
+        jLabel6.setText("          Farmacia BIOFarma");
 
         jLabel7.setFont(new java.awt.Font("Poppins", 1, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -200,64 +230,70 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Vida Sana");
+        jLabel8.setText("BIOFarma");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/farmacia-48.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/BIOFarma-Logo.png"))); // NOI18N
 
-        jSeparator2.setBackground(new java.awt.Color(153, 153, 153));
-        jSeparator2.setForeground(new java.awt.Color(153, 153, 153));
+        Separador1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(135, 166, 54)));
+        Separador1.setEnabled(false);
 
         javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
         panelMenu.setLayout(panelMenuLayout);
         panelMenuLayout.setHorizontalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnPromociones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelMenuLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
                 .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelMenuLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 20, Short.MAX_VALUE)))
-                .addGap(23, 23, 23))
-            .addComponent(btnInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(panelMenuLayout.createSequentialGroup()
-                .addComponent(jSeparator2)
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnPromociones, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Separador1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panelMenuLayout.setVerticalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMenuLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(9, 9, 9)
+                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelMenuLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelMenuLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Separador1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelMenuLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(btnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(btnProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(btnPromociones, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(62, 62, 62)
+                        .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelMenuLayout.createSequentialGroup()
+                        .addGap(247, 247, 247)
+                        .addComponent(btnProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelMenuLayout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelMenuLayout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addComponent(btnVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(btnPromociones, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(88, 88, 88)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -266,9 +302,8 @@ public class Principal extends javax.swing.JFrame {
         LblMenu.setFont(new java.awt.Font("Poppins ExtraBold", 0, 24)); // NOI18N
         LblMenu.setForeground(new java.awt.Color(20, 63, 102));
 
-        LblTipoUsuario.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        LblTipoUsuario.setFont(new java.awt.Font("Poppins", 0, 16)); // NOI18N
         LblTipoUsuario.setForeground(new java.awt.Color(51, 51, 51));
-        LblTipoUsuario.setText("Administrador");
 
         LogoUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/user.png"))); // NOI18N
         LogoUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -285,11 +320,11 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(panelEstaticoLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(LblMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(LblTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(LblTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LogoUsuario)
-                .addGap(55, 55, 55))
+                .addGap(25, 25, 25))
         );
         panelEstaticoLayout.setVerticalGroup(
             panelEstaticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,15 +332,15 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addComponent(LblMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(LogoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+            .addComponent(LogoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
             .addComponent(LblTipoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         contenido.setBackground(new java.awt.Color(255, 255, 255));
         contenido.setLayout(new java.awt.CardLayout());
 
-        separador.setBackground(new java.awt.Color(102, 102, 102));
-        separador.setPreferredSize(new java.awt.Dimension(0, 4));
+        Separador2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(17, 53, 87)));
+        Separador2.setEnabled(false);
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
@@ -315,9 +350,9 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(panelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(separador, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
-                    .addComponent(contenido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelEstatico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(contenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelEstatico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Separador2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelPrincipalLayout.setVerticalGroup(
@@ -327,8 +362,8 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(panelEstatico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Separador2, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
                 .addComponent(contenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -347,6 +382,7 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void CerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarSesionActionPerformed
         Login miLogin = new Login();
         miLogin.setVisible(true);
@@ -356,34 +392,39 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_CerrarSesionActionPerformed
 
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
-        LblMenu.setText("REGISTRO DE VENTAS");
+        GettexIcon(btnVentas);
+        InsetarNuevoIcon("/resources_img/ventas2.png");
         cambiarPanel(ventas);
 
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
 
-        LblMenu.setText("INICIO");
-
+        GettexIcon(btnInicio);
+        InsetarNuevoIcon("/resources_img/Home1.png");
         cambiarPanel(inicio);
+
     }//GEN-LAST:event_btnInicioActionPerformed
 
     private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
 
-        LblMenu.setText("PRODUCTOS");
+        GettexIcon(btnProductos);
+        InsetarNuevoIcon("/resources_img/medicamentos2.png");
         cambiarPanel(productos);
     }//GEN-LAST:event_btnProductosActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
 
-        LblMenu.setText("CLIENTES");
+        GettexIcon(btnClientes);
+        InsetarNuevoIcon("/resources_img/clientes2.png");
         cambiarPanel(clientes);
 
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
 
-        LblMenu.setText("PROVEEDORES");
+        GettexIcon(btnProveedores);
+        InsetarNuevoIcon("/resources_img/proveedores2.png");
         cambiarPanel(proveedores);
 
     }//GEN-LAST:event_btnProveedoresActionPerformed
@@ -396,13 +437,15 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnPromocionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromocionesActionPerformed
 
-        LblMenu.setText("PROMOCIONES");
+        GettexIcon(btnPromociones);
+        InsetarNuevoIcon("/resources_img/promos2.png");
         cambiarPanel(promos);
     }//GEN-LAST:event_btnPromocionesActionPerformed
 
     private void PerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PerfilActionPerformed
 
-        LblMenu.setText("PERFIL");
+        LblMenu.setText("Pefil");
+        InsetarNuevoIcon("/resources_img/perfil.png");
         cambiarPanel(perfil);
 
 
@@ -415,6 +458,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel LblTipoUsuario;
     private javax.swing.JLabel LogoUsuario;
     private javax.swing.JMenuItem Perfil;
+    private javax.swing.JLabel Separador1;
+    private javax.swing.JLabel Separador2;
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnInicio;
     private javax.swing.JButton btnProductos;
@@ -427,11 +472,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPopupMenu menuDesplegable;
     private javax.swing.JPanel panelEstatico;
     private javax.swing.JPanel panelMenu;
     private javax.swing.JPanel panelPrincipal;
-    private javax.swing.JSeparator separador;
     // End of variables declaration//GEN-END:variables
 }

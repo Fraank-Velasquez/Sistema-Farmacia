@@ -75,7 +75,7 @@ public class Clientes extends javax.swing.JPanel {
         jLabel1.setText("Lista de Clientes");
 
         btnAgregarProductos.setBackground(new java.awt.Color(32, 138, 215));
-        btnAgregarProductos.setFont(new java.awt.Font("Roboto Condensed", 0, 16)); // NOI18N
+        btnAgregarProductos.setFont(new java.awt.Font("Poppins", 0, 16)); // NOI18N
         btnAgregarProductos.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarProductos.setText("Nuevo Cliente");
         btnAgregarProductos.setBorder(null);
@@ -86,11 +86,13 @@ public class Clientes extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Poppins", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Buscar cliente: ");
 
         txtBuscar.setBackground(new java.awt.Color(242, 242, 242));
+        txtBuscar.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        txtBuscar.setForeground(new java.awt.Color(0, 0, 0));
         txtBuscar.setBorder(null);
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,12 +100,12 @@ public class Clientes extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Poppins", 0, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Acciones : ");
 
         btnEditar.setBackground(new java.awt.Color(242, 242, 242));
-        btnEditar.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        btnEditar.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         btnEditar.setForeground(new java.awt.Color(51, 51, 51));
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/edit_square_30dp_5084C1_FILL0_wght400_GRAD0_opsz24.png"))); // NOI18N
         btnEditar.setText("Editar");
@@ -117,9 +119,9 @@ public class Clientes extends javax.swing.JPanel {
         });
 
         btnEliminar.setBackground(new java.awt.Color(242, 242, 242));
-        btnEliminar.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        btnEliminar.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         btnEliminar.setForeground(new java.awt.Color(51, 51, 51));
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/delete_30dp_RGB(220, 53, 69)_FILL0_wght400_GRAD0_opsz24.png"))); // NOI18N
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/Elimar.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.setBorder(null);
         btnEliminar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -161,12 +163,12 @@ public class Clientes extends javax.swing.JPanel {
                             .addComponent(jScrollPane1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)

@@ -1,29 +1,29 @@
 package com.mycompany.farmaciasystem.Presentacion.Login;
 
-import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.mycompany.farmaciasystem.Presentacion.Principal.Principal;
+import com.mycompany.farmaciasystem.controladores.UsuarioController;
 import com.mycompany.farmaciasystem.modelo.entidades.Usuario;
-import com.mycompany.farmaciasystem.repository.Implementaciones.UsuarioRepositoryImpl;
-import com.mycompany.farmaciasystem.repository.Interfaces.IUsuarioRepository;
 import java.awt.Color;
-import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
+    private final UsuarioController usuarioController;
+
     public Login() {
         initComponents();
         otrosComponentes();
+        FlatIntelliJLaf.setup();
+        this.usuarioController = new UsuarioController();
 
     }
 
     private void otrosComponentes() {
-        FlatLightLaf.setup();
         lblUsuario.requestFocus();
         txtUsuario.putClientProperty("JTextField.placeholderText", "Ingrese nombre de usuario");
         txtContrasenia.putClientProperty("JTextField.placeholderText", "*******");
         txtUsuario.putClientProperty("JTextField.showClearButton", true);
-
     }
 
     /**
@@ -36,13 +36,17 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txtUsuario = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtBGPaswrd = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnIniciaSesion = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         btnVerContrasena = new javax.swing.JToggleButton();
+        txtUsuario = new javax.swing.JTextField();
+        txtBGUser = new javax.swing.JTextField();
         txtContrasenia = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,23 +55,30 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtUsuario.setBackground(new java.awt.Color(238, 251, 253));
-        txtUsuario.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
-        txtUsuario.setForeground(new java.awt.Color(0, 0, 0));
-        txtUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 255)));
-        txtUsuario.setPreferredSize(new java.awt.Dimension(15, 35));
-        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 222, 306, -1));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/FormkitPassword.png"))); // NOI18N
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 320, 28, 30));
+
+        txtBGPaswrd.setEditable(false);
+        txtBGPaswrd.setBackground(new java.awt.Color(238, 251, 253));
+        txtBGPaswrd.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        txtBGPaswrd.setForeground(new java.awt.Color(0, 0, 0));
+        txtBGPaswrd.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 255)));
+        txtBGPaswrd.setEnabled(false);
+        txtBGPaswrd.setFocusable(false);
+        txtBGPaswrd.setPreferredSize(new java.awt.Dimension(15, 35));
+        txtBGPaswrd.setRequestFocusEnabled(false);
+        jPanel1.add(txtBGPaswrd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 30, -1));
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(367, 184, -1, -1));
 
         lblUsuario.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
         lblUsuario.setForeground(new java.awt.Color(29, 82, 109));
         lblUsuario.setText("Usuario");
-        jPanel1.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 184, 209, 32));
+        jPanel1.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 209, 32));
 
         jLabel6.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(29, 82, 109));
         jLabel6.setText("Contraseña");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 275, 209, 32));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 209, 32));
 
         btnIniciaSesion.setBackground(new java.awt.Color(22, 120, 162));
         btnIniciaSesion.setFont(new java.awt.Font("Poppins SemiBold", 0, 21)); // NOI18N
@@ -93,10 +104,13 @@ public class Login extends javax.swing.JFrame {
                 btnIniciaSesionActionPerformed(evt);
             }
         });
-        jPanel1.add(btnIniciaSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 380, 199, 46));
+        jPanel1.add(btnIniciaSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, 199, 46));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/logo2 (1).jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 361, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/BIOFarma-banner.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 361, 150));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/MynauiUser.png"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 230, 30, 30));
 
         btnVerContrasena.setBackground(new java.awt.Color(238, 251, 253));
         btnVerContrasena.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/IconoirEye.png"))); // NOI18N
@@ -106,7 +120,29 @@ public class Login extends javax.swing.JFrame {
                 btnVerContrasenaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVerContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 315, 40, 30));
+        jPanel1.add(btnVerContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, 40, 33));
+
+        txtUsuario.setBackground(new java.awt.Color(238, 251, 253));
+        txtUsuario.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        txtUsuario.setForeground(new java.awt.Color(0, 0, 0));
+        txtUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 255)));
+        txtUsuario.setPreferredSize(new java.awt.Dimension(15, 35));
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsuarioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 230, 280, -1));
+
+        txtBGUser.setEditable(false);
+        txtBGUser.setBackground(new java.awt.Color(238, 251, 253));
+        txtBGUser.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        txtBGUser.setForeground(new java.awt.Color(0, 0, 0));
+        txtBGUser.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 255)));
+        txtBGUser.setEnabled(false);
+        txtBGUser.setFocusable(false);
+        txtBGUser.setPreferredSize(new java.awt.Dimension(15, 35));
+        jPanel1.add(txtBGUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 30, -1));
 
         txtContrasenia.setBackground(new java.awt.Color(238, 251, 253));
         txtContrasenia.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
@@ -118,7 +154,7 @@ public class Login extends javax.swing.JFrame {
                 txtContraseniaActionPerformed(evt);
             }
         });
-        jPanel1.add(txtContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 313, 300, -1));
+        jPanel1.add(txtContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 270, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -128,7 +164,7 @@ public class Login extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -149,39 +185,49 @@ public class Login extends javax.swing.JFrame {
 
     private void btnIniciaSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciaSesionActionPerformed
 
-        String usuario = txtUsuario.getText().trim();
+        String nombreUsuario = txtUsuario.getText().trim();
         char[] contraseniaChar = txtContrasenia.getPassword();
         String contrasenia = new String(contraseniaChar).trim();
 
-        if (usuario.isEmpty() || contrasenia.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Complete todos los campos", " ❌ Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+        if (nombreUsuario.isEmpty() || contrasenia.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Complete todos los campos",
+                    " ⚠ Error de inicio de sesión",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        try {
-
-            IUsuarioRepository UserRepos = new UsuarioRepositoryImpl();
-            Usuario Usuario = UserRepos.ValidarLogin(usuario, contrasenia);
-
-            if (Usuario != null) {
-
-                new Principal(Usuario).setVisible(true);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Nombre de usuario o Contraseña incorrectos", " ❌ Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
-
-            }
-        } catch (HeadlessException e) {
-            System.out.println(e.toString());
-
+        if (contrasenia.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor ingrese su contraseña",
+                    "Campo requerido",
+                    JOptionPane.WARNING_MESSAGE);
+            txtContrasenia.requestFocus();
+            return;
         }
 
+        Usuario usuario = usuarioController.validarLogin(nombreUsuario, contrasenia);
 
+        if (usuario != null) {
+            JOptionPane.showMessageDialog(this,
+                    "Bienvenido " + usuario.getNombres() + " " + usuario.getApellidos(),
+                    "Login Exitoso",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            this.dispose();
+
+            Principal principal = new Principal(usuario);
+            principal.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Usuario o contraseña incorrectos",
+                    "Error de Autenticación",
+                    JOptionPane.ERROR_MESSAGE);
+
+            txtContrasenia.setText("");
+            txtUsuario.requestFocus();
+        }
     }//GEN-LAST:event_btnIniciaSesionActionPerformed
-
-    private void txtContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseniaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraseniaActionPerformed
 
     private void btnVerContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerContrasenaActionPerformed
 
@@ -192,15 +238,29 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnVerContrasenaActionPerformed
 
+    private void txtContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseniaActionPerformed
+        btnIniciaSesion.doClick();
+    }//GEN-LAST:event_txtContraseniaActionPerformed
+
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+
+        btnIniciaSesion.doClick();
+
+    }//GEN-LAST:event_txtUsuarioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciaSesion;
     private javax.swing.JToggleButton btnVerContrasena;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblUsuario;
+    private javax.swing.JTextField txtBGPaswrd;
+    private javax.swing.JTextField txtBGUser;
     private javax.swing.JPasswordField txtContrasenia;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

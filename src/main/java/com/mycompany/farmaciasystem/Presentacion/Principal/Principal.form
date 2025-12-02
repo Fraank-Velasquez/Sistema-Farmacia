@@ -73,11 +73,11 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Component id="panelMenu" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="separador" alignment="0" pref="605" max="32767" attributes="0"/>
-                      <Component id="contenido" alignment="1" max="32767" attributes="0"/>
-                      <Component id="panelEstatico" alignment="1" max="32767" attributes="0"/>
+                      <Component id="contenido" max="32767" attributes="0"/>
+                      <Component id="panelEstatico" max="32767" attributes="0"/>
+                      <Component id="Separador2" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -90,8 +90,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="panelEstatico" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="separador" min="-2" pref="8" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="Separador2" min="-2" pref="8" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Component id="contenido" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -109,29 +109,28 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnPromociones" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnProveedores" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnClientes" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnProductos" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnVentas" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabel6" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="75" max="-2" attributes="0"/>
+                      <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel7" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                               <Component id="jLabel8" min="-2" pref="83" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="jLabel7" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="23" pref="23" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="btnInicio" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jSeparator2" max="32767" attributes="0"/>
+                  <Component id="btnProductos" min="-2" pref="213" max="-2" attributes="0"/>
+                  <Component id="btnProveedores" min="-2" pref="213" max="-2" attributes="0"/>
+                  <Component id="btnClientes" min="-2" pref="213" max="-2" attributes="0"/>
+                  <Component id="btnInicio" min="-2" pref="213" max="-2" attributes="0"/>
+                  <Component id="btnVentas" min="-2" pref="213" max="-2" attributes="0"/>
+                  <Component id="btnPromociones" min="-2" pref="213" max="-2" attributes="0"/>
+                  <Component id="jLabel6" min="-2" pref="213" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="Separador1" min="-2" pref="198" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -139,30 +138,44 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel1" min="-2" pref="77" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                                      <Component id="jLabel8" min="-2" pref="20" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="Separador1" min="-2" pref="14" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="62" pref="62" max="-2" attributes="0"/>
+                              <Component id="btnProductos" min="-2" pref="63" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel1" min="-2" pref="58" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="247" pref="247" max="-2" attributes="0"/>
+                              <Component id="btnProveedores" min="-2" pref="63" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="185" pref="185" max="-2" attributes="0"/>
+                              <Component id="btnClientes" min="-2" pref="63" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="btnInicio" min="-2" pref="63" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="123" pref="123" max="-2" attributes="0"/>
+                              <Component id="btnVentas" min="-2" pref="63" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jSeparator2" min="-2" pref="12" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="btnInicio" min="-2" pref="56" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnProductos" min="-2" pref="56" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="btnVentas" min="-2" pref="56" max="-2" attributes="0"/>
-                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                      <Component id="btnClientes" min="-2" pref="56" max="-2" attributes="0"/>
-                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                      <Component id="btnProveedores" min="-2" pref="56" max="-2" attributes="0"/>
-                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                      <Component id="btnPromociones" min="-2" pref="56" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnPromociones" min="-2" pref="63" max="-2" attributes="0"/>
+                      <EmptySpace min="88" pref="88" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -181,7 +194,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/resources_img/pastillas-30.png"/>
+                  <Image iconType="3" name="/resources_img/medicamentos1.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="   Productos"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -213,7 +226,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/resources_img/ventas.png"/>
+                  <Image iconType="3" name="/resources_img/ventas1.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="   Ventas"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -244,7 +257,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/resources_img/Home.png"/>
+                  <Image iconType="3" name="/resources_img/Home2.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="   Inicio"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -258,7 +271,6 @@
                   <Color id="Hand Cursor"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="horizontalTextPosition" type="int" value="4"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInicioActionPerformed"/>
@@ -276,7 +288,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/resources_img/Promocion.png"/>
+                  <Image iconType="3" name="/resources_img/promos1.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="   Promociones"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -307,7 +319,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/resources_img/laboratorios.png"/>
+                  <Image iconType="3" name="/resources_img/proveedores1.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="   Proveedores"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -338,7 +350,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/resources_img/clientes-30.png"/>
+                  <Image iconType="3" name="/resources_img/clientes1.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="   Clientes"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -368,7 +380,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="          Farmacia VIda Sana"/>
+                <Property name="text" type="java.lang.String" value="          Farmacia BIOFarma"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
@@ -390,24 +402,26 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Vida Sana"/>
+                <Property name="text" type="java.lang.String" value="BIOFarma"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/resources_img/farmacia-48.png"/>
+                  <Image iconType="3" name="/resources_img/BIOFarma-Logo.png"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JSeparator" name="jSeparator2">
+            <Component class="javax.swing.JLabel" name="Separador1">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="99" green="99" red="99" type="rgb"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
+                    <MatteColorBorder bottom="2" left="0" right="0" top="0">
+                      <Color PropertyName="color" blue="36" green="a6" red="87" type="rgb"/>
+                    </MatteColorBorder>
+                  </Border>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="99" green="99" red="99" type="rgb"/>
-                </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -425,11 +439,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="LblMenu" min="-2" pref="354" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="LblTipoUsuario" min="-2" pref="106" max="-2" attributes="0"/>
+                      <EmptySpace pref="52" max="32767" attributes="0"/>
+                      <Component id="LblTipoUsuario" min="-2" pref="115" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="LogoUsuario" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -440,7 +454,7 @@
                       <Component id="LblMenu" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Component id="LogoUsuario" alignment="0" pref="78" max="32767" attributes="0"/>
+                  <Component id="LogoUsuario" alignment="0" pref="84" max="32767" attributes="0"/>
                   <Component id="LblTipoUsuario" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
@@ -459,12 +473,11 @@
             <Component class="javax.swing.JLabel" name="LblTipoUsuario">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Poppins" size="14" style="0"/>
+                  <Font name="Poppins" size="16" style="0"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Administrador"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="LogoUsuario">
@@ -491,14 +504,16 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
         </Container>
-        <Component class="javax.swing.JSeparator" name="separador">
+        <Component class="javax.swing.JLabel" name="Separador2">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="66" type="rgb"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
+                <MatteColorBorder bottom="2" left="0" right="0" top="0">
+                  <Color PropertyName="color" blue="57" green="35" red="11" type="rgb"/>
+                </MatteColorBorder>
+              </Border>
             </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[0, 4]"/>
-            </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>
