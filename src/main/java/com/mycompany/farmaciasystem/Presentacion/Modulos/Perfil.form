@@ -135,6 +135,9 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="iconTextGap" type="int" value="18"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -160,14 +163,14 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="txtnombre" max="32767" attributes="0"/>
+                                              <Component id="txtIdUsuario" max="32767" attributes="0"/>
                                               <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="jLabel4" max="32767" attributes="0"/>
                                               <EmptySpace min="151" pref="151" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="txtdni" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txtRolUsuario" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -177,7 +180,7 @@
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="txtcorreo" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <Component id="jLabel5" max="32767" attributes="0"/>
                                                       <EmptySpace min="125" pref="125" max="-2" attributes="0"/>
@@ -202,12 +205,12 @@
                                                       <Component id="jLabel9" min="-2" pref="130" max="-2" attributes="0"/>
                                                       <EmptySpace min="0" pref="58" max="32767" attributes="0"/>
                                                   </Group>
-                                                  <Component id="txtPassword" max="32767" attributes="0"/>
+                                                  <Component id="txtContrasenia" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                                              <Component id="btnCambiarPas" max="32767" attributes="0"/>
+                                              <Component id="btnCambiar" max="32767" attributes="0"/>
                                           </Group>
-                                          <Component id="txtApellido2" max="32767" attributes="0"/>
+                                          <Component id="txtApellidos" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                                   </Group>
@@ -234,9 +237,9 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtnombre" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="txtIdUsuario" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="txtNombre" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="txtApellido2" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="txtApellidos" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
@@ -255,12 +258,12 @@
                       </Group>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="txtPassword" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="btnCambiarPas" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="txtContrasenia" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="btnCambiar" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="txtcorreo" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="txtdni" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="txtEmail" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="txtRolUsuario" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="27" max="32767" attributes="0"/>
@@ -283,8 +286,9 @@
                 <Property name="text" type="java.lang.String" value="Datos Personales"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtnombre">
+            <Component class="javax.swing.JTextField" name="txtIdUsuario">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
@@ -311,7 +315,7 @@
                 <Property name="text" type="java.lang.String" value="ID de usuario"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtApellido2">
+            <Component class="javax.swing.JTextField" name="txtApellidos">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -367,7 +371,7 @@
                 <Property name="text" type="java.lang.String" value="Apellidos"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtcorreo">
+            <Component class="javax.swing.JTextField" name="txtEmail">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -384,7 +388,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtdni">
+            <Component class="javax.swing.JTextField" name="txtRolUsuario">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -402,7 +406,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtdniActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtRolUsuarioActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
@@ -438,7 +442,7 @@
                 <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnCambiarPas">
+            <Component class="javax.swing.JButton" name="btnCambiar">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -450,10 +454,10 @@
                 <Property name="borderPainted" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCambiarPasActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCambiarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="txtPassword">
+            <Component class="javax.swing.JPasswordField" name="txtContrasenia">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

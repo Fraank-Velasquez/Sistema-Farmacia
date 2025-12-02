@@ -4,9 +4,11 @@
  */
 package com.mycompany.farmaciasystem.Presentacion.Modulos;
 
-import com.mycompany.farmaciasystem.Presentacion.FormsADD.NuevaContrasenia;
 import com.mycompany.farmaciasystem.Presentacion.FormsADD.NuevosUsuarios;
+import com.mycompany.farmaciasystem.controladores.UsuarioController;
+import com.mycompany.farmaciasystem.modelo.entidades.Usuario;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
@@ -15,11 +17,29 @@ import javax.swing.SwingUtilities;
  */
 public class Perfil extends javax.swing.JPanel {
 
+    private final Usuario usuarioActual;
+    private UsuarioController usuarioController;
+
     /**
      * Creates new form Perfil
+     *
+     * @param usuario
      */
-    public Perfil() {
+    public Perfil(Usuario usuario) {
         initComponents();
+        this.usuarioActual = usuario;
+
+        cargarDatosUsuarioPerfil();
+    }
+
+    // cargar datos del usuario en el perfil
+    private void cargarDatosUsuarioPerfil() {
+        txtIdUsuario.setText(String.valueOf(usuarioActual.getIdUsuario()));
+        txtNombre.setText(usuarioActual.getNombres());
+        txtApellidos.setText(usuarioActual.getApellidos());
+        txtRolUsuario.setText(usuarioActual.getRol());
+        txtEmail.setText(usuarioActual.getEmail());
+        txtContrasenia.setText("********"); // Ocultar contraseña
     }
 
     /**
@@ -37,19 +57,19 @@ public class Perfil extends javax.swing.JPanel {
         btnGuardar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        txtnombre = new javax.swing.JTextField();
+        txtIdUsuario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtApellido2 = new javax.swing.JTextField();
+        txtApellidos = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtcorreo = new javax.swing.JTextField();
-        txtdni = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtRolUsuario = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        btnCambiarPas = new javax.swing.JButton();
-        txtPassword = new javax.swing.JPasswordField();
+        btnCambiar = new javax.swing.JButton();
+        txtContrasenia = new javax.swing.JPasswordField();
 
         BackGround.setBackground(new java.awt.Color(232, 232, 245));
         BackGround.setPreferredSize(new java.awt.Dimension(830, 423));
@@ -74,6 +94,11 @@ public class Perfil extends javax.swing.JPanel {
         btnGuardar.setBorderPainted(false);
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnGuardar.setIconTextGap(18);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,17 +128,18 @@ public class Perfil extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Datos Personales");
 
-        txtnombre.setBackground(new java.awt.Color(255, 255, 255));
-        txtnombre.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtIdUsuario.setEditable(false);
+        txtIdUsuario.setBackground(new java.awt.Color(255, 255, 255));
+        txtIdUsuario.setForeground(new java.awt.Color(51, 51, 51));
+        txtIdUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("ID de usuario");
 
-        txtApellido2.setBackground(new java.awt.Color(255, 255, 255));
-        txtApellido2.setForeground(new java.awt.Color(51, 51, 51));
-        txtApellido2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtApellidos.setBackground(new java.awt.Color(255, 255, 255));
+        txtApellidos.setForeground(new java.awt.Color(51, 51, 51));
+        txtApellidos.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
         txtNombre.setBackground(new java.awt.Color(255, 255, 255));
         txtNombre.setForeground(new java.awt.Color(51, 51, 51));
@@ -127,17 +153,17 @@ public class Perfil extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Apellidos");
 
-        txtcorreo.setBackground(new java.awt.Color(255, 255, 255));
-        txtcorreo.setForeground(new java.awt.Color(51, 51, 51));
-        txtcorreo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtEmail.setBackground(new java.awt.Color(255, 255, 255));
+        txtEmail.setForeground(new java.awt.Color(51, 51, 51));
+        txtEmail.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
-        txtdni.setEditable(false);
-        txtdni.setBackground(new java.awt.Color(255, 255, 255));
-        txtdni.setForeground(new java.awt.Color(51, 51, 51));
-        txtdni.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
-        txtdni.addActionListener(new java.awt.event.ActionListener() {
+        txtRolUsuario.setEditable(false);
+        txtRolUsuario.setBackground(new java.awt.Color(255, 255, 255));
+        txtRolUsuario.setForeground(new java.awt.Color(51, 51, 51));
+        txtRolUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtRolUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtdniActionPerformed(evt);
+                txtRolUsuarioActionPerformed(evt);
             }
         });
 
@@ -153,20 +179,20 @@ public class Perfil extends javax.swing.JPanel {
         jLabel9.setForeground(new java.awt.Color(51, 51, 51));
         jLabel9.setText("Contraseña");
 
-        btnCambiarPas.setBackground(new java.awt.Color(255, 255, 255));
-        btnCambiarPas.setText("cambiar");
-        btnCambiarPas.setBorder(null);
-        btnCambiarPas.setBorderPainted(false);
-        btnCambiarPas.addActionListener(new java.awt.event.ActionListener() {
+        btnCambiar.setBackground(new java.awt.Color(255, 255, 255));
+        btnCambiar.setText("cambiar");
+        btnCambiar.setBorder(null);
+        btnCambiar.setBorderPainted(false);
+        btnCambiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCambiarPasActionPerformed(evt);
+                btnCambiarActionPerformed(evt);
             }
         });
 
-        txtPassword.setEditable(false);
-        txtPassword.setBackground(new java.awt.Color(255, 255, 255));
-        txtPassword.setForeground(new java.awt.Color(51, 51, 51));
-        txtPassword.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtContrasenia.setEditable(false);
+        txtContrasenia.setBackground(new java.awt.Color(255, 255, 255));
+        txtContrasenia.setForeground(new java.awt.Color(51, 51, 51));
+        txtContrasenia.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -183,12 +209,12 @@ public class Perfil extends javax.swing.JPanel {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(txtnombre)
+                                        .addComponent(txtIdUsuario)
                                         .addGap(1, 1, 1))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(151, 151, 151))
-                                    .addComponent(txtdni))
+                                    .addComponent(txtRolUsuario))
                                 .addGap(40, 40, 40)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -196,7 +222,7 @@ public class Perfil extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(txtcorreo, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                                 .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addGap(125, 125, 125))
@@ -213,10 +239,10 @@ public class Perfil extends javax.swing.JPanel {
                                             .addGroup(jPanel2Layout.createSequentialGroup()
                                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(0, 58, Short.MAX_VALUE))
-                                            .addComponent(txtPassword))
+                                            .addComponent(txtContrasenia))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnCambiarPas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(txtApellido2))
+                                        .addComponent(btnCambiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(txtApellidos))
                                 .addGap(47, 47, 47))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -234,9 +260,9 @@ public class Perfil extends javax.swing.JPanel {
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(57, 57, 57)
@@ -250,11 +276,11 @@ public class Perfil extends javax.swing.JPanel {
                         .addGap(16, 16, 16)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnCambiarPas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCambiar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtdni, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtRolUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -295,31 +321,166 @@ public class Perfil extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtdniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdniActionPerformed
+    private void txtRolUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRolUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtdniActionPerformed
+    }//GEN-LAST:event_txtRolUsuarioActionPerformed
 
-    private void btnCambiarPasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPasActionPerformed
-        
-        JFrame principal = (JFrame) SwingUtilities.getWindowAncestor(this);
-        NuevaContrasenia newPas = new NuevaContrasenia(principal);
-        newPas.setVisible(true);
+    private void btnCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarActionPerformed
 
-    }//GEN-LAST:event_btnCambiarPasActionPerformed
+//        JFrame principal = (JFrame) SwingUtilities.getWindowAncestor(this);
+//        NuevaContrasenia newPas = new NuevaContrasenia(principal);
+//        newPas.setVisible(true);
+        // Solicitar contraseña actual
+        String contrasenaActual = JOptionPane.showInputDialog(this,
+                "Ingrese su contraseña actual:",
+                "Verificación",
+                JOptionPane.PLAIN_MESSAGE);
+
+        if (contrasenaActual == null || contrasenaActual.trim().isEmpty()) {
+            return;
+        }
+
+        // Verificar contraseña actual
+        Usuario verificacion = usuarioController.validarLogin(
+                usuarioActual.getNombreUsuario(),
+                contrasenaActual
+        );
+
+        if (verificacion == null) {
+            JOptionPane.showMessageDialog(this,
+                    "Contraseña actual incorrecta",
+                    "Error de Verificación",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Solicitar nueva contraseña
+        String nuevaContrasena = JOptionPane.showInputDialog(this,
+                "Ingrese la nueva contraseña:",
+                "Nueva Contraseña",
+                JOptionPane.PLAIN_MESSAGE);
+
+        if (nuevaContrasena == null || nuevaContrasena.trim().isEmpty()) {
+            return;
+        }
+
+        if (nuevaContrasena.length() < 6) {
+            JOptionPane.showMessageDialog(this,
+                    "La contraseña debe tener al menos 6 caracteres",
+                    "Validación",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Confirmar nueva contraseña
+        String confirmarContrasena = JOptionPane.showInputDialog(this,
+                "Confirme la nueva contraseña:",
+                "Confirmar Contraseña",
+                JOptionPane.PLAIN_MESSAGE);
+
+        if (!nuevaContrasena.equals(confirmarContrasena)) {
+            JOptionPane.showMessageDialog(this,
+                    "Las contraseñas no coinciden",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Actualizar contraseña
+        usuarioActual.setContrasenia(nuevaContrasena);
+        boolean actualizado = usuarioController.actualizarUsuario(usuarioActual);
+
+        if (actualizado) {
+            JOptionPane.showMessageDialog(this,
+                    "Contraseña actualizada correctamente",
+                    "Éxito",
+                    JOptionPane.INFORMATION_MESSAGE);
+            txtContrasenia.setText("********");
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Error al actualizar la contraseña",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_btnCambiarActionPerformed
 
     private void btnNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoUsuarioActionPerformed
-        
+
+        // Verificar si el usuario actual es administrador
+        if (!usuarioActual.getRol().equalsIgnoreCase("Administrador")) {
+            JOptionPane.showMessageDialog(this,
+                    "Solo los administradores pueden crear nuevos usuarios",
+                    "Acceso Denegado",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         JFrame principal = (JFrame) SwingUtilities.getWindowAncestor(this);
         NuevosUsuarios nUsuarios = new NuevosUsuarios(principal);
         nUsuarios.setVisible(true);
-        
+
 
     }//GEN-LAST:event_btnNuevoUsuarioActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+
+        // Validar que los campos no estén vacíos
+        if (txtNombre.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "El nombre es requerido",
+                    "Validación",
+                    JOptionPane.WARNING_MESSAGE);
+            txtNombre.requestFocus();
+            return;
+        }
+
+        if (txtApellidos.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Los apellidos son requeridos",
+                    "Validación",
+                    JOptionPane.WARNING_MESSAGE);
+            txtApellidos.requestFocus();
+            return;
+        }
+
+        if (txtEmail.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "El email es requerido",
+                    "Validación",
+                    JOptionPane.WARNING_MESSAGE);
+            txtEmail.requestFocus();
+            return;
+        }
+
+        // Actualizar datos del usuario actual
+        usuarioActual.setNombres(txtNombre.getText().trim());
+        usuarioActual.setApellidos(txtApellidos.getText().trim());
+        usuarioActual.setEmail(txtEmail.getText().trim());
+
+        // Guardar en BD usando el controller
+        boolean actualizado = usuarioController.actualizarUsuario(usuarioActual);
+
+        if (actualizado) {
+            JOptionPane.showMessageDialog(this,
+                    "Datos actualizados correctamente",
+                    "Actualización Exitosa",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Error al actualizar los datos",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BackGround;
-    private javax.swing.JButton btnCambiarPas;
+    private javax.swing.JButton btnCambiar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevoUsuario;
     private javax.swing.JLabel jLabel3;
@@ -331,11 +492,11 @@ public class Perfil extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtApellido2;
+    private javax.swing.JTextField txtApellidos;
+    private javax.swing.JPasswordField txtContrasenia;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtIdUsuario;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtcorreo;
-    private javax.swing.JTextField txtdni;
-    private javax.swing.JTextField txtnombre;
+    private javax.swing.JTextField txtRolUsuario;
     // End of variables declaration//GEN-END:variables
 }

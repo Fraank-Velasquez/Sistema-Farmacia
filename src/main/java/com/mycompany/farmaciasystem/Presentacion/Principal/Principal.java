@@ -41,7 +41,7 @@ public class Principal extends javax.swing.JFrame {
     Proveedores proveedores = new Proveedores();
     Ventas ventas = new Ventas();
     Promociones promos = new Promociones();
-    Perfil perfil = new Perfil();
+    Perfil perfil = new Perfil(usuarioActual);
 
     private void otrosComponentes() {
 

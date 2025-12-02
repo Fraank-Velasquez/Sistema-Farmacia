@@ -197,8 +197,14 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tbMasVendidos">
+                <Component class="javax.swing.JTable" name="tablaMasVendidos">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Poppins Medium" size="14" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="33" green="33" red="33" type="rgb"/>
+                    </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="0" rowCount="4"/>
                     </Property>
@@ -216,8 +222,14 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tbStockBajo">
+                <Component class="javax.swing.JTable" name="tablaBajoStock">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Poppins Medium" size="14" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="33" green="33" red="33" type="rgb"/>
+                    </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="0" rowCount="4"/>
                     </Property>
@@ -243,32 +255,32 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lblTotalProductos" max="32767" attributes="0"/>
-                          <Component id="lblLotesVencidos" pref="204" max="32767" attributes="0"/>
-                          <Component id="lblProductosBajoStock" pref="204" max="32767" attributes="0"/>
+                          <Component id="lblTotalProductosl" max="32767" attributes="0"/>
+                          <Component id="lblLotesVencidosl" pref="204" max="32767" attributes="0"/>
+                          <Component id="lblProductosBajoStockl" pref="204" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblUsuario3" min="-2" pref="90" max="-2" attributes="0"/>
-                          <Component id="lblUsuario7" min="-2" pref="90" max="-2" attributes="0"/>
-                          <Component id="lblUsuario8" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="lblTotalProductos" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="lblProductosBajoStock" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="lblLotesVencidos" min="-2" pref="90" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="lblTotalClientes" min="-2" pref="204" max="-2" attributes="0"/>
+                              <Component id="lblTotalClientesl" min="-2" pref="204" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblUsuario10" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="lblTotalClientes" min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="lblTotalProveedores" min="-2" pref="204" max="-2" attributes="0"/>
+                              <Component id="lblTotalProveedoresl" min="-2" pref="204" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblUsuario11" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="lblTotalProveedores" min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblVentasDelDia" min="-2" pref="204" max="-2" attributes="0"/>
+                              <Component id="lblVentasDelDial" min="-2" pref="204" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblUsuario9" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="lblVentasDelDia" min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
@@ -280,31 +292,31 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblTotalProductosl" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="lblVentasDelDial" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="lblTotalProductos" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="lblVentasDelDia" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="lblUsuario3" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="lblUsuario9" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblProductosBajoStockl" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="lblTotalClientesl" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="lblProductosBajoStock" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="lblTotalClientes" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="lblUsuario7" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="lblUsuario10" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblLotesVencidosl" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="lblTotalProveedoresl" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="lblLotesVencidos" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="lblTotalProveedores" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="lblUsuario8" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="lblUsuario11" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lblTotalProductos">
+            <Component class="javax.swing.JLabel" name="lblTotalProductosl">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins Medium" size="16" style="0"/>
@@ -315,7 +327,7 @@
                 <Property name="text" type="java.lang.String" value="Total de Productos:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblProductosBajoStock">
+            <Component class="javax.swing.JLabel" name="lblProductosBajoStockl">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins Medium" size="16" style="0"/>
@@ -326,7 +338,7 @@
                 <Property name="text" type="java.lang.String" value="Bajo Stock:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblLotesVencidos">
+            <Component class="javax.swing.JLabel" name="lblLotesVencidosl">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins Medium" size="16" style="0"/>
@@ -337,7 +349,7 @@
                 <Property name="text" type="java.lang.String" value="Lotes Vencidos:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblTotalClientes">
+            <Component class="javax.swing.JLabel" name="lblTotalClientesl">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins Medium" size="16" style="0"/>
@@ -348,7 +360,7 @@
                 <Property name="text" type="java.lang.String" value="Clientes:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblTotalProveedores">
+            <Component class="javax.swing.JLabel" name="lblTotalProveedoresl">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins Medium" size="16" style="0"/>
@@ -359,7 +371,7 @@
                 <Property name="text" type="java.lang.String" value="Proveedores:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblVentasDelDia">
+            <Component class="javax.swing.JLabel" name="lblVentasDelDial">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins Medium" size="16" style="0"/>
@@ -370,7 +382,7 @@
                 <Property name="text" type="java.lang.String" value="Ventas de Hoy: "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblUsuario3">
+            <Component class="javax.swing.JLabel" name="lblTotalProductos">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins Medium" size="16" style="0"/>
@@ -378,10 +390,9 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="0000000"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblUsuario7">
+            <Component class="javax.swing.JLabel" name="lblProductosBajoStock">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins Medium" size="16" style="0"/>
@@ -389,10 +400,9 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="0000000"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblUsuario8">
+            <Component class="javax.swing.JLabel" name="lblLotesVencidos">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins Medium" size="16" style="0"/>
@@ -400,10 +410,9 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="0000000"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblUsuario9">
+            <Component class="javax.swing.JLabel" name="lblVentasDelDia">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins Medium" size="16" style="0"/>
@@ -411,10 +420,9 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="0000000"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblUsuario10">
+            <Component class="javax.swing.JLabel" name="lblTotalClientes">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins Medium" size="16" style="0"/>
@@ -422,10 +430,9 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="0000000"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblUsuario11">
+            <Component class="javax.swing.JLabel" name="lblTotalProveedores">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Poppins Medium" size="16" style="0"/>
@@ -433,7 +440,6 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="0000000"/>
               </Properties>
             </Component>
           </SubComponents>

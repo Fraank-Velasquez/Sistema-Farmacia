@@ -89,12 +89,15 @@ com\mycompany\farmaciasystem\Presentacion\Modulos\Perfil$3.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Promociones$1.class
 com\mycompany\farmaciasystem\facade\VentaFacade.class
 com\mycompany\farmaciasystem\Presentacion\FormsEditar\EditarClientes.class
+com\mycompany\farmaciasystem\Presentacion\Modulos\Inicio$6.class
 com\mycompany\farmaciasystem\Presentacion\Principal\Principal$9.class
 com\mycompany\farmaciasystem\modelo\entidades\Compra.class
 com\mycompany\farmaciasystem\observer\NotificacionDashboardObserver.class
 com\mycompany\farmaciasystem\repository\Interfaces\IRepository.class
 com\mycompany\farmaciasystem\Presentacion\FormsEditar\EditarPromocion.class
+com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevosUsuarios$2.class
 com\mycompany\farmaciasystem\Presentacion\Principal\Principal$3.class
+com\mycompany\farmaciasystem\Presentacion\Modulos\Perfil$4.class
 com\mycompany\farmaciasystem\command\ActualizarProductoCommand.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Ventas$3.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Clientes$1.class
@@ -126,7 +129,9 @@ com\mycompany\farmaciasystem\factory\IReporte.class
 com\mycompany\farmaciasystem\modelo\DTO\VentaDTO.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Proveedores$1.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Productos$2.class
+com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevosUsuarios$1.class
 com\mycompany\farmaciasystem\modelo\entidades\Empresa.class
+com\mycompany\farmaciasystem\Presentacion\Modulos\Inicio$7.class
 com\mycompany\farmaciasystem\controladores\ProductoController.class
 com\mycompany\farmaciasystem\factory\ReporteInventario.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\ListaVentas$3.class

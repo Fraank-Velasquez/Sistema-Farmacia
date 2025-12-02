@@ -4,17 +4,143 @@
  */
 package com.mycompany.farmaciasystem.Presentacion.Modulos;
 
+import com.mycompany.farmaciasystem.controladores.DashboardController;
+import com.mycompany.farmaciasystem.controladores.ProductoController;
+import com.mycompany.farmaciasystem.modelo.entidades.Producto;
+import com.mycompany.farmaciasystem.observer.NotificacionDashboardObserver;
+import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Frank
  */
 public class Inicio extends javax.swing.JPanel {
 
+    private final DashboardController dashboardController;
+    private final ProductoController productoController;
+    private NotificacionDashboardObserver notificacionObserver;
+
     /**
      * Creates new form NewJPanel
      */
     public Inicio() {
         initComponents();
+        this.dashboardController = new DashboardController();
+        this.productoController = new ProductoController();
+        configurarTablas();
+        cargarDashboard();
+    }
+
+    private void configurarTablas() {
+        // tabla de productos con bajo stock
+        DefaultTableModel modeloBajoStock = new DefaultTableModel(
+                new Object[][]{},
+                new String[]{"ID", "Nombre", "Stock Actual", "Stock Mínimo", "Estado"}
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tablaBajoStock.setModel(modeloBajoStock);
+
+        //tabla de productos más vendidos
+        DefaultTableModel modeloMasVendidos = new DefaultTableModel(
+                new Object[][]{},
+                new String[]{"Producto", "Cantidad Vendida", "Total Ventas"}
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tablaMasVendidos.setModel(modeloMasVendidos);
+    }
+
+    private void cargarDashboard() {
+        cargarEstadisticas();
+        cargarProductosBajoStock();
+        cargarProductosMasVendidos();
+        verificarAlertas();
+    }
+
+    private void cargarEstadisticas() {
+        Map<String, Object> estadisticas = dashboardController.obtenerEstadisticasDashboard();
+
+        lblTotalProductos.setText(String.valueOf(estadisticas.get("totalProductos")));
+        lblProductosBajoStock.setText(String.valueOf(estadisticas.get("productosBajoStock")));
+        lblVentasDelDia.setText(String.valueOf(estadisticas.get("ventasDelDia")));
+        lblTotalClientes.setText(String.valueOf(estadisticas.get("totalClientes")));
+        lblTotalProveedores.setText(String.valueOf(estadisticas.get("totalProveedores")));
+        lblLotesVencidos.setText(String.valueOf(estadisticas.get("lotesVencidos")));
+    }
+
+    private void cargarProductosBajoStock() {
+        DefaultTableModel modelo = (DefaultTableModel) tablaBajoStock.getModel();
+        modelo.setRowCount(0);
+
+        List<Producto> productosBajoStock = productoController.obtenerProductosBajoStock();
+
+        for (Producto producto : productosBajoStock) {
+            Object[] fila = {
+                producto.getIdProducto(),
+                producto.getNombre(),
+                producto.getStockActual(),
+                producto.getStockMinimo(),
+                "ALERTA"
+            };
+            modelo.addRow(fila);
+        }
+
+        if (productosBajoStock.isEmpty()) {
+            Object[] fila = {"No hay ", "productos", "bajos", "en stock", ""};
+            modelo.addRow(fila);
+        }
+    }
+
+    private void cargarProductosMasVendidos() {
+        DefaultTableModel modelo = (DefaultTableModel) tablaMasVendidos.getModel();
+        modelo.setRowCount(0);
+
+        // productos de ejemplo
+        Object[] fila1 = {"Paracetamol 500mg", "120", "S/. 360.00"};
+        Object[] fila2 = {"Ibuprofeno 400mg", "95", "S/. 475.00"};
+        Object[] fila3 = {"Amoxicilina 500mg", "80", "S/. 640.00"};
+
+        modelo.addRow(fila1);
+        modelo.addRow(fila2);
+        modelo.addRow(fila3);
+    }
+
+    private void verificarAlertas() {
+        notificacionObserver = dashboardController.verificarAlertas();
+
+        if (notificacionObserver.hayAlertas()) {
+            mostrarNotificacionAlertas();
+        }
+    }
+
+    private void mostrarNotificacionAlertas() {
+        List<String> notificaciones = notificacionObserver.obtenerNotificaciones();
+
+        if (!notificaciones.isEmpty()) {
+            StringBuilder mensaje = new StringBuilder();
+            mensaje.append("ALERTAS DEL SISTEMA:\n\n");
+
+            int contador = 1;
+            for (String notif : notificaciones) {
+                mensaje.append(contador).append(". ").append(notif).append("\n");
+                contador++;
+            }
+
+            JOptionPane.showMessageDialog(this,
+                    mensaje.toString(),
+                    "Alertas del Sistema",
+                    JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     /**
@@ -32,22 +158,22 @@ public class Inicio extends javax.swing.JPanel {
         lblProdBajS = new javax.swing.JButton();
         lblProductosMasVendidos = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbMasVendidos = new javax.swing.JTable();
+        tablaMasVendidos = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbStockBajo = new javax.swing.JTable();
+        tablaBajoStock = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
+        lblTotalProductosl = new javax.swing.JLabel();
+        lblProductosBajoStockl = new javax.swing.JLabel();
+        lblLotesVencidosl = new javax.swing.JLabel();
+        lblTotalClientesl = new javax.swing.JLabel();
+        lblTotalProveedoresl = new javax.swing.JLabel();
+        lblVentasDelDial = new javax.swing.JLabel();
         lblTotalProductos = new javax.swing.JLabel();
         lblProductosBajoStock = new javax.swing.JLabel();
         lblLotesVencidos = new javax.swing.JLabel();
+        lblVentasDelDia = new javax.swing.JLabel();
         lblTotalClientes = new javax.swing.JLabel();
         lblTotalProveedores = new javax.swing.JLabel();
-        lblVentasDelDia = new javax.swing.JLabel();
-        lblUsuario3 = new javax.swing.JLabel();
-        lblUsuario7 = new javax.swing.JLabel();
-        lblUsuario8 = new javax.swing.JLabel();
-        lblUsuario9 = new javax.swing.JLabel();
-        lblUsuario10 = new javax.swing.JLabel();
-        lblUsuario11 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(232, 232, 245));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -114,7 +240,9 @@ public class Inicio extends javax.swing.JPanel {
             }
         });
 
-        tbMasVendidos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaMasVendidos.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        tablaMasVendidos.setForeground(new java.awt.Color(51, 51, 51));
+        tablaMasVendidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -125,9 +253,11 @@ public class Inicio extends javax.swing.JPanel {
 
             }
         ));
-        jScrollPane1.setViewportView(tbMasVendidos);
+        jScrollPane1.setViewportView(tablaMasVendidos);
 
-        tbStockBajo.setModel(new javax.swing.table.DefaultTableModel(
+        tablaBajoStock.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        tablaBajoStock.setForeground(new java.awt.Color(51, 51, 51));
+        tablaBajoStock.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -138,7 +268,7 @@ public class Inicio extends javax.swing.JPanel {
 
             }
         ));
-        jScrollPane2.setViewportView(tbStockBajo);
+        jScrollPane2.setViewportView(tablaBajoStock);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -171,53 +301,47 @@ public class Inicio extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
+        lblTotalProductosl.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblTotalProductosl.setForeground(new java.awt.Color(29, 82, 109));
+        lblTotalProductosl.setText("Total de Productos:");
+
+        lblProductosBajoStockl.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblProductosBajoStockl.setForeground(new java.awt.Color(29, 82, 109));
+        lblProductosBajoStockl.setText("Bajo Stock:");
+
+        lblLotesVencidosl.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblLotesVencidosl.setForeground(new java.awt.Color(29, 82, 109));
+        lblLotesVencidosl.setText("Lotes Vencidos:");
+
+        lblTotalClientesl.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblTotalClientesl.setForeground(new java.awt.Color(29, 82, 109));
+        lblTotalClientesl.setText("Clientes:");
+
+        lblTotalProveedoresl.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblTotalProveedoresl.setForeground(new java.awt.Color(29, 82, 109));
+        lblTotalProveedoresl.setText("Proveedores:");
+
+        lblVentasDelDial.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblVentasDelDial.setForeground(new java.awt.Color(29, 82, 109));
+        lblVentasDelDial.setText("Ventas de Hoy: ");
+
         lblTotalProductos.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
-        lblTotalProductos.setForeground(new java.awt.Color(29, 82, 109));
-        lblTotalProductos.setText("Total de Productos:");
+        lblTotalProductos.setForeground(new java.awt.Color(51, 51, 51));
 
         lblProductosBajoStock.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
-        lblProductosBajoStock.setForeground(new java.awt.Color(29, 82, 109));
-        lblProductosBajoStock.setText("Bajo Stock:");
+        lblProductosBajoStock.setForeground(new java.awt.Color(51, 51, 51));
 
         lblLotesVencidos.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
-        lblLotesVencidos.setForeground(new java.awt.Color(29, 82, 109));
-        lblLotesVencidos.setText("Lotes Vencidos:");
-
-        lblTotalClientes.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
-        lblTotalClientes.setForeground(new java.awt.Color(29, 82, 109));
-        lblTotalClientes.setText("Clientes:");
-
-        lblTotalProveedores.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
-        lblTotalProveedores.setForeground(new java.awt.Color(29, 82, 109));
-        lblTotalProveedores.setText("Proveedores:");
+        lblLotesVencidos.setForeground(new java.awt.Color(51, 51, 51));
 
         lblVentasDelDia.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
-        lblVentasDelDia.setForeground(new java.awt.Color(29, 82, 109));
-        lblVentasDelDia.setText("Ventas de Hoy: ");
+        lblVentasDelDia.setForeground(new java.awt.Color(51, 51, 51));
 
-        lblUsuario3.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
-        lblUsuario3.setForeground(new java.awt.Color(51, 51, 51));
-        lblUsuario3.setText("0000000");
+        lblTotalClientes.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblTotalClientes.setForeground(new java.awt.Color(51, 51, 51));
 
-        lblUsuario7.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
-        lblUsuario7.setForeground(new java.awt.Color(51, 51, 51));
-        lblUsuario7.setText("0000000");
-
-        lblUsuario8.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
-        lblUsuario8.setForeground(new java.awt.Color(51, 51, 51));
-        lblUsuario8.setText("0000000");
-
-        lblUsuario9.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
-        lblUsuario9.setForeground(new java.awt.Color(51, 51, 51));
-        lblUsuario9.setText("0000000");
-
-        lblUsuario10.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
-        lblUsuario10.setForeground(new java.awt.Color(51, 51, 51));
-        lblUsuario10.setText("0000000");
-
-        lblUsuario11.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
-        lblUsuario11.setForeground(new java.awt.Color(51, 51, 51));
-        lblUsuario11.setText("0000000");
+        lblTotalProveedores.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblTotalProveedores.setForeground(new java.awt.Color(51, 51, 51));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -226,28 +350,28 @@ public class Inicio extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblTotalProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblLotesVencidos, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                    .addComponent(lblProductosBajoStock, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
+                    .addComponent(lblTotalProductosl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblLotesVencidosl, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addComponent(lblProductosBajoStockl, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsuario7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsuario8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTotalProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProductosBajoStock, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLotesVencidos, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lblTotalClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTotalClientesl, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblUsuario10, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblTotalClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lblTotalProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTotalProveedoresl, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblUsuario11, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblTotalProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lblVentasDelDia, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblVentasDelDial, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblUsuario9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblVentasDelDia, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(89, 89, 89))
         );
         jPanel3Layout.setVerticalGroup(
@@ -255,22 +379,22 @@ public class Inicio extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTotalProductosl, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblVentasDelDial, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTotalProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblVentasDelDia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsuario9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblVentasDelDia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProductosBajoStockl, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTotalClientesl, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblProductosBajoStock, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTotalClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsuario7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsuario10, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTotalClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLotesVencidosl, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTotalProveedoresl, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLotesVencidos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTotalProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsuario8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsuario11, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblTotalProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -346,7 +470,13 @@ public class Inicio extends javax.swing.JPanel {
     }//GEN-LAST:event_lblProductosMasVendidosActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         // TODO add your handling code here:
+
+        cargarDashboard();
+        JOptionPane.showMessageDialog(this,
+                "Dashboard actualizado correctamente",
+                "Actualización Exitosa",
+                JOptionPane.INFORMATION_MESSAGE);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -358,20 +488,20 @@ public class Inicio extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblLotesVencidos;
+    private javax.swing.JLabel lblLotesVencidosl;
     private javax.swing.JButton lblProdBajS;
     private javax.swing.JLabel lblProductosBajoStock;
+    private javax.swing.JLabel lblProductosBajoStockl;
     private javax.swing.JButton lblProductosMasVendidos;
     private javax.swing.JLabel lblTotalClientes;
+    private javax.swing.JLabel lblTotalClientesl;
     private javax.swing.JLabel lblTotalProductos;
+    private javax.swing.JLabel lblTotalProductosl;
     private javax.swing.JLabel lblTotalProveedores;
-    private javax.swing.JLabel lblUsuario10;
-    private javax.swing.JLabel lblUsuario11;
-    private javax.swing.JLabel lblUsuario3;
-    private javax.swing.JLabel lblUsuario7;
-    private javax.swing.JLabel lblUsuario8;
-    private javax.swing.JLabel lblUsuario9;
+    private javax.swing.JLabel lblTotalProveedoresl;
     private javax.swing.JLabel lblVentasDelDia;
-    private javax.swing.JTable tbMasVendidos;
-    private javax.swing.JTable tbStockBajo;
+    private javax.swing.JLabel lblVentasDelDial;
+    private javax.swing.JTable tablaBajoStock;
+    private javax.swing.JTable tablaMasVendidos;
     // End of variables declaration//GEN-END:variables
 }
