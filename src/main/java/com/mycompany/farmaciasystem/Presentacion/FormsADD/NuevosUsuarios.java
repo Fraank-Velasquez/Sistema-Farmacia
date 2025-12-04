@@ -83,10 +83,13 @@ public class NuevosUsuarios extends javax.swing.JDialog {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setText("ID de usuario: ");
 
+        txtIdUsuarioNuevo.setEditable(false);
         txtIdUsuarioNuevo.setBackground(new java.awt.Color(238, 247, 225));
         txtIdUsuarioNuevo.setForeground(new java.awt.Color(51, 51, 51));
+        txtIdUsuarioNuevo.setText("Asingnación auto.");
         txtIdUsuarioNuevo.setAutoscrolls(false);
         txtIdUsuarioNuevo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtIdUsuarioNuevo.setFocusable(false);
 
         jLabel6.setBackground(new java.awt.Color(0, 0, 0));
         jLabel6.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N

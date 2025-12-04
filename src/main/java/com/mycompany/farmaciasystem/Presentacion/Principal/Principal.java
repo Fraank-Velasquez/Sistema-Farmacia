@@ -28,6 +28,14 @@ public class Principal extends javax.swing.JFrame {
 
     Usuario usuarioActual;
 
+    Inicio inicio = new Inicio();
+    Productos productos = new Productos();
+    Clientes clientes = new Clientes();
+    Proveedores proveedores = new Proveedores();
+    Ventas ventas = new Ventas();
+    Promociones promos = new Promociones();
+    Perfil perfil;
+
     public Principal(Usuario usuario) {
         initComponents();
         this.usuarioActual = usuario;
@@ -35,16 +43,10 @@ public class Principal extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
-    Inicio inicio = new Inicio();
-    Productos productos = new Productos();
-    Clientes clientes = new Clientes();
-    Proveedores proveedores = new Proveedores();
-    Ventas ventas = new Ventas();
-    Promociones promos = new Promociones();
-    Perfil perfil = new Perfil(usuarioActual);
-
     private void otrosComponentes() {
 
+        perfil = new Perfil(usuarioActual);
+        
         GettexIcon(btnInicio);
         InsetarNuevoIcon("/resources_img/Home1.png");
         cambiarPanel(inicio);

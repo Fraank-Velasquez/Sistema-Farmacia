@@ -18,7 +18,7 @@ import javax.swing.SwingUtilities;
 public class Perfil extends javax.swing.JPanel {
 
     private final Usuario usuarioActual;
-    private UsuarioController usuarioController;
+    private final UsuarioController usuarioController;
 
     /**
      * Creates new form Perfil
@@ -28,7 +28,7 @@ public class Perfil extends javax.swing.JPanel {
     public Perfil(Usuario usuario) {
         initComponents();
         this.usuarioActual = usuario;
-
+        this.usuarioController = new UsuarioController();
         cargarDatosUsuarioPerfil();
     }
 
@@ -132,6 +132,8 @@ public class Perfil extends javax.swing.JPanel {
         txtIdUsuario.setBackground(new java.awt.Color(255, 255, 255));
         txtIdUsuario.setForeground(new java.awt.Color(51, 51, 51));
         txtIdUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtIdUsuario.setEnabled(false);
+        txtIdUsuario.setFocusable(false);
 
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));

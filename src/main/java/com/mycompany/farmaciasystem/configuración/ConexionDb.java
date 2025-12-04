@@ -48,7 +48,7 @@ public class ConexionDb {
             // Verifica si la conexión existe y está activa
             if (conexion == null || conexion.isClosed()) {
                 conexion = DriverManager.getConnection(url, user, password);
-                System.out.println("Conexión establecida con la base de datos");
+                System.out.println("Conexion establecida con la base de datos");
 //                JOptionPane.showMessageDialog(null,"Conexión establecida con la base de datos",
 //                        "Exitoso",JOptionPane.INFORMATION_MESSAGE);
             }
