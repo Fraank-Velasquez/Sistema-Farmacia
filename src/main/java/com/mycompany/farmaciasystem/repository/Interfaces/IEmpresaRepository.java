@@ -12,10 +12,12 @@ import java.util.List;
  * @author Frank
  */
 public interface IEmpresaRepository extends IRepository<Empresa> {
-    
+
     List<Empresa> listarPorTipo(String tipoEmpresa);
-    Empresa buscarPorRuc(String ruc);
-    List<Empresa>listarProveedores();
-    List<Empresa>listarLaboratorios();
-    
+
+    List<Empresa> listarProveedores();
+
+    List<Empresa> listarLaboratorios();
+
+
 }

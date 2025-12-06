@@ -30,7 +30,7 @@ public class ProductoRepositoryImpl implements IProductoRepository {
     public List<Producto> listarTodos() {
 
         List<Producto> listaProductos = new ArrayList<>();
-        String sql = "select * from productos";
+        String sql = "SELECT * FROM productos WHERE activo = true ORDER BY id_producto";
 
         try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
@@ -69,7 +69,9 @@ public class ProductoRepositoryImpl implements IProductoRepository {
     @Override
     public boolean insertar(Producto entidad) {
 
-        String sql = "call insertarProductos(?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO productos (nombre, descripcion, id_categoria, "
+                + "id_empresa_fabricante, precio_venta, stock_actual, stock_minimo, activo) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
@@ -94,11 +96,10 @@ public class ProductoRepositoryImpl implements IProductoRepository {
     public boolean actualizar(int id_entidad, Producto entidad) {
 
         String sql = "UPDATE productos SET nombre=?, descripcion=?, id_categoria=?, "
-                   + "id_empresa_fabricante=?, precio_venta=?, stock_minimo=? " 
-                   + "WHERE id_producto=?";
+                + "id_empresa_fabricante=?, precio_venta=?, stock_minimo=? "
+                + "WHERE id_producto=?";
 
-        try (Connection conn = conectardb.establecerConexion();
-             PreparedStatement pst = conn.prepareStatement(sql)) {
+        try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
             pst.setString(1, entidad.getNombre());
             pst.setString(2, entidad.getDescripcion());
@@ -106,8 +107,8 @@ public class ProductoRepositoryImpl implements IProductoRepository {
             pst.setInt(4, entidad.getIdEmpresaFabricante());
             pst.setDouble(5, entidad.getPrecioVenta());
             pst.setInt(6, entidad.getStockMinimo());
-            
-            pst.setInt(7, id_entidad); 
+
+            pst.setInt(7, id_entidad);
 
             return pst.executeUpdate() > 0;
 
@@ -119,11 +120,10 @@ public class ProductoRepositoryImpl implements IProductoRepository {
 
     @Override
     public boolean eliminar(int id) {
-        String sql = "UPDATE productos SET activo = false WHERE id_producto = ?"; 
-        
-        try (Connection conn = conectardb.establecerConexion();
-             PreparedStatement pst = conn.prepareStatement(sql)) {
-             
+        String sql = "UPDATE productos SET activo = false WHERE id_producto = ?";
+
+        try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
+
             pst.setInt(1, id);
             return pst.executeUpdate() > 0;
 
@@ -218,13 +218,12 @@ public class ProductoRepositoryImpl implements IProductoRepository {
     @Override
     public boolean actualizarStock(int idProducto, int cantidad) {
 
-        String sql = "UPDATE productos SET stock_actual = stock_actual + ? WHERE id_producto = ?"; 
+        String sql = "UPDATE productos SET stock_actual = stock_actual + ? WHERE id_producto = ?";
 
-        try (Connection conn = conectardb.establecerConexion();
-             PreparedStatement pst = conn.prepareStatement(sql)) {
+        try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
-            pst.setInt(1, cantidad); 
-            pst.setInt(2, idProducto); 
+            pst.setInt(1, cantidad);
+            pst.setInt(2, idProducto);
 
             return pst.executeUpdate() > 0;
 

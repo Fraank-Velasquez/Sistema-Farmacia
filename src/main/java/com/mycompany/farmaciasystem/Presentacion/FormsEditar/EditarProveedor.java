@@ -4,14 +4,21 @@
  */
 package com.mycompany.farmaciasystem.Presentacion.FormsEditar;
 
+import com.mycompany.farmaciasystem.modelo.entidades.Empresa;
+import com.mycompany.farmaciasystem.servicios.EmpresaService;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Frank
  */
 public class EditarProveedor extends javax.swing.JDialog {
+
+    EmpresaService empresaService = new EmpresaService();
+    private int idEmpresaEditar;
+
     /**
      * Creates new form EditarProveedor
      *
@@ -22,7 +29,25 @@ public class EditarProveedor extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(ventana);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        
+
+    }
+
+    public void cargarDatos(int id) {
+        this.idEmpresaEditar = id;
+        Empresa e = empresaService.buscarPorId(id);
+
+        if (e != null) {
+            // Mismo mapeo que NuevosProveedores
+            txtId.setText(e.getRuc());
+            txtId.setEditable(false); // RUC no debería cambiar usualmente
+
+            txtNombre.setText(e.getNombre());
+            txtTelefono.setText(e.getTelefono());
+            txtEmail.setText(e.getEmail());
+            txtDireccion.setText(e.getDireccion());
+            txtCiudad.setText(e.getCiudad());
+            // Tipo de empresa
+        }
     }
 
     /**
@@ -38,22 +63,22 @@ public class EditarProveedor extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtnombre4 = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnGuardar1 = new javax.swing.JButton();
-        txtnombre10 = new javax.swing.JTextField();
-        txtnombre7 = new javax.swing.JTextField();
+        txtContacto = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        txtnombre8 = new javax.swing.JTextField();
-        txtnombre12 = new javax.swing.JTextField();
-        txtnombre13 = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        txtnombre14 = new javax.swing.JTextField();
-        txtnombre9 = new javax.swing.JTextField();
+        txtCiudad = new javax.swing.JTextField();
+        txtRuc = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -79,10 +104,11 @@ public class EditarProveedor extends javax.swing.JDialog {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setText("ID proveedor: ");
 
-        txtnombre4.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre4.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre4.setAutoscrolls(false);
-        txtnombre4.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtId.setEditable(false);
+        txtId.setBackground(new java.awt.Color(238, 247, 225));
+        txtId.setForeground(new java.awt.Color(51, 51, 51));
+        txtId.setAutoscrolls(false);
+        txtId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
         jLabel6.setBackground(new java.awt.Color(0, 0, 0));
         jLabel6.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
@@ -102,6 +128,11 @@ public class EditarProveedor extends javax.swing.JDialog {
         btnGuardar.setBorderPainted(false);
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnGuardar.setIconTextGap(18);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnGuardar1.setBackground(new java.awt.Color(255, 51, 51));
         btnGuardar1.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
@@ -111,16 +142,21 @@ public class EditarProveedor extends javax.swing.JDialog {
         btnGuardar1.setBorderPainted(false);
         btnGuardar1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnGuardar1.setIconTextGap(18);
+        btnGuardar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardar1ActionPerformed(evt);
+            }
+        });
 
-        txtnombre10.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre10.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre10.setAutoscrolls(false);
-        txtnombre10.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtContacto.setBackground(new java.awt.Color(238, 247, 225));
+        txtContacto.setForeground(new java.awt.Color(51, 51, 51));
+        txtContacto.setAutoscrolls(false);
+        txtContacto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
-        txtnombre7.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre7.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre7.setAutoscrolls(false);
-        txtnombre7.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtNombre.setBackground(new java.awt.Color(238, 247, 225));
+        txtNombre.setForeground(new java.awt.Color(51, 51, 51));
+        txtNombre.setAutoscrolls(false);
+        txtNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
@@ -138,20 +174,20 @@ public class EditarProveedor extends javax.swing.JDialog {
         jLabel17.setForeground(new java.awt.Color(51, 51, 51));
         jLabel17.setText("Direccion:");
 
-        txtnombre8.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre8.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre8.setAutoscrolls(false);
-        txtnombre8.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtEmail.setBackground(new java.awt.Color(238, 247, 225));
+        txtEmail.setForeground(new java.awt.Color(51, 51, 51));
+        txtEmail.setAutoscrolls(false);
+        txtEmail.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
-        txtnombre12.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre12.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre12.setAutoscrolls(false);
-        txtnombre12.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtDireccion.setBackground(new java.awt.Color(238, 247, 225));
+        txtDireccion.setForeground(new java.awt.Color(51, 51, 51));
+        txtDireccion.setAutoscrolls(false);
+        txtDireccion.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
-        txtnombre13.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre13.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre13.setAutoscrolls(false);
-        txtnombre13.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtTelefono.setBackground(new java.awt.Color(238, 247, 225));
+        txtTelefono.setForeground(new java.awt.Color(51, 51, 51));
+        txtTelefono.setAutoscrolls(false);
+        txtTelefono.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
         jLabel18.setBackground(new java.awt.Color(0, 0, 0));
         jLabel18.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
@@ -159,15 +195,15 @@ public class EditarProveedor extends javax.swing.JDialog {
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel18.setText("Ciudad / provincia:");
 
-        txtnombre14.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre14.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre14.setAutoscrolls(false);
-        txtnombre14.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtCiudad.setBackground(new java.awt.Color(238, 247, 225));
+        txtCiudad.setForeground(new java.awt.Color(51, 51, 51));
+        txtCiudad.setAutoscrolls(false);
+        txtCiudad.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
-        txtnombre9.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre9.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre9.setAutoscrolls(false);
-        txtnombre9.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtRuc.setBackground(new java.awt.Color(238, 247, 225));
+        txtRuc.setForeground(new java.awt.Color(51, 51, 51));
+        txtRuc.setAutoscrolls(false);
+        txtRuc.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
         jLabel19.setBackground(new java.awt.Color(0, 0, 0));
         jLabel19.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
@@ -184,11 +220,11 @@ public class EditarProveedor extends javax.swing.JDialog {
                         .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtnombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(42, 42, 42)
-                                .addComponent(txtnombre7, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(39, 39, 39)
-                                .addComponent(txtnombre10, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(42, 42, 42)
@@ -213,17 +249,17 @@ public class EditarProveedor extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(33, 33, 33)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtnombre13, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtnombre14, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(27, 27, 27)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtnombre9, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtRuc, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtnombre8, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(39, 39, 39)
-                                        .addComponent(txtnombre12, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 671, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(116, 116, 116)))
@@ -243,9 +279,9 @@ public class EditarProveedor extends javax.swing.JDialog {
                     .addComponent(jLabel8))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtnombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnombre7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnombre10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
@@ -253,9 +289,9 @@ public class EditarProveedor extends javax.swing.JDialog {
                     .addComponent(jLabel17))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtnombre13, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnombre8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnombre12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
@@ -264,8 +300,8 @@ public class EditarProveedor extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtnombre14, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtnombre9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRuc, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
@@ -291,6 +327,36 @@ public class EditarProveedor extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        try {
+            Empresa e = new Empresa();
+
+            e.setIdEmpresa(idEmpresaEditar); // ID existente
+            e.setRuc(txtId.getText().trim());
+            e.setNombre(txtNombre.getText().trim());
+            e.setTelefono(txtTelefono.getText().trim());
+            e.setEmail(txtEmail.getText().trim());
+            e.setDireccion(txtDireccion.getText().trim());
+            e.setCiudad(txtCiudad.getText().trim());
+            e.setTipoEmpresa("proveedor"); // O valor de campo
+            e.setActivo(true);
+
+            if (empresaService.actualizarEmpresa(e)) { // Método en Service que llama a repository.actualizar
+                JOptionPane.showMessageDialog(this, "Proveedor actualizado.");
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al actualizar.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnGuardar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
@@ -306,13 +372,13 @@ public class EditarProveedor extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtnombre10;
-    private javax.swing.JTextField txtnombre12;
-    private javax.swing.JTextField txtnombre13;
-    private javax.swing.JTextField txtnombre14;
-    private javax.swing.JTextField txtnombre4;
-    private javax.swing.JTextField txtnombre7;
-    private javax.swing.JTextField txtnombre8;
-    private javax.swing.JTextField txtnombre9;
+    private javax.swing.JTextField txtCiudad;
+    private javax.swing.JTextField txtContacto;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtRuc;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

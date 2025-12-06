@@ -4,8 +4,11 @@
  */
 package com.mycompany.farmaciasystem.Presentacion.FormsADD;
 
+import com.mycompany.farmaciasystem.controladores.ClienteController;
+import com.mycompany.farmaciasystem.modelo.entidades.Cliente;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,8 +16,11 @@ import javax.swing.JFrame;
  */
 public class NuevosClientes extends javax.swing.JDialog {
 
+    ClienteController clienteController = new ClienteController();
+
     /**
      * Creates new form NuevosClientes
+     *
      * @param ventana
      */
     public NuevosClientes(JFrame ventana) {
@@ -41,7 +47,7 @@ public class NuevosClientes extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
-        btnGuardar1 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         txtnombre10 = new javax.swing.JTextField();
         txtnombre7 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -97,15 +103,25 @@ public class NuevosClientes extends javax.swing.JDialog {
         btnGuardar.setBorderPainted(false);
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnGuardar.setIconTextGap(18);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
-        btnGuardar1.setBackground(new java.awt.Color(255, 51, 51));
-        btnGuardar1.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
-        btnGuardar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardar1.setText("Cancelar");
-        btnGuardar1.setBorder(null);
-        btnGuardar1.setBorderPainted(false);
-        btnGuardar1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnGuardar1.setIconTextGap(18);
+        btnCancelar.setBackground(new java.awt.Color(255, 51, 51));
+        btnCancelar.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setBorder(null);
+        btnCancelar.setBorderPainted(false);
+        btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnCancelar.setIconTextGap(18);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         txtnombre10.setBackground(new java.awt.Color(238, 247, 225));
         txtnombre10.setForeground(new java.awt.Color(51, 51, 51));
@@ -191,7 +207,7 @@ public class NuevosClientes extends javax.swing.JDialog {
                                 .addGap(191, 191, 191)
                                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(47, 47, 47)
-                                .addComponent(btnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(167, 167, 167)))
@@ -227,7 +243,7 @@ public class NuevosClientes extends javax.swing.JDialog {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -245,10 +261,46 @@ public class NuevosClientes extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-  
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        try {
+            // Validar campos requeridos
+            if (txtnombre4.getText().trim().isEmpty() || txtnombre7.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "DNI y Nombre son obligatorios.");
+                return;
+            }
+
+            Cliente c = new Cliente();
+
+            // MAPEO DE VARIABLES SEGÚN TU DISEÑO:
+            c.setDni(txtnombre4.getText().trim());       // DNI
+            c.setNombres(txtnombre7.getText().trim());   // Nombres
+            c.setApellidos(txtnombre10.getText().trim());// Apellidos
+            c.setTelefono(txtnombre13.getText().trim()); // Teléfono
+            c.setEmail(txtnombre8.getText().trim());     // Email
+
+            // txtnombre12 es "Dirección" pero la BD no tiene ese campo, lo ignoramos.
+            c.setActivo(true);
+
+            if (clienteController.guardarCliente(c)) {
+                JOptionPane.showMessageDialog(this, "Cliente registrado exitosamente.");
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al guardar (posible DNI duplicado).", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnGuardar1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;

@@ -29,21 +29,10 @@ public class ClienteService {
         return clienteRepository.buscarPorID(id);
     }
 
-    public Cliente buscarPorDni(String dni) {
-        return clienteRepository.buscarPorDni(dni);
-    }
-
     public boolean guardarCliente(Cliente cliente) {
         if (!validarCliente(cliente)) {
             return false;
         }
-
-        Cliente clienteExistente = buscarPorDni(cliente.getDni());
-        if (clienteExistente != null) {
-            System.err.println("Validacion fallida: Ya existe un cliente con el DNI: " + cliente.getDni());
-            return false;
-        }
-
         return clienteRepository.insertar(cliente);
     }
 

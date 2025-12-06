@@ -4,8 +4,13 @@
  */
 package com.mycompany.farmaciasystem.Presentacion.FormsEditar;
 
+import com.mycompany.farmaciasystem.controladores.PromocionController;
+import com.mycompany.farmaciasystem.modelo.entidades.Promocion;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,15 +18,32 @@ import javax.swing.JFrame;
  */
 public class EditarPromocion extends javax.swing.JDialog {
 
+    private int idPromo;
+    PromocionController promocionController = new PromocionController();
+
     /**
      * Creates new form EditarPromocion
+     *
      * @param ventana
      */
     public EditarPromocion(JFrame ventana) {
-        super(ventana,true);
+        super(ventana, true);
         initComponents();
         setLocationRelativeTo(ventana);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+    }
+
+    public void cargarDatos(int id) {
+        this.idPromo = id;
+        Promocion p = promocionController.buscarPorId(id);
+        if (p != null) {
+            txtNombre.setText(p.getNombre());
+            txtDescripcion.setText(p.getDescripcion());
+            txtID.setText(p.getTipoDescuento());
+            txtnombre5.setText(String.valueOf(p.getValorDescuento()));
+            txtFechaiN.setText(p.getFechaInicio().toString());
+            txtTipoDesceunto.setText(p.getFechaFin().toString());
+        }
     }
 
     /**
@@ -37,23 +59,23 @@ public class EditarPromocion extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtnombre4 = new javax.swing.JTextField();
+        txtID = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnGuardar1 = new javax.swing.JButton();
-        txtnombre10 = new javax.swing.JTextField();
-        txtnombre11 = new javax.swing.JTextField();
-        txtnombre7 = new javax.swing.JTextField();
+        txtFechaiN = new javax.swing.JTextField();
+        txtFechaFIn = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        txtnombre8 = new javax.swing.JTextField();
-        txtnombre13 = new javax.swing.JTextField();
+        txtnombre5 = new javax.swing.JTextField();
+        txtTipoDesceunto = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        txtnombre14 = new javax.swing.JTextField();
-        txtnombre9 = new javax.swing.JTextField();
+        txtAplicable = new javax.swing.JTextField();
+        txtDescripcion = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -79,10 +101,10 @@ public class EditarPromocion extends javax.swing.JDialog {
         jLabel5.setText("ID de la promoción:");
         jLabel5.setToolTipText("");
 
-        txtnombre4.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre4.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre4.setAutoscrolls(false);
-        txtnombre4.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtID.setBackground(new java.awt.Color(238, 247, 225));
+        txtID.setForeground(new java.awt.Color(51, 51, 51));
+        txtID.setAutoscrolls(false);
+        txtID.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
         jLabel6.setBackground(new java.awt.Color(0, 0, 0));
         jLabel6.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
@@ -110,6 +132,11 @@ public class EditarPromocion extends javax.swing.JDialog {
         btnGuardar.setBorderPainted(false);
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnGuardar.setIconTextGap(18);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnGuardar1.setBackground(new java.awt.Color(255, 51, 51));
         btnGuardar1.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
@@ -120,23 +147,23 @@ public class EditarPromocion extends javax.swing.JDialog {
         btnGuardar1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnGuardar1.setIconTextGap(18);
 
-        txtnombre10.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre10.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre10.setAutoscrolls(false);
-        txtnombre10.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtFechaiN.setBackground(new java.awt.Color(238, 247, 225));
+        txtFechaiN.setForeground(new java.awt.Color(51, 51, 51));
+        txtFechaiN.setAutoscrolls(false);
+        txtFechaiN.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
-        txtnombre11.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre11.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre11.setAutoscrolls(false);
-        txtnombre11.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtFechaFIn.setBackground(new java.awt.Color(238, 247, 225));
+        txtFechaFIn.setForeground(new java.awt.Color(51, 51, 51));
+        txtFechaFIn.setAutoscrolls(false);
+        txtFechaFIn.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
-        txtnombre7.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre7.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre7.setAutoscrolls(false);
-        txtnombre7.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
-        txtnombre7.addActionListener(new java.awt.event.ActionListener() {
+        txtNombre.setBackground(new java.awt.Color(238, 247, 225));
+        txtNombre.setForeground(new java.awt.Color(51, 51, 51));
+        txtNombre.setAutoscrolls(false);
+        txtNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnombre7ActionPerformed(evt);
+                txtNombreActionPerformed(evt);
             }
         });
 
@@ -153,15 +180,15 @@ public class EditarPromocion extends javax.swing.JDialog {
         jLabel16.setText("Valor de descuento: ");
         jLabel16.setToolTipText("");
 
-        txtnombre8.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre8.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre8.setAutoscrolls(false);
-        txtnombre8.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtnombre5.setBackground(new java.awt.Color(238, 247, 225));
+        txtnombre5.setForeground(new java.awt.Color(51, 51, 51));
+        txtnombre5.setAutoscrolls(false);
+        txtnombre5.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
-        txtnombre13.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre13.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre13.setAutoscrolls(false);
-        txtnombre13.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtTipoDesceunto.setBackground(new java.awt.Color(238, 247, 225));
+        txtTipoDesceunto.setForeground(new java.awt.Color(51, 51, 51));
+        txtTipoDesceunto.setAutoscrolls(false);
+        txtTipoDesceunto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
         jLabel19.setBackground(new java.awt.Color(0, 0, 0));
         jLabel19.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
@@ -176,15 +203,15 @@ public class EditarPromocion extends javax.swing.JDialog {
         jLabel20.setText("Descripcion de la promoción:");
         jLabel20.setToolTipText("");
 
-        txtnombre14.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre14.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre14.setAutoscrolls(false);
-        txtnombre14.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtAplicable.setBackground(new java.awt.Color(238, 247, 225));
+        txtAplicable.setForeground(new java.awt.Color(51, 51, 51));
+        txtAplicable.setAutoscrolls(false);
+        txtAplicable.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
-        txtnombre9.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre9.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre9.setAutoscrolls(false);
-        txtnombre9.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtDescripcion.setBackground(new java.awt.Color(238, 247, 225));
+        txtDescripcion.setForeground(new java.awt.Color(51, 51, 51));
+        txtDescripcion.setAutoscrolls(false);
+        txtDescripcion.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -203,13 +230,13 @@ public class EditarPromocion extends javax.swing.JDialog {
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(txtnombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(txtnombre7, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
-                .addComponent(txtnombre10, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtFechaiN, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
-                .addComponent(txtnombre11, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtFechaFIn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(jLabel15)
@@ -219,17 +246,17 @@ public class EditarPromocion extends javax.swing.JDialog {
                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(txtnombre13, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTipoDesceunto, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(txtnombre8, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtnombre5, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
-                .addComponent(txtnombre14, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtAplicable, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(jLabel20))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(txtnombre9, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(425, 425, 425)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,14 +278,14 @@ public class EditarPromocion extends javax.swing.JDialog {
                     .addComponent(jLabel7))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtnombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnombre7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(txtnombre10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtFechaiN, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(txtnombre11, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtFechaFIn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
@@ -266,13 +293,13 @@ public class EditarPromocion extends javax.swing.JDialog {
                     .addComponent(jLabel19))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtnombre13, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnombre8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnombre14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTipoDesceunto, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtnombre5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAplicable, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addComponent(jLabel20)
                 .addGap(6, 6, 6)
-                .addComponent(txtnombre9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -296,9 +323,64 @@ public class EditarPromocion extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtnombre7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombre7ActionPerformed
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtnombre7ActionPerformed
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        try {
+            if (txtNombre.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "El nombre de la promoción es obligatorio.");
+                return;
+            }
+
+            // 2. Crear el objeto y asignar el ID que estamos editando
+            Promocion p = new Promocion();
+
+            // ASIGNACIÓN DEL ID (Vital para que el UPDATE sepa cuál registro tocar)
+            p.setIdPromocion(this.idPromo);
+
+            // 3. Recoger datos de los TextFields
+            p.setNombre(txtNombre.getText().trim());           
+            p.setDescripcion(txtDescripcion.getText().trim());     
+            p.setTipoDescuento(txtID.getText().trim());    
+
+            // Conversión de número (Valor del descuento)
+            p.setValorDescuento(Double.parseDouble(txtnombre5.getText().trim()));
+
+            // 4. Conversión de Fechas (Formato esperado: yyyy-MM-dd, ej: 2024-12-31)
+            p.setFechaInicio(LocalDate.parse(txtFechaiN.getText().trim()));
+            p.setFechaFin(LocalDate.parse(txtTipoDesceunto.getText().trim()));
+
+            p.setActivo(true);
+
+            // 5. Enviar al controlador
+            if (promocionController.actualizar(p)) {
+                JOptionPane.showMessageDialog(this, "Promoción actualizada correctamente.");
+                this.dispose(); // Cerrar ventana
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "No se pudo actualizar.\nVerifique que la Fecha Inicio no sea mayor a la Fecha Fin.",
+                        "Error de Lógica",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                    "El valor del descuento debe ser un número válido.",
+                    "Error de Formato",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Error en las fechas.\nFormato requerido: yyyy-MM-dd (Ej: 2024-10-25)",
+                    "Error de Formato",
+                    JOptionPane.WARNING_MESSAGE);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage());
+        }    }//GEN-LAST:event_btnGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -315,13 +397,13 @@ public class EditarPromocion extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtnombre10;
-    private javax.swing.JTextField txtnombre11;
-    private javax.swing.JTextField txtnombre13;
-    private javax.swing.JTextField txtnombre14;
-    private javax.swing.JTextField txtnombre4;
-    private javax.swing.JTextField txtnombre7;
-    private javax.swing.JTextField txtnombre8;
-    private javax.swing.JTextField txtnombre9;
+    private javax.swing.JTextField txtAplicable;
+    private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextField txtFechaFIn;
+    private javax.swing.JTextField txtFechaiN;
+    private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtTipoDesceunto;
+    private javax.swing.JTextField txtnombre5;
     // End of variables declaration//GEN-END:variables
 }

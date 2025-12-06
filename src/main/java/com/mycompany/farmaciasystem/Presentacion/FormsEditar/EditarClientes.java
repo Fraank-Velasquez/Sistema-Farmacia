@@ -4,6 +4,8 @@
  */
 package com.mycompany.farmaciasystem.Presentacion.FormsEditar;
 
+import com.mycompany.farmaciasystem.controladores.ClienteController;
+import com.mycompany.farmaciasystem.modelo.entidades.Cliente;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -12,6 +14,9 @@ import javax.swing.JFrame;
  * @author Frank
  */
 public class EditarClientes extends javax.swing.JDialog {
+
+    ClienteController clienteController = new ClienteController();
+    private int idClienteEditar;
 
     /**
      * Creates new form EditarClientes
@@ -23,6 +28,21 @@ public class EditarClientes extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(ventana);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+    }
+
+    // Método vital para cargar la info antes de editar
+    public void cargarDatos(int id) {
+        this.idClienteEditar = id;
+        Cliente c = clienteController.buscarClientePorId(id);
+
+        if (c != null) {
+            // Mismo mapeo que en NuevosClientes
+            txtDNI.setText(c.getDni());
+            txtNmbre.setText(c.getNombres());
+            txtApelidos.setText(c.getApellidos());
+            txtTelefono.setText(c.getTelefono());
+            txtEmail.setText(c.getEmail());
+        }
     }
 
     /**
@@ -38,19 +58,17 @@ public class EditarClientes extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtnombre4 = new javax.swing.JTextField();
+        txtDNI = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnGuardar1 = new javax.swing.JButton();
-        txtnombre10 = new javax.swing.JTextField();
-        txtnombre7 = new javax.swing.JTextField();
+        txtApelidos = new javax.swing.JTextField();
+        txtNmbre = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        txtnombre8 = new javax.swing.JTextField();
-        txtnombre12 = new javax.swing.JTextField();
-        txtnombre13 = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -75,10 +93,10 @@ public class EditarClientes extends javax.swing.JDialog {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setText("DNI:");
 
-        txtnombre4.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre4.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre4.setAutoscrolls(false);
-        txtnombre4.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtDNI.setBackground(new java.awt.Color(238, 247, 225));
+        txtDNI.setForeground(new java.awt.Color(51, 51, 51));
+        txtDNI.setAutoscrolls(false);
+        txtDNI.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
         jLabel6.setBackground(new java.awt.Color(0, 0, 0));
         jLabel6.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
@@ -98,6 +116,11 @@ public class EditarClientes extends javax.swing.JDialog {
         btnGuardar.setBorderPainted(false);
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnGuardar.setIconTextGap(18);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnGuardar1.setBackground(new java.awt.Color(255, 51, 51));
         btnGuardar1.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
@@ -107,16 +130,21 @@ public class EditarClientes extends javax.swing.JDialog {
         btnGuardar1.setBorderPainted(false);
         btnGuardar1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnGuardar1.setIconTextGap(18);
+        btnGuardar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardar1ActionPerformed(evt);
+            }
+        });
 
-        txtnombre10.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre10.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre10.setAutoscrolls(false);
-        txtnombre10.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtApelidos.setBackground(new java.awt.Color(238, 247, 225));
+        txtApelidos.setForeground(new java.awt.Color(51, 51, 51));
+        txtApelidos.setAutoscrolls(false);
+        txtApelidos.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
-        txtnombre7.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre7.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre7.setAutoscrolls(false);
-        txtnombre7.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtNmbre.setBackground(new java.awt.Color(238, 247, 225));
+        txtNmbre.setForeground(new java.awt.Color(51, 51, 51));
+        txtNmbre.setAutoscrolls(false);
+        txtNmbre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
@@ -129,25 +157,15 @@ public class EditarClientes extends javax.swing.JDialog {
         jLabel16.setForeground(new java.awt.Color(51, 51, 51));
         jLabel16.setText("Email: ");
 
-        jLabel17.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel17.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel17.setText("Direccion:");
+        txtEmail.setBackground(new java.awt.Color(238, 247, 225));
+        txtEmail.setForeground(new java.awt.Color(51, 51, 51));
+        txtEmail.setAutoscrolls(false);
+        txtEmail.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
-        txtnombre8.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre8.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre8.setAutoscrolls(false);
-        txtnombre8.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
-
-        txtnombre12.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre12.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre12.setAutoscrolls(false);
-        txtnombre12.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
-
-        txtnombre13.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre13.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre13.setAutoscrolls(false);
-        txtnombre13.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtTelefono.setBackground(new java.awt.Color(238, 247, 225));
+        txtTelefono.setForeground(new java.awt.Color(51, 51, 51));
+        txtTelefono.setAutoscrolls(false);
+        txtTelefono.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -159,18 +177,16 @@ public class EditarClientes extends javax.swing.JDialog {
                         .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtnombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(42, 42, 42)
-                                .addComponent(txtnombre7, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNmbre, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(39, 39, 39)
-                                .addComponent(txtnombre10, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtApelidos, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(42, 42, 42)
                                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(102, 102, 102)
-                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(144, 144, 144))))
+                                .addGap(363, 363, 363))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -182,11 +198,9 @@ public class EditarClientes extends javax.swing.JDialog {
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(33, 33, 33)
-                                .addComponent(txtnombre13, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(42, 42, 42)
-                                .addComponent(txtnombre8, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39)
-                                .addComponent(txtnombre12, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(111, 111, 111)
                                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,19 +225,17 @@ public class EditarClientes extends javax.swing.JDialog {
                     .addComponent(jLabel8))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtnombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnombre7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnombre10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNmbre, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtApelidos, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17))
+                    .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtnombre13, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnombre8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnombre12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,24 +257,49 @@ public class EditarClientes extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        try {
+            Cliente c = new Cliente();
+
+            c.setIdCliente(idClienteEditar); // IMPORTANTE
+            c.setDni(txtDNI.getText().trim());
+            c.setNombres(txtNmbre.getText().trim());
+            c.setApellidos(txtApelidos.getText().trim());
+            c.setTelefono(txtTelefono.getText().trim());
+            c.setEmail(txtEmail.getText().trim());
+            c.setActivo(true);
+
+            if (clienteController.actualizarCliente(c)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Cliente actualizado correctamente.");
+                this.dispose();
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al actualizar.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnGuardar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnGuardar1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtnombre10;
-    private javax.swing.JTextField txtnombre12;
-    private javax.swing.JTextField txtnombre13;
-    private javax.swing.JTextField txtnombre4;
-    private javax.swing.JTextField txtnombre7;
-    private javax.swing.JTextField txtnombre8;
+    private javax.swing.JTextField txtApelidos;
+    private javax.swing.JTextField txtDNI;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtNmbre;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

@@ -38,7 +38,13 @@ public class Productos extends javax.swing.JPanel {
      */
     public Productos() {
         initComponents();
+        OtrosComponentes();
         CargarTablaProductos();
+
+    }
+
+    private void OtrosComponentes() {
+        txtBuscar.putClientProperty("JTextField.placeholderText", "Ingrese el nombre del producto...");
     }
 
     public final void CargarTablaProductos() {
@@ -50,18 +56,15 @@ public class Productos extends javax.swing.JPanel {
             }
         };
 
-        // Nombres de columnas coincidiendo con tus datos
         String titulos[] = {"ID", "Nombre", "Descripción", "Precio", "Stock Actual", "Stock Mínimo", "Estado"};
         modeloTabla.setColumnIdentifiers(titulos);
 
         tbProductos.setModel(modeloTabla);
-
-        // Configuración visual (tu código original)
         tbProductos.getTableHeader().setReorderingAllowed(false);
         tbProductos.getTableHeader().setFont(new Font("poppins semibold", Font.BOLD, 12));
         tbProductos.getTableHeader().setBackground(new Color(207, 250, 254));
 
-        // CARGAR DATOS REALES
+        // Cargar datos iniciales desde la base de datos
         productoController.cargarProductosEnTabla(modeloTabla);
     }
 
@@ -290,6 +293,7 @@ public class Productos extends javax.swing.JPanel {
 
         NuevosProductos ventanaProduc = new NuevosProductos(Principal);
         ventanaProduc.setVisible(true);
+        CargarTablaProductos();
 
     }//GEN-LAST:event_btnAgregarProductosActionPerformed
 
@@ -304,7 +308,7 @@ public class Productos extends javax.swing.JPanel {
             int id = Integer.parseInt(tbProductos.getValueAt(fila, 0).toString());
 
             EditarProducto ventanaEditar = new EditarProducto(Principal);
-            ventanaEditar.cargarDatos(id); 
+            ventanaEditar.cargarDatos(id);
             ventanaEditar.setVisible(true);
 
             CargarTablaProductos(); // Refrescar al volver
@@ -372,7 +376,36 @@ public class Productos extends javax.swing.JPanel {
         }    }//GEN-LAST:event_btnRepoBajoStockActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-       
+        String criterio = txtBuscar.getText().trim();
+
+        // Limpiamos visualmente la tabla
+        DefaultTableModel modelo = (DefaultTableModel) tbProductos.getModel();
+        modelo.setRowCount(0);
+
+        java.util.List<Producto> lista;
+
+        if (criterio.isEmpty()) {
+            // Si está vacío, traemos todos (los activos, gracias al cambio del paso 1)
+            lista = productoController.obtenerTodosLosProductos();
+        } else {
+            // Si hay texto, buscamos por nombre
+            lista = productoController.buscarProductosPorNombre(criterio);
+        }
+
+        // Rellenamos la tabla
+        for (Producto p : lista) {
+            Object[] fila = {
+                p.getIdProducto(),
+                p.getNombre(),
+                p.getIdCategoria(), // O p.getCategoriaNombre() si lo tienes
+                p.getIdEmpresaFabricante(), // O el nombre del laboratorio
+                p.getPrecioVenta(),
+                p.getStockActual(),
+                p.getStockMinimo(),
+                p.getDescripcion()
+            };
+            modelo.addRow(fila);
+        }
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 

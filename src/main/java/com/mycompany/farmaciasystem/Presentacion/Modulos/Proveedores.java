@@ -6,9 +6,13 @@ package com.mycompany.farmaciasystem.Presentacion.Modulos;
 
 import com.mycompany.farmaciasystem.Presentacion.FormsADD.NuevosProveedores;
 import com.mycompany.farmaciasystem.Presentacion.FormsEditar.EditarProveedor;
-import java.awt.Color;
-import java.awt.Font;
+import com.mycompany.farmaciasystem.controladores.EmpresaController;
+import com.mycompany.farmaciasystem.modelo.entidades.Empresa;
+import com.mycompany.farmaciasystem.servicios.EmpresaService;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +23,9 @@ import javax.swing.table.DefaultTableModel;
 public class Proveedores extends javax.swing.JPanel {
 
     JFrame principal = (JFrame) SwingUtilities.getWindowAncestor(this);
+    private EmpresaService empresaService = new EmpresaService();
+    private EmpresaController empresaController = new EmpresaController();
+    private DefaultTableModel modeloTabla;
 
     /**
      * Creates new form Proveedore
@@ -26,28 +33,46 @@ public class Proveedores extends javax.swing.JPanel {
     public Proveedores() {
         initComponents();
         CargarTablaProveedores();
+        OtrosComponentes();
     }
-    
-    public final void CargarTablaProveedores() {
 
-        DefaultTableModel TablaProveedores = new DefaultTableModel() {
+    private void OtrosComponentes() {
+        txtBuscar.putClientProperty("JTextField.placeholderText", "Buscar proveedor...");
+    }
+
+    public final void CargarTablaProveedores() {
+        modeloTabla = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int colum) {
                 return false;
             }
         };
 
-        String titulos[] = {"ID Proveedor", "RUC", "Empresa", "Contacto", "Telefono", "Email", "Direccion", "Fecha_Registo"};
-        TablaProveedores.setColumnIdentifiers(titulos);
+        String titulos[] = {"ID", "RUC", "Nombre", "Teléfono", "Ciudad", "Tipo"};
+        modeloTabla.setColumnIdentifiers(titulos);
 
-        // CargarDatos: 
-        tbProveedores.setModel(TablaProveedores);
-        tbProveedores.getTableHeader().setReorderingAllowed(false);
-        tbProveedores.getTableHeader().setFont(new Font("poppins semibold", Font.BOLD, 12));
-        tbProveedores.getTableHeader().setBackground(new Color(207, 250, 254));
-        tbProveedores.getTableHeader().setResizingAllowed(false);
+        tbProveedores.setModel(modeloTabla);
+
+        // Estilos
+        tbProveedores.getTableHeader().setFont(new java.awt.Font("poppins semibold", java.awt.Font.BOLD, 12));
+        tbProveedores.getTableHeader().setBackground(new java.awt.Color(207, 250, 254));
+
+        // Cargar datos
+        List<Empresa> lista = empresaService.listarProveedores();
+
+        modeloTabla.setRowCount(0);
+        for (Empresa e : lista) {
+            Object[] fila = {
+                e.getIdEmpresa(),
+                e.getRuc(),
+                e.getNombre(),
+                e.getTelefono(),
+                e.getCiudad(),
+                e.getTipoEmpresa()
+            };
+            modeloTabla.addRow(fila);
+        }
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,7 +93,6 @@ public class Proveedores extends javax.swing.JPanel {
         btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbProveedores = new javax.swing.JTable();
-        btnReporteCompras = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -145,20 +169,6 @@ public class Proveedores extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tbProveedores);
 
-        btnReporteCompras.setBackground(new java.awt.Color(242, 242, 242));
-        btnReporteCompras.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        btnReporteCompras.setForeground(new java.awt.Color(51, 51, 51));
-        btnReporteCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/verCompras.png"))); // NOI18N
-        btnReporteCompras.setText("Generar reporte de compras");
-        btnReporteCompras.setBorder(null);
-        btnReporteCompras.setBorderPainted(false);
-        btnReporteCompras.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnReporteCompras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReporteComprasActionPerformed(evt);
-            }
-        });
-
         btnBuscar.setBackground(new java.awt.Color(242, 242, 242));
         btnBuscar.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         btnBuscar.setForeground(new java.awt.Color(51, 51, 51));
@@ -180,9 +190,6 @@ public class Proveedores extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnReporteCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -223,13 +230,9 @@ public class Proveedores extends javax.swing.JPanel {
                             .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnReporteCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -248,6 +251,7 @@ public class Proveedores extends javax.swing.JPanel {
 
         NuevosProveedores nProveedor = new NuevosProveedores(principal);
         nProveedor.setVisible(true);
+        CargarTablaProveedores();
 
     }//GEN-LAST:event_btnAgregarProveedorActionPerformed
 
@@ -257,20 +261,92 @@ public class Proveedores extends javax.swing.JPanel {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
-        EditarProveedor eProveedor = new EditarProveedor(principal);
-        eProveedor.setVisible(true);
+        int fila = tbProveedores.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un proveedor.");
+            return;
+        }
+
+        int id = Integer.parseInt(tbProveedores.getValueAt(fila, 0).toString());
+
+        EditarProveedor ventana = new EditarProveedor(principal);
+        ventana.cargarDatos(id);
+        ventana.setVisible(true);
+
+        CargarTablaProveedores();
+
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int fila = tbProveedores.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un proveedor para eliminar.");
+            return;
+        }
+
+        int id = Integer.parseInt(tbProveedores.getValueAt(fila, 0).toString());
+        String nombre = tbProveedores.getValueAt(fila, 2).toString();
+
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "¿Eliminar proveedor '" + nombre + "'?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            if (empresaService.eliminarEmpresa(id)) {
+                JOptionPane.showMessageDialog(this, "Proveedor eliminado.");
+                CargarTablaProveedores();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al eliminar.");
+            }
+        }
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void btnReporteComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteComprasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReporteComprasActionPerformed
-
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String criterio = txtBuscar.getText().trim();
+        modeloTabla.setRowCount(0); // Limpiar tabla
 
+        List<Empresa> lista = new ArrayList<>();
+
+        if (criterio.isEmpty()) {
+            // Si está vacío, mostramos todos
+            lista = empresaService.listarProveedores(); // O listarTodas()
+        } else {
+            // Si escribieron algo, intentamos buscar por ID
+            try {
+                int id = Integer.parseInt(criterio);
+
+                // LLAMAMOS AL MÉTODO QUE ACABAS DE CORREGIR
+                Empresa encontrada = empresaService.buscarPorId(id);
+
+                if (encontrada != null) {
+                    lista.add(encontrada); // Agregamos el único resultado a la lista para mostrarlo
+                }
+
+            } catch (NumberFormatException e) {
+                // Si escribieron letras, no hacemos nada (la lista queda vacía)
+                // O podrías mostrar un mensaje: "Búsqueda por ID requiere números"
+            }
+        }
+
+        for (Empresa e : lista) {
+            // Filtramos para no mostrar laboratorios puros en la vista de proveedores
+            if (e.getTipoEmpresa().equalsIgnoreCase("laboratorio")) {
+                continue;
+            }
+
+            Object[] fila = {
+                e.getIdEmpresa(),
+                e.getRuc(),
+                e.getNombre(),
+                e.getNombre(), 
+                e.getTelefono(),
+                e.getEmail(),
+                e.getDireccion(),
+                e.getFechaRegistro()
+            };
+            modeloTabla.addRow(fila);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
 
@@ -279,7 +355,6 @@ public class Proveedores extends javax.swing.JPanel {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnReporteCompras;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

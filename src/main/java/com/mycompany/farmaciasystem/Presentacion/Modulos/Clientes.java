@@ -6,9 +6,13 @@ package com.mycompany.farmaciasystem.Presentacion.Modulos;
 
 import com.mycompany.farmaciasystem.Presentacion.FormsADD.NuevosClientes;
 import com.mycompany.farmaciasystem.Presentacion.FormsEditar.EditarClientes;
+import com.mycompany.farmaciasystem.controladores.ClienteController;
+import com.mycompany.farmaciasystem.modelo.entidades.Cliente;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,6 +22,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Clientes extends javax.swing.JPanel {
 
+    private ClienteController clienteController = new ClienteController();
+    private DefaultTableModel modeloTabla;
     JFrame principal = (JFrame) SwingUtilities.getWindowAncestor(this);
 
     /**
@@ -26,25 +32,48 @@ public class Clientes extends javax.swing.JPanel {
     public Clientes() {
         initComponents();
         CargarTablaClientes();
+        OtrosComponentes();
+    }
+
+    private void OtrosComponentes() {
+        txtBuscar.putClientProperty("JTextField.placeholderText", "Buscar por DNI, Nombre o Apellido...");
     }
 
     public final void CargarTablaClientes() {
-
-        DefaultTableModel TablaClientes = new DefaultTableModel() {
+        modeloTabla = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int colum) {
                 return false;
             }
         };
 
-        String titulos[] = {"ID Cliente", "DNI", "Nombre", "Apellidos", "Telefono", "Email", "Direccion"};
-        TablaClientes.setColumnIdentifiers(titulos);
+        // Columnas alineadas a la BD (Omitimos Direccion porque no está en BD)
+        String titulos[] = {"ID", "DNI", "Nombres", "Apellidos", "Teléfono", "Email"};
+        modeloTabla.setColumnIdentifiers(titulos);
 
-        // CargarDatos: 
-        tbClientes.setModel(TablaClientes);
+        tbClientes.setModel(modeloTabla);
         tbClientes.getTableHeader().setReorderingAllowed(false);
         tbClientes.getTableHeader().setFont(new Font("poppins semibold", Font.BOLD, 12));
         tbClientes.getTableHeader().setBackground(new Color(207, 250, 254));
+
+        // Cargar datos iniciales
+        List<Cliente> lista = clienteController.obtenerTodosLosClientes();
+        llenarTabla(lista);
+    }
+
+    private void llenarTabla(List<Cliente> lista) {
+        modeloTabla.setRowCount(0);
+        for (com.mycompany.farmaciasystem.modelo.entidades.Cliente c : lista) {
+            Object[] fila = {
+                c.getIdCliente(),
+                c.getDni(),
+                c.getNombres(),
+                c.getApellidos(),
+                c.getTelefono(),
+                c.getEmail()
+            };
+            modeloTabla.addRow(fila);
+        }
     }
 
     /**
@@ -58,7 +87,7 @@ public class Clientes extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnAgregarProductos = new javax.swing.JButton();
+        btnAgregarClientes = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -74,15 +103,15 @@ public class Clientes extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(33, 37, 41));
         jLabel1.setText("Lista de Clientes");
 
-        btnAgregarProductos.setBackground(new java.awt.Color(32, 138, 215));
-        btnAgregarProductos.setFont(new java.awt.Font("Poppins", 0, 16)); // NOI18N
-        btnAgregarProductos.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgregarProductos.setText("Nuevo Cliente");
-        btnAgregarProductos.setBorder(null);
-        btnAgregarProductos.setIconTextGap(6);
-        btnAgregarProductos.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarClientes.setBackground(new java.awt.Color(32, 138, 215));
+        btnAgregarClientes.setFont(new java.awt.Font("Poppins", 0, 16)); // NOI18N
+        btnAgregarClientes.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarClientes.setText("Nuevo Cliente");
+        btnAgregarClientes.setBorder(null);
+        btnAgregarClientes.setIconTextGap(6);
+        btnAgregarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarProductosActionPerformed(evt);
+                btnAgregarClientesActionPerformed(evt);
             }
         });
 
@@ -169,7 +198,7 @@ public class Clientes extends javax.swing.JPanel {
                         .addGap(16, 16, 16)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAgregarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnAgregarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,7 +223,7 @@ public class Clientes extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAgregarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -204,8 +233,8 @@ public class Clientes extends javax.swing.JPanel {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE))
                     .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
@@ -222,12 +251,13 @@ public class Clientes extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductosActionPerformed
+    private void btnAgregarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClientesActionPerformed
 
         NuevosClientes nClientes = new NuevosClientes(principal);
         nClientes.setVisible(true);
+        CargarTablaClientes();
 
-    }//GEN-LAST:event_btnAgregarProductosActionPerformed
+    }//GEN-LAST:event_btnAgregarClientesActionPerformed
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
 
@@ -235,22 +265,58 @@ public class Clientes extends javax.swing.JPanel {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
-        EditarClientes editClientes = new EditarClientes(principal);
-        editClientes.setVisible(true);
+        int fila = tbClientes.getSelectedRow();
+        if (fila == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un cliente para editar.");
+            return;
+        }
+
+        int id = Integer.parseInt(tbClientes.getValueAt(fila, 0).toString());
+
+        EditarClientes ventanaEditar = new EditarClientes(principal);
+        ventanaEditar.cargarDatos(id); // Método que crearemos en el paso 4
+        ventanaEditar.setVisible(true);
+
+        CargarTablaClientes();
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int fila = tbClientes.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un cliente para eliminar.");
+            return;
+        }
 
+        int id = Integer.parseInt(tbClientes.getValueAt(fila, 0).toString());
+        String nombre = tbClientes.getValueAt(fila, 2).toString();
+
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "¿Eliminar al cliente " + nombre + "?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            if (clienteController.eliminarCliente(id)) {
+                JOptionPane.showMessageDialog(this, "Cliente eliminado.");
+                CargarTablaClientes();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al eliminar.");
+            }
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
+        String texto = txtBuscar.getText().trim();
+        if (texto.isEmpty()) {
+            CargarTablaClientes();
+        } else {
+            List<Cliente> resultados = clienteController.buscarClientesPorNombre(texto);
+            llenarTabla(resultados);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregarProductos;
+    private javax.swing.JButton btnAgregarClientes;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;

@@ -30,30 +30,27 @@ public class PromocionRepositoryImpl implements IPromocionRepository {
     @Override
     public List<Promocion> listarTodos() {
 
-        List<Promocion> listaTodasPromociones = new ArrayList<>();
-        String sql = "select * from promociones";
+        List<Promocion> lista = new ArrayList<>();
+        String sql = "SELECT * FROM promociones WHERE activo = true ORDER BY id_promocion";
 
-        try (Connection conn = conectardb.establecerConexion();
-             PreparedStatement pst = conn.prepareStatement(sql)) {
-             
+        try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
+
             ResultSet rs = pst.executeQuery();
-
             while (rs.next()) {
-                listaTodasPromociones.add(guardarDatosPromocion(rs));
+                lista.add(guardarDatosPromocion(rs));
             }
         } catch (SQLException e) {
             e.toString();
         }
-        return listaTodasPromociones;
+        return lista;
     }
 
     @Override
     public Promocion buscarPorID(int id) {
-        
+
         String sql = "SELECT * FROM promociones WHERE id_promocion = ?";
 
-        try (Connection conn = conectardb.establecerConexion();
-             PreparedStatement pst = conn.prepareStatement(sql)) {
+        try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
@@ -70,72 +67,59 @@ public class PromocionRepositoryImpl implements IPromocionRepository {
 
     @Override
     public boolean insertar(Promocion entidad) {
-        
-        String sql = "INSERT INTO promociones (nombre, descripcion, tipo_descuento, "
-                   + "valor_descuento, fecha_inicio, fecha_fin, activo) VALUES (?,?,?,?,?,?,?)";
 
-        try (Connection conn = conectardb.establecerConexion();
-             PreparedStatement pst = conn.prepareStatement(sql)) {
+        String sql = "INSERT INTO promociones (nombre, descripcion, tipo_descuento, valor_descuento, fecha_inicio, fecha_fin, activo) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
             pst.setString(1, entidad.getNombre());
             pst.setString(2, entidad.getDescripcion());
-            pst.setString(3, entidad.getTipoDescuento());
+            pst.setString(3, entidad.getTipoDescuento()); // "porcentaje" o "monto"
             pst.setDouble(4, entidad.getValorDescuento());
-            pst.setDate(5, Date.valueOf(entidad.getFechaInicio()));
-            pst.setDate(6, Date.valueOf(entidad.getFechaFin()));
+            pst.setDate(5, java.sql.Date.valueOf(entidad.getFechaInicio()));
+            pst.setDate(6, java.sql.Date.valueOf(entidad.getFechaFin()));
             pst.setBoolean(7, true);
 
             return pst.executeUpdate() > 0;
-
         } catch (SQLException e) {
-            e.toString();
+            System.err.println("Error insertando promoción: " + e.getMessage());
+            return false;
         }
-
-        return false;
     }
 
     @Override
     public boolean actualizar(int id_entidad, Promocion entidad) {
 
-        String sql = "UPDATE promociones SET nombre = ?, descripcion = ?, tipo_descuento = ?, "
-                + "valor_descuento = ?, fecha_inicio = ?, fecha_fin = ?, activo = ? "
-                + "WHERE id_promocion = ?";
+        String sql = "UPDATE promociones SET nombre=?, descripcion=?, tipo_descuento=?, valor_descuento=?, fecha_inicio=?, fecha_fin=? "
+                + "WHERE id_promocion=?";
 
-        try (Connection conn = conectardb.establecerConexion();
-             PreparedStatement pst = conn.prepareStatement(sql)) {
+        try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
             pst.setString(1, entidad.getNombre());
             pst.setString(2, entidad.getDescripcion());
             pst.setString(3, entidad.getTipoDescuento());
             pst.setDouble(4, entidad.getValorDescuento());
-            pst.setDate(5, Date.valueOf(entidad.getFechaInicio()));
-            pst.setDate(6, Date.valueOf(entidad.getFechaFin()));
-            pst.setBoolean(7, entidad.isActivo());
-            pst.setInt(8, entidad.getIdPromocion());
+            pst.setDate(5, java.sql.Date.valueOf(entidad.getFechaInicio()));
+            pst.setDate(6, java.sql.Date.valueOf(entidad.getFechaFin()));
+            pst.setInt(7, id_entidad);
 
             return pst.executeUpdate() > 0;
-
         } catch (SQLException e) {
-            e.toString();
+            System.err.println("Error actualizando promoción: " + e.getMessage());
+            return false;
         }
-
-        return false;
     }
 
     @Override
     public boolean eliminar(int id) {
-        String sql = "DELETE FROM promociones WHERE id_promocion = ?";
-        
-        try (Connection conn = conectardb.establecerConexion();
-             PreparedStatement pst = conn.prepareStatement(sql)) {
-             
+        String sql = "UPDATE promociones SET activo = false WHERE id_promocion = ?";
+        try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
             pst.setInt(1, id);
             return pst.executeUpdate() > 0;
-
         } catch (SQLException e) {
-            e.toString();
+            return false;
         }
-        return false;
     }
 
     @Override
@@ -146,9 +130,8 @@ public class PromocionRepositoryImpl implements IPromocionRepository {
                 + "AND fecha_inicio <= CURRENT_DATE AND fecha_fin >= CURRENT_DATE "
                 + "ORDER BY fecha_inicio DESC";
 
-        try (Connection conn = conectardb.establecerConexion();
-             PreparedStatement pst = conn.prepareStatement(sql)) {
-             
+        try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
+
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
@@ -170,8 +153,7 @@ public class PromocionRepositoryImpl implements IPromocionRepository {
                 + "WHERE pp.id_producto = ? AND p.activo = true "
                 + "AND p.fecha_inicio <= CURRENT_DATE AND p.fecha_fin >= CURRENT_DATE";
 
-        try (Connection conn = conectardb.establecerConexion();
-             PreparedStatement pst = conn.prepareStatement(sql)) {
+        try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
             pst.setInt(1, idProducto);
             ResultSet rs = pst.executeQuery();
@@ -185,6 +167,22 @@ public class PromocionRepositoryImpl implements IPromocionRepository {
         }
 
         return promociones;
+    }
+
+    @Override
+    public List<Promocion> buscarPorNombre(String nombre) {
+        List<Promocion> lista = new ArrayList<>();
+        String sql = "SELECT * FROM promociones WHERE LOWER(nombre) LIKE LOWER(?) AND activo = true";
+        try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
+            pst.setString(1, "%" + nombre + "%");
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                lista.add(guardarDatosPromocion(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
     }
 
     private Promocion guardarDatosPromocion(ResultSet rs) throws SQLException {
@@ -206,7 +204,7 @@ public class PromocionRepositoryImpl implements IPromocionRepository {
         }
 
         promocion.setActivo(rs.getBoolean("activo"));
-        
+
         return promocion;
     }
 

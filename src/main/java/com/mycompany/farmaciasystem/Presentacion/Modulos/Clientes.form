@@ -42,7 +42,7 @@
                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" pref="283" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnAgregarProductos" min="-2" pref="160" max="-2" attributes="0"/>
+                          <Component id="btnAgregarClientes" min="-2" pref="160" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
@@ -74,7 +74,7 @@
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel1" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="btnAgregarProductos" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="btnAgregarClientes" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -86,8 +86,8 @@
                               <Component id="btnEditar" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                               <Component id="btnEliminar" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="18" max="32767" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="330" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" pref="330" max="32767" attributes="0"/>
                       </Group>
                       <Component id="btnBuscar" min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
@@ -108,7 +108,7 @@
             <Property name="text" type="java.lang.String" value="Lista de Clientes"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnAgregarProductos">
+        <Component class="javax.swing.JButton" name="btnAgregarClientes">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d7" green="8a" red="20" type="rgb"/>
@@ -126,7 +126,7 @@
             <Property name="iconTextGap" type="int" value="6"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarProductosActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarClientesActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">

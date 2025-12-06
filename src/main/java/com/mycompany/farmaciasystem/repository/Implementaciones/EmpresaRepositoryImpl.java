@@ -30,8 +30,7 @@ public class EmpresaRepositoryImpl implements IEmpresaRepository {
     public List<Empresa> listarTodos() {
 
         List<Empresa> listaTodos = new ArrayList<>();
-        String sql = "select * from empresa";
-
+        String sql = "SELECT * FROM empresa WHERE activo = true ORDER BY id_empresa";
         try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
             ResultSet rs = pst.executeQuery();
@@ -47,29 +46,10 @@ public class EmpresaRepositoryImpl implements IEmpresaRepository {
     }
 
     @Override
-    public Empresa buscarPorID(int id) {
-
-        String sql = "call buscarEmpresaID(?)";
-
-        try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
-
-            pst.setInt(1, id);
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                return guardarDatosEmpresa(rs);
-            }
-
-        } catch (SQLException e) {
-            e.toString();
-        }
-        return null;
-    }
-
-    @Override
     public boolean insertar(Empresa entidad) {
 
-        String sql = "call insertarEmpresa(?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO empresa (nombre, telefono, email, direccion, ciudad, ruc, tipo_empresa, activo) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
@@ -80,21 +60,21 @@ public class EmpresaRepositoryImpl implements IEmpresaRepository {
             pst.setString(5, entidad.getCiudad());
             pst.setString(6, entidad.getRuc());
             pst.setString(7, entidad.getTipoEmpresa());
-            pst.setTimestamp(8, entidad.getFechaRegistro());
-            pst.setBoolean(9, true);
+            pst.setBoolean(8, true);
 
             return pst.executeUpdate() > 0;
 
         } catch (SQLException e) {
-            e.toString();
+            System.err.println("Error al insertar empresa: " + e.getMessage());
+            return false;
         }
-        return false;
-
     }
 
     @Override
-    public boolean actualizar(int id_entidad, Empresa entidad) {
-        String sql = "call actualizarEmpresa(?,?,?,?,?,?,?)";
+    public boolean actualizar(int id_entidad, Empresa entidad
+    ) {
+        String sql = "UPDATE empresa SET nombre=?, telefono=?, email=?, direccion=?, ciudad=?, ruc=?, tipo_empresa=? "
+                + "WHERE id_empresa=?";
 
         try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
@@ -105,30 +85,28 @@ public class EmpresaRepositoryImpl implements IEmpresaRepository {
             pst.setString(5, entidad.getCiudad());
             pst.setString(6, entidad.getRuc());
             pst.setString(7, entidad.getTipoEmpresa());
+            pst.setInt(8, id_entidad);
 
             return pst.executeUpdate() > 0;
 
         } catch (SQLException e) {
-            e.toString();
+            System.err.println("Error al actualizar empresa: " + e.getMessage());
+            return false;
         }
-
-        return false;
     }
 
     @Override
-    public boolean eliminar(int id) {
-
-        String sql = " call eliminarEmpresa(?)";
-
+    public boolean eliminar(int id
+    ) {
+        String sql = "UPDATE empresa SET activo = false WHERE id_empresa = ?";
         try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
             pst.setInt(1, id);
             return pst.executeUpdate() > 0;
 
         } catch (SQLException e) {
-            e.toString();
+            return false;
         }
-        return false;
     }
 
     private Empresa guardarDatosEmpresa(ResultSet rs) throws SQLException {
@@ -171,26 +149,6 @@ public class EmpresaRepositoryImpl implements IEmpresaRepository {
     }
 
     @Override
-    public Empresa buscarPorRuc(String ruc) {
-        String sql = "SELECT * FROM empresa WHERE ruc = ? AND activo = true";
-
-        try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
-
-            pst.setString(1, ruc);
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                return guardarDatosEmpresa(rs);
-            }
-
-        } catch (SQLException e) {
-            e.toString();
-        }
-
-        return null;
-    }
-
-    @Override
     public List<Empresa> listarProveedores() {
         List<Empresa> empresas = new ArrayList<>();
         String sql = "SELECT * FROM empresa WHERE (tipo_empresa = 'proveedor' OR tipo_empresa = 'ambos') "
@@ -226,5 +184,27 @@ public class EmpresaRepositoryImpl implements IEmpresaRepository {
         }
 
         return empresas;
+    }
+
+    @Override
+    public Empresa buscarPorID(int id) {
+        String sql = "SELECT * FROM empresa WHERE id_empresa = ?";
+
+        try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setInt(1, id);
+
+            ResultSet rs = pst.executeQuery();
+
+            
+            if (rs.next()) {
+                return guardarDatosEmpresa(rs);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        }
+
+        return null;
     }
 }

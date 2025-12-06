@@ -6,43 +6,40 @@ package com.mycompany.farmaciasystem.Presentacion.Modulos;
 
 import com.mycompany.farmaciasystem.Presentacion.FormsADD.NuevasPromociones;
 import com.mycompany.farmaciasystem.Presentacion.FormsEditar.EditarPromocion;
-import java.awt.Color;
-import java.awt.Font;
+import com.mycompany.farmaciasystem.controladores.PromocionController;
+import com.mycompany.farmaciasystem.modelo.entidades.Promocion;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 public class Promociones extends javax.swing.JPanel {
 
     JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);
+    PromocionController promocionController = new PromocionController();
+    DefaultTableModel modeloTabla;
 
     /**
      * Creates new form Promociones
      */
     public Promociones() {
         initComponents();
-        cargarTablaPromociones();
+        CargarTablaPromociones();
     }
 
-    public final void cargarTablaPromociones() {
-        
-        DefaultTableModel tablaPromociones = new DefaultTableModel() {
+    public final void CargarTablaPromociones() {
+        modeloTabla = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int colum) {
                 return false;
             }
         };
+        String titulos[] = {"ID", "Nombre", "Descripción", "Tipo", "Valor", "Inicio", "Fin"};
+        modeloTabla.setColumnIdentifiers(titulos);
+        tbPromociones.setModel(modeloTabla);
 
-    
-    String titulos[] = {"ID Promoción", "Nombre", "Descripción", "Tipo Descuento", "Estado"};
-    tablaPromociones.setColumnIdentifiers(titulos);
-    //cargarDatos:
-    
-    tbProductos.setModel(tablaPromociones);
-    tbProductos.getTableHeader().setReorderingAllowed(false);
-
-    tbProductos.getTableHeader().setFont(new Font("poppins semibold", Font.BOLD, 12));
-    tbProductos.getTableHeader().setBackground(new Color(207, 250, 254));
+        // Cargar Datos
+        promocionController.cargarTabla(modeloTabla);
     }
 
     /**
@@ -63,7 +60,7 @@ public class Promociones extends javax.swing.JPanel {
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbProductos = new javax.swing.JTable();
+        tbPromociones = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -134,7 +131,7 @@ public class Promociones extends javax.swing.JPanel {
             }
         });
 
-        tbProductos.setModel(new javax.swing.table.DefaultTableModel(
+        tbPromociones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -145,7 +142,7 @@ public class Promociones extends javax.swing.JPanel {
 
             }
         ));
-        jScrollPane1.setViewportView(tbProductos);
+        jScrollPane1.setViewportView(tbPromociones);
 
         btnBuscar.setBackground(new java.awt.Color(255, 255, 255));
         btnBuscar.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
@@ -230,6 +227,7 @@ public class Promociones extends javax.swing.JPanel {
 
         NuevasPromociones nPromos = new NuevasPromociones(ventana);
         nPromos.setVisible(true);
+        CargarTablaPromociones();
 
     }//GEN-LAST:event_btnAgregarPromocionActionPerformed
 
@@ -239,18 +237,54 @@ public class Promociones extends javax.swing.JPanel {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
-        EditarPromocion editPromos = new EditarPromocion(ventana);
-        editPromos.setVisible(true);
+        int fila = tbPromociones.getSelectedRow();
+        if (fila == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Seleccione una promoción.");
+            return;
+        }
+        int id = Integer.parseInt(tbPromociones.getValueAt(fila, 0).toString());
+
+        EditarPromocion ventanaP = new EditarPromocion(ventana);
+        ventanaP.cargarDatos(id); // Implementar en paso 4
+        ventanaP.setVisible(true);
+
+        CargarTablaPromociones();
 
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int fila = tbPromociones.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione para eliminar.");
+            return;
+        }
+        int id = Integer.parseInt(tbPromociones.getValueAt(fila, 0).toString());
 
+        if (JOptionPane.showConfirmDialog(this, "¿Eliminar promoción?", "Confirmar", JOptionPane.YES_NO_OPTION) == 0) {
+            if (promocionController.eliminar(id)) {
+                JOptionPane.showMessageDialog(this, "Eliminado.");
+                CargarTablaPromociones();
+            }
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String texto = txtBuscar.getText().trim();
+        modeloTabla.setRowCount(0);
+        java.util.List<Promocion> lista;
 
+        if (texto.isEmpty()) {
+            lista = promocionController.listarTodas();
+        } else {
+            lista = promocionController.buscar(texto);
+        }
+
+        for (Promocion p : lista) {
+            modeloTabla.addRow(new Object[]{
+                p.getIdPromocion(), p.getNombre(), p.getDescripcion(), p.getTipoDescuento(), p.getValorDescuento(), p.getFechaInicio(), p.getFechaFin()
+            });
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
 
@@ -264,7 +298,7 @@ public class Promociones extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbProductos;
+    private javax.swing.JTable tbPromociones;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

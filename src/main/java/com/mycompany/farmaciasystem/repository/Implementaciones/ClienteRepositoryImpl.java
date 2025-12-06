@@ -27,44 +27,25 @@ public class ClienteRepositoryImpl implements IClienteRepository {
     }
 
     @Override
-    public Cliente buscarPorDni(String dni) {
+    public List<Cliente> buscarPorNombre(String criterio) {
 
-        String sql = "SELECT * FROM clientes WHERE dni = ? AND activo = true";
-
-        try (Connection conn = conectarDB.establecerConexion(); PreparedStatement st = conn.prepareStatement(sql)) {
-
-            st.setString(1, dni);
-            ResultSet rs = st.executeQuery();
-
-            if (rs.next()) {
-                return guardarDatosClientes(rs);
-            }
-        } catch (SQLException e) {
-            e.toString();
-        }
-        return null;
-    }
-
-    @Override
-    public List<Cliente> buscarPorNombre(String nombre) {
-
-        List<Cliente> listaPorNombre = new ArrayList<>();
-        String sql = "SELECT * FROM clientes WHERE (LOWER(nombres) LIKE LOWER(?) OR LOWER(apellidos) LIKE LOWER(?)) AND activo = true";
+        String sql = "SELECT * FROM clientes WHERE (LOWER(nombres) LIKE LOWER(?) OR LOWER(apellidos) LIKE LOWER(?) OR dni LIKE ?) AND activo = true";
+        List<Cliente> lista = new ArrayList<>();
         try (Connection conn = conectarDB.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
-            pst.setString(1, nombre);
+            String filtro = "%" + criterio + "%";
+            pst.setString(1, filtro);
+            pst.setString(2, filtro);
+            pst.setString(3, filtro);
 
             ResultSet rs = pst.executeQuery();
-
             while (rs.next()) {
-                listaPorNombre.add(guardarDatosClientes(rs));
+                lista.add(guardarDatosClientes(rs));
             }
-
         } catch (SQLException e) {
-            e.toString();
+            e.printStackTrace();
         }
-
-        return listaPorNombre;
+        return lista;
     }
 
     @Override
@@ -108,7 +89,7 @@ public class ClienteRepositoryImpl implements IClienteRepository {
     @Override
     public boolean insertar(Cliente entidad) {
 
-        String sql = "INSERT INTO clientes (dni, nombres, apellidos, telefono, email, activo) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO clientes (dni, nombres, apellidos, telefono, email, activo) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = conectarDB.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
             pst.setString(1, entidad.getDni());
@@ -137,6 +118,7 @@ public class ClienteRepositoryImpl implements IClienteRepository {
             pst.setString(3, entidad.getApellidos());
             pst.setString(4, entidad.getTelefono());
             pst.setString(5, entidad.getEmail());
+            pst.setInt(6, id_entidad);
 
             return pst.executeUpdate() > 0;
 
@@ -152,14 +134,11 @@ public class ClienteRepositoryImpl implements IClienteRepository {
 
         String sql = "UPDATE clientes SET activo = false WHERE id_cliente = ?";
         try (Connection conn = conectarDB.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
-
             pst.setInt(1, id);
             return pst.executeUpdate() > 0;
-
         } catch (SQLException e) {
-            e.toString();
+            return false;
         }
-        return false;
     }
 
     private Cliente guardarDatosClientes(ResultSet rs) throws SQLException {

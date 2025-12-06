@@ -60,13 +60,13 @@
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
-                  <Component id="txtnombre4" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="txtID" min="-2" pref="137" max="-2" attributes="0"/>
                   <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
-                  <Component id="txtnombre7" min="-2" pref="180" max="-2" attributes="0"/>
+                  <Component id="txtNombre" min="-2" pref="180" max="-2" attributes="0"/>
                   <EmptySpace min="37" pref="37" max="-2" attributes="0"/>
-                  <Component id="txtnombre10" min="-2" pref="117" max="-2" attributes="0"/>
+                  <Component id="txtFechaiN" min="-2" pref="117" max="-2" attributes="0"/>
                   <EmptySpace min="24" pref="24" max="-2" attributes="0"/>
-                  <Component id="txtnombre11" min="-2" pref="144" max="-2" attributes="0"/>
+                  <Component id="txtFechaFIn" min="-2" pref="144" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
@@ -78,11 +78,11 @@
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
-                  <Component id="txtnombre13" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="txtTipoDesceunto" min="-2" pref="137" max="-2" attributes="0"/>
                   <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
-                  <Component id="txtnombre8" min="-2" pref="178" max="-2" attributes="0"/>
+                  <Component id="txtnombre5" min="-2" pref="178" max="-2" attributes="0"/>
                   <EmptySpace min="39" pref="39" max="-2" attributes="0"/>
-                  <Component id="txtnombre14" min="-2" pref="285" max="-2" attributes="0"/>
+                  <Component id="txtAplicable" min="-2" pref="285" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
@@ -90,7 +90,7 @@
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
-                  <Component id="txtnombre9" min="-2" pref="680" max="-2" attributes="0"/>
+                  <Component id="txtDescripcion" min="-2" pref="680" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="425" pref="425" max="-2" attributes="0"/>
@@ -116,15 +116,15 @@
                   </Group>
                   <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtnombre4" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="txtnombre7" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="txtID" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="txtNombre" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                          <Component id="txtnombre10" min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="txtFechaiN" min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
-                          <Component id="txtnombre11" min="-2" pref="26" max="-2" attributes="0"/>
+                          <Component id="txtFechaFIn" min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
@@ -135,14 +135,14 @@
                   </Group>
                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtnombre13" alignment="0" min="-2" pref="26" max="-2" attributes="0"/>
-                      <Component id="txtnombre8" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="txtnombre14" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="txtTipoDesceunto" alignment="0" min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="txtnombre5" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="txtAplicable" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                   <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                  <Component id="txtnombre9" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="txtDescripcion" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace min="32" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnGuardar" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
@@ -201,7 +201,7 @@
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtnombre4">
+        <Component class="javax.swing.JTextField" name="txtID">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="f7" red="ee" type="rgb"/>
@@ -283,6 +283,9 @@
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="iconTextGap" type="int" value="18"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnGuardar1">
           <Properties>
@@ -304,7 +307,7 @@
             <Property name="iconTextGap" type="int" value="18"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtnombre10">
+        <Component class="javax.swing.JTextField" name="txtFechaiN">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="f7" red="ee" type="rgb"/>
@@ -322,7 +325,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtnombre11">
+        <Component class="javax.swing.JTextField" name="txtFechaFIn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="f7" red="ee" type="rgb"/>
@@ -340,7 +343,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtnombre7">
+        <Component class="javax.swing.JTextField" name="txtNombre">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="f7" red="ee" type="rgb"/>
@@ -358,7 +361,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtnombre7ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombreActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel15">
@@ -392,7 +395,7 @@
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtnombre8">
+        <Component class="javax.swing.JTextField" name="txtnombre5">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="f7" red="ee" type="rgb"/>
@@ -410,7 +413,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtnombre13">
+        <Component class="javax.swing.JTextField" name="txtTipoDesceunto">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="f7" red="ee" type="rgb"/>
@@ -459,7 +462,7 @@
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtnombre14">
+        <Component class="javax.swing.JTextField" name="txtAplicable">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="f7" red="ee" type="rgb"/>
@@ -477,7 +480,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtnombre9">
+        <Component class="javax.swing.JTextField" name="txtDescripcion">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="f7" red="ee" type="rgb"/>

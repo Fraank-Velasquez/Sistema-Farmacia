@@ -29,10 +29,6 @@ public class EmpresaService {
         return empresaRepository.buscarPorID(id);
     }
 
-    public Empresa buscarPorRuc(String ruc) {
-        return empresaRepository.buscarPorRuc(ruc);
-    }
-
     public List<Empresa> listarProveedores() {
         return empresaRepository.listarProveedores();
     }
@@ -43,12 +39,6 @@ public class EmpresaService {
 
     public boolean guardarEmpresa(Empresa empresa) {
         if (!validarEmpresa(empresa)) {
-            return false;
-        }
-
-        Empresa empresaExistente = buscarPorRuc(empresa.getRuc());
-        if (empresaExistente != null) {
-            System.err.println("Validacion fallida: Ya existe una empresa con el RUC: " + empresa.getRuc());
             return false;
         }
 

@@ -11,8 +11,7 @@ import java.util.List;
  *
  * @author Frank
  */
-public interface IClienteRepository extends  IRepository<Cliente> {
-    
-    Cliente buscarPorDni(String dni);
-    List<Cliente> buscarPorNombre(String nombre);
+public interface IClienteRepository extends IRepository<Cliente> {
+
+    public List<Cliente> buscarPorNombre(String criterio);
 }

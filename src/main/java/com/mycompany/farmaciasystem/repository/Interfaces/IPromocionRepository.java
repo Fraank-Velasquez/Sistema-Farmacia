@@ -17,4 +17,6 @@ public interface IPromocionRepository extends IRepository<Promocion> {
 
     List<Promocion> listarPorProductos(int idProducto);
 
+    List<Promocion> buscarPorNombre(String nombre);
+
 }

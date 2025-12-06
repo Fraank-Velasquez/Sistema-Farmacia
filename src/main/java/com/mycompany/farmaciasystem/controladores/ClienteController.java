@@ -29,10 +29,6 @@ public class ClienteController {
         return clienteService.buscarPorId(id);
     }
 
-    public Cliente buscarClientePorDni(String dni) {
-        return clienteService.buscarPorDni(dni);
-    }
-
     public boolean guardarCliente(Cliente cliente) {
         return clienteService.guardarCliente(cliente);
     }

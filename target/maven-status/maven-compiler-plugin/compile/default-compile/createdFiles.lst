@@ -1,5 +1,6 @@
 com\mycompany\farmaciasystem\Presentacion\Modulos\Proveedores$5.class
 com\mycompany\farmaciasystem\repository\Implementaciones\UsuarioRepositoryImpl.class
+com\mycompany\farmaciasystem\Presentacion\FormsEditar\EditarClientes$2.class
 com\mycompany\farmaciasystem\command\ICommand.class
 com\mycompany\farmaciasystem\repository\Implementaciones\ProductoRepositoryImpl.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Inicio$3.class
@@ -15,6 +16,7 @@ com\mycompany\farmaciasystem\Presentacion\Principal\Principal$6.class
 com\mycompany\farmaciasystem\modelo\entidades\Cliente.class
 com\mycompany\farmaciasystem\Presentacion\Login\Login$4.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Clientes.class
+com\mycompany\farmaciasystem\controladores\PromocionController.class
 com\mycompany\farmaciasystem\repository\Implementaciones\DetalleCompraRepositoryImpl.class
 com\mycompany\farmaciasystem\Presentacion\Principal\Principal$5.class
 com\mycompany\farmaciasystem\observer\InventarioObservable.class
@@ -44,6 +46,7 @@ com\mycompany\farmaciasystem\Presentacion\Modulos\Ventas$4.class
 com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevasPromociones$1.class
 com\mycompany\farmaciasystem\repository\Implementaciones\CompraRepositoryImpl.class
 com\mycompany\farmaciasystem\repository\Implementaciones\EmpresaRepositoryImpl.class
+com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevosClientes$1.class
 com\mycompany\farmaciasystem\Presentacion\Principal\Principal$7.class
 com\mycompany\farmaciasystem\MainApp.class
 com\mycompany\farmaciasystem\observer\IObserver.class
@@ -68,7 +71,9 @@ com\mycompany\farmaciasystem\Presentacion\Modulos\Perfil.class
 com\mycompany\farmaciasystem\servicios\ProductoService.class
 com\mycompany\farmaciasystem\modelo\entidades\Lote.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Proveedores$4.class
+com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevosProveedores$2.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Inicio$1.class
+com\mycompany\farmaciasystem\Presentacion\Modulos\Promociones$6.class
 com\mycompany\farmaciasystem\repository\Interfaces\ILoteRepository.class
 com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevosProductos.class
 com\mycompany\farmaciasystem\decorator\PrecioBase.class
@@ -80,9 +85,12 @@ com\mycompany\farmaciasystem\Presentacion\Modulos\Ventas$5.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Ventas$8.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Productos$3.class
 com\mycompany\farmaciasystem\servicios\LoteService.class
+com\mycompany\farmaciasystem\Presentacion\Modulos\Clientes$6.class
+com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevasPromociones$2.class
 com\mycompany\farmaciasystem\repository\Interfaces\IClienteRepository.class
 com\mycompany\farmaciasystem\observer\AlertaBajoStockObserver.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Proveedores$2.class
+com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevosProveedores$1.class
 com\mycompany\farmaciasystem\repository\Implementaciones\VentaRepositoryImpl.class
 com\mycompany\farmaciasystem\command\CommandInvoker$RegistroComando.class
 com\mycompany\farmaciasystem\Presentacion\FormsEditar\EditarProducto.class
@@ -92,6 +100,7 @@ com\mycompany\farmaciasystem\Presentacion\Login\Login$1.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Perfil$3.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Promociones$1.class
 com\mycompany\farmaciasystem\facade\VentaFacade.class
+com\mycompany\farmaciasystem\Presentacion\FormsEditar\EditarProveedor$1.class
 com\mycompany\farmaciasystem\Presentacion\FormsEditar\EditarClientes.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Inicio$6.class
 com\mycompany\farmaciasystem\Presentacion\Principal\Principal$9.class
@@ -107,6 +116,7 @@ com\mycompany\farmaciasystem\Presentacion\Modulos\Ventas$3.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Clientes$1.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Inicio$5.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\DetalleVentas.class
+com\mycompany\farmaciasystem\Presentacion\Modulos\Productos$8.class
 com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevosProveedores.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Promociones$2.class
 com\mycompany\farmaciasystem\servicios\ClienteService.class
@@ -128,10 +138,12 @@ com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevosClientes.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Ventas.class
 com\mycompany\farmaciasystem\repository\Implementaciones\PromocionRepositoryImpl.class
 com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevasPromociones.class
+com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevosClientes$2.class
 com\mycompany\farmaciasystem\factory\IReporte.class
 com\mycompany\farmaciasystem\modelo\DTO\VentaDTO.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Proveedores$1.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Productos$2.class
+com\mycompany\farmaciasystem\Presentacion\FormsEditar\EditarProveedor$2.class
 com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevosUsuarios$1.class
 com\mycompany\farmaciasystem\modelo\entidades\Empresa.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Inicio$7.class
@@ -147,11 +159,13 @@ com\mycompany\farmaciasystem\Presentacion\Login\Login.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Ventas$10.class
 com\mycompany\farmaciasystem\controladores\ReporteController.class
 com\mycompany\farmaciasystem\decorator\DescuentoPorcentajeDecorator.class
+com\mycompany\farmaciasystem\Presentacion\FormsEditar\EditarPromocion$2.class
 com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevaContrasenia$1.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Clientes$4.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Inicio.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Proveedores.class
 com\mycompany\farmaciasystem\decorator\PrecioDecorator.class
+com\mycompany\farmaciasystem\Presentacion\FormsEditar\EditarClientes$1.class
 com\mycompany\farmaciasystem\repository\Implementaciones\DetalleVentaRepositoryImpl.class
 com\mycompany\farmaciasystem\decorator\PromocionDecorator.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Productos.class

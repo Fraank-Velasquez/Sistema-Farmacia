@@ -52,11 +52,11 @@
                           <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="txtnombre4" min="-2" pref="132" max="-2" attributes="0"/>
+                                  <Component id="txtidProveedor" min="-2" pref="132" max="-2" attributes="0"/>
                                   <EmptySpace min="42" pref="42" max="-2" attributes="0"/>
-                                  <Component id="txtnombre7" min="-2" pref="178" max="-2" attributes="0"/>
+                                  <Component id="txtNombreEmpresa" min="-2" pref="178" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                  <Component id="txtnombre10" min="-2" pref="221" max="-2" attributes="0"/>
+                                  <Component id="txtContacto" min="-2" pref="221" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabel15" min="-2" pref="132" max="-2" attributes="0"/>
@@ -87,18 +87,18 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtnombre13" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
-                                      <Component id="txtnombre14" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
+                                      <Component id="txtTelefono" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
+                                      <Component id="txtCiudad" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
                                       <Component id="jLabel18" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel19" min="-2" pref="115" max="-2" attributes="0"/>
-                                      <Component id="txtnombre9" min="-2" pref="178" max="-2" attributes="0"/>
+                                      <Component id="txtRuc" min="-2" pref="178" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="txtnombre8" min="-2" pref="178" max="-2" attributes="0"/>
+                                          <Component id="txtEmail" min="-2" pref="178" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                          <Component id="txtnombre12" min="-2" pref="221" max="-2" attributes="0"/>
+                                          <Component id="txtDireccion" min="-2" pref="221" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -127,9 +127,9 @@
                   </Group>
                   <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtnombre4" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="txtnombre7" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="txtnombre10" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="txtidProveedor" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="txtNombreEmpresa" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="txtContacto" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -139,9 +139,9 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtnombre13" alignment="0" min="-2" pref="26" max="-2" attributes="0"/>
-                      <Component id="txtnombre8" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="txtnombre12" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="txtTelefono" alignment="0" min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="txtEmail" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="txtDireccion" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -152,8 +152,8 @@
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtnombre14" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="txtnombre9" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="txtCiudad" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="txtRuc" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -217,7 +217,7 @@
             <Property name="text" type="java.lang.String" value="ID proveedor: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtnombre4">
+        <Component class="javax.swing.JTextField" name="txtidProveedor">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="f7" red="ee" type="rgb"/>
@@ -282,6 +282,9 @@
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="iconTextGap" type="int" value="18"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnGuardar1">
           <Properties>
@@ -302,8 +305,11 @@
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="iconTextGap" type="int" value="18"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardar1ActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtnombre10">
+        <Component class="javax.swing.JTextField" name="txtContacto">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="f7" red="ee" type="rgb"/>
@@ -321,7 +327,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtnombre7">
+        <Component class="javax.swing.JTextField" name="txtNombreEmpresa">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="f7" red="ee" type="rgb"/>
@@ -382,7 +388,7 @@
             <Property name="text" type="java.lang.String" value="Direccion:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtnombre8">
+        <Component class="javax.swing.JTextField" name="txtEmail">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="f7" red="ee" type="rgb"/>
@@ -400,7 +406,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtnombre12">
+        <Component class="javax.swing.JTextField" name="txtDireccion">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="f7" red="ee" type="rgb"/>
@@ -418,7 +424,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtnombre13">
+        <Component class="javax.swing.JTextField" name="txtTelefono">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="f7" red="ee" type="rgb"/>
@@ -451,7 +457,7 @@
             <Property name="text" type="java.lang.String" value="Ciudad / provincia:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtnombre14">
+        <Component class="javax.swing.JTextField" name="txtCiudad">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="f7" red="ee" type="rgb"/>
@@ -469,7 +475,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtnombre9">
+        <Component class="javax.swing.JTextField" name="txtRuc">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e1" green="f7" red="ee" type="rgb"/>
