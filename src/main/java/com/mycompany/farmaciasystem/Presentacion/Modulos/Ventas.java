@@ -5,8 +5,9 @@
 package com.mycompany.farmaciasystem.Presentacion.Modulos;
 
 import com.mycompany.farmaciasystem.Presentacion.Principal.Principal;
-import java.awt.Color;
-import java.awt.Font;
+import com.mycompany.farmaciasystem.controladores.VentaController;
+import com.mycompany.farmaciasystem.modelo.entidades.Producto;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,6 +17,10 @@ import javax.swing.table.DefaultTableModel;
 public class Ventas extends javax.swing.JPanel {
 
     Principal princ;
+    private VentaController ventaController = new VentaController();
+
+    DefaultTableModel modeloProductos;
+    DefaultTableModel modeloCarrito;
 
     /**
      * Creates new form Ventas
@@ -24,57 +29,26 @@ public class Ventas extends javax.swing.JPanel {
      */
     public Ventas() {
         initComponents();
-        CargarTablaProductosDisp();
-        CargarTablaCarrito();
+        CargarTablas();
         OtrosComponentes();
     }
 
     private void OtrosComponentes() {
 
-        txtBuscar.putClientProperty("JTextField.placeholderText", "Ingrese la fecha o id de venta a buscar");
+        txtBuscarProducto.putClientProperty("JTextField.placeholderText", "Ingrese el nombre del producto a buscar");
         txtBuscarCl.putClientProperty("JTextField.placeholderText", "Ingrese el DNI del cliente");
     }
 
-    public final void CargarTablaProductosDisp() {
+    public final void CargarTablas() {
+        String[] cabeceraProd = {"ID", "Nombre", "Descripción", "Precio", "Stock"};
+        modeloProductos = new DefaultTableModel(null, cabeceraProd);
+        tblProductos.setModel(modeloProductos);
 
-        DefaultTableModel tabla = new DefaultTableModel() {
-            @Override
-            public boolean isCellEditable(int row, int colum) {
-                return false;
-            }
-        };
+        String[] cabeceraCarr = {"ID", "Nombre", "Cant", "P. Unit", "Subtotal"};
+        modeloCarrito = new DefaultTableModel(null, cabeceraCarr);
+        tblCarrito.setModel(modeloCarrito);
 
-        String titulos[] = {"ID", "Nombre", "Categoria", "Precio", "Stock Actual", "Descripcion"};
-        tabla.setColumnIdentifiers(titulos);
-
-        // CargarDatos:
-        //
-        tbProductosDisp.setModel(tabla);
-        tbProductosDisp.getTableHeader().setReorderingAllowed(false);
-
-        tbProductosDisp.getTableHeader().setFont(new Font("poppins semibold", Font.BOLD, 12));
-        tbProductosDisp.getTableHeader().setBackground(new Color(207, 250, 254));
-    }
-
-    public final void CargarTablaCarrito() {
-
-        DefaultTableModel tabla = new DefaultTableModel() {
-            @Override
-            public boolean isCellEditable(int row, int colum) {
-                return false;
-            }
-        };
-
-        String titulos[] = {"ID", "Producto", "Precio", "Cantidad", "SubTotal"};
-        tabla.setColumnIdentifiers(titulos);
-
-        // CargarDatos:
-        //
-        tbCarrito.setModel(tabla);
-        tbCarrito.getTableHeader().setReorderingAllowed(false);
-
-        tbCarrito.getTableHeader().setFont(new Font("poppins semibold", Font.BOLD, 12));
-        tbCarrito.getTableHeader().setBackground(new Color(207, 250, 254));
+        ventaController.buscarProductos("", modeloProductos);
     }
 
     /**
@@ -89,17 +63,17 @@ public class Ventas extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txtBuscar = new javax.swing.JTextField();
+        txtBuscarProducto = new javax.swing.JTextField();
         btnAgregarProductos = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbProductosDisp = new javax.swing.JTable();
+        tblProductos = new javax.swing.JTable();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        panel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbCarrito = new javax.swing.JTable();
+        tblCarrito = new javax.swing.JTable();
         txtBuscarCl = new javax.swing.JTextField();
         separador = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
@@ -107,10 +81,12 @@ public class Ventas extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         separador1 = new javax.swing.JSeparator();
-        btnAgregarProductos1 = new javax.swing.JButton();
+        btnRegistrarVenta = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         btnListaVentas = new javax.swing.JButton();
+        txtSubtotalVenta = new javax.swing.JTextField();
+        txtDescuentoVenta = new javax.swing.JTextField();
+        txtTotalVenta = new javax.swing.JTextField();
 
         jPanel1.setBackground(new java.awt.Color(232, 232, 245));
 
@@ -121,13 +97,13 @@ public class Ventas extends javax.swing.JPanel {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Productos disponibles");
 
-        txtBuscar.setBackground(new java.awt.Color(242, 242, 242));
-        txtBuscar.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        txtBuscar.setForeground(new java.awt.Color(0, 0, 0));
-        txtBuscar.setBorder(null);
-        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+        txtBuscarProducto.setBackground(new java.awt.Color(242, 242, 242));
+        txtBuscarProducto.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        txtBuscarProducto.setForeground(new java.awt.Color(0, 0, 0));
+        txtBuscarProducto.setBorder(null);
+        txtBuscarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarActionPerformed(evt);
+                txtBuscarProductoActionPerformed(evt);
             }
         });
 
@@ -145,7 +121,8 @@ public class Ventas extends javax.swing.JPanel {
             }
         });
 
-        tbProductosDisp.setModel(new javax.swing.table.DefaultTableModel(
+        tblProductos.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -156,7 +133,7 @@ public class Ventas extends javax.swing.JPanel {
 
             }
         ));
-        jScrollPane1.setViewportView(tbProductosDisp);
+        jScrollPane1.setViewportView(tblProductos);
 
         btnEditar.setBackground(new java.awt.Color(242, 242, 242));
         btnEditar.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
@@ -197,14 +174,16 @@ public class Ventas extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+                                .addGap(8, 8, 8))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(txtBuscarProducto)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -213,8 +192,8 @@ public class Ventas extends javax.swing.JPanel {
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(6, 6, 6)
                                         .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(btnAgregarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(20, 20, 20)))
+                                    .addComponent(btnAgregarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(20, 20, 20)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -224,18 +203,18 @@ public class Ventas extends javax.swing.JPanel {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtBuscar)
+                    .addComponent(txtBuscarProducto)
                     .addComponent(btnAgregarProductos, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
-                .addGap(25, 25, 25))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        panel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(33, 37, 41));
@@ -247,7 +226,8 @@ public class Ventas extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Carrito de ventas");
 
-        tbCarrito.setModel(new javax.swing.table.DefaultTableModel(
+        tblCarrito.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        tblCarrito.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -258,7 +238,7 @@ public class Ventas extends javax.swing.JPanel {
 
             }
         ));
-        jScrollPane2.setViewportView(tbCarrito);
+        jScrollPane2.setViewportView(tblCarrito);
 
         txtBuscarCl.setBackground(new java.awt.Color(242, 242, 242));
         txtBuscarCl.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
@@ -286,28 +266,26 @@ public class Ventas extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(33, 37, 41));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel6.setText("S/. 0.00");
 
         jLabel7.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(33, 37, 41));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel7.setText("S/. 0.00");
 
         separador1.setBackground(new java.awt.Color(102, 102, 102));
         separador1.setPreferredSize(new java.awt.Dimension(0, 4));
 
-        btnAgregarProductos1.setBackground(new java.awt.Color(153, 255, 153));
-        btnAgregarProductos1.setFont(new java.awt.Font("Roboto Condensed", 0, 16)); // NOI18N
-        btnAgregarProductos1.setForeground(new java.awt.Color(51, 51, 51));
-        btnAgregarProductos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/RegVenta.png"))); // NOI18N
-        btnAgregarProductos1.setText("Registrar Venta");
-        btnAgregarProductos1.setBorder(null);
-        btnAgregarProductos1.setFocusPainted(false);
-        btnAgregarProductos1.setFocusable(false);
-        btnAgregarProductos1.setIconTextGap(6);
-        btnAgregarProductos1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrarVenta.setBackground(new java.awt.Color(153, 255, 153));
+        btnRegistrarVenta.setFont(new java.awt.Font("Roboto Condensed", 0, 16)); // NOI18N
+        btnRegistrarVenta.setForeground(new java.awt.Color(51, 51, 51));
+        btnRegistrarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/RegVenta.png"))); // NOI18N
+        btnRegistrarVenta.setText("Registrar Venta");
+        btnRegistrarVenta.setBorder(null);
+        btnRegistrarVenta.setFocusPainted(false);
+        btnRegistrarVenta.setFocusable(false);
+        btnRegistrarVenta.setIconTextGap(6);
+        btnRegistrarVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarProductos1ActionPerformed(evt);
+                btnRegistrarVentaActionPerformed(evt);
             }
         });
 
@@ -315,11 +293,6 @@ public class Ventas extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(33, 37, 41));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel8.setText("TOTAL:");
-
-        jLabel9.setFont(new java.awt.Font("Poppins", 1, 22)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(33, 37, 41));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel9.setText("S/. 0.00");
 
         btnListaVentas.setBackground(new java.awt.Color(204, 204, 204));
         btnListaVentas.setFont(new java.awt.Font("Roboto Condensed", 0, 16)); // NOI18N
@@ -337,90 +310,130 @@ public class Ventas extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        txtSubtotalVenta.setEditable(false);
+        txtSubtotalVenta.setBackground(new java.awt.Color(242, 242, 242));
+        txtSubtotalVenta.setFont(new java.awt.Font("Poppins Medium", 0, 13)); // NOI18N
+        txtSubtotalVenta.setForeground(new java.awt.Color(0, 0, 0));
+        txtSubtotalVenta.setBorder(null);
+        txtSubtotalVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSubtotalVentaActionPerformed(evt);
+            }
+        });
+
+        txtDescuentoVenta.setEditable(false);
+        txtDescuentoVenta.setBackground(new java.awt.Color(242, 242, 242));
+        txtDescuentoVenta.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        txtDescuentoVenta.setForeground(new java.awt.Color(0, 0, 0));
+        txtDescuentoVenta.setBorder(null);
+        txtDescuentoVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescuentoVentaActionPerformed(evt);
+            }
+        });
+
+        txtTotalVenta.setEditable(false);
+        txtTotalVenta.setBackground(new java.awt.Color(242, 242, 242));
+        txtTotalVenta.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        txtTotalVenta.setForeground(new java.awt.Color(0, 0, 0));
+        txtTotalVenta.setBorder(null);
+        txtTotalVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTotalVentaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
+        panel2.setLayout(panel2Layout);
+        panel2Layout.setHorizontalGroup(
+            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel2Layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtBuscarCl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(separador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(8, 8, 8))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(separador1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(32, 32, 32)
-                                        .addComponent(btnAgregarProductos1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnListaVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(16, 16, 16)))))
-                .addGap(11, 11, 11))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(txtBuscarCl)
+                .addGap(8, 8, 8))
+            .addGroup(panel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2)
+                .addGap(2, 2, 2))
+            .addGroup(panel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(217, 217, 217)
+                .addComponent(txtSubtotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panel2Layout.createSequentialGroup()
+                .addGap(219, 219, 219)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(217, 217, 217)
+                .addComponent(txtDescuentoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(207, 207, 207)
+                        .addComponent(txtTotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addGap(199, 199, 199)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(separador1, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(panel2Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(btnRegistrarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(btnListaVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBuscarCl, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        panel2Layout.setVerticalGroup(
+            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel2Layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel1)
+                .addGap(6, 6, 6)
+                .addComponent(txtBuscarCl, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabel6))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(12, 12, 12)
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(txtSubtotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addComponent(jLabel6)
+                .addGap(3, 3, 3)
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(separador1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAgregarProductos1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDescuentoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(txtTotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel7))
+                    .addComponent(separador1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRegistrarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnListaVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13))
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -430,17 +443,17 @@ public class Ventas extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(12, 12, 12)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -458,19 +471,90 @@ public class Ventas extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+    private void txtBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarProductoActionPerformed
 
-    }//GEN-LAST:event_txtBuscarActionPerformed
+    }//GEN-LAST:event_txtBuscarProductoActionPerformed
 
     private void btnAgregarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductosActionPerformed
-
+        String texto = txtBuscarProducto.getText().trim();
+        ventaController.buscarProductos(texto, modeloProductos);
     }//GEN-LAST:event_btnAgregarProductosActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
+        int fila = tblProductos.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un producto.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Producto productoSeleccionado = ventaController.obtenerProductoDeBusqueda(fila);
+        if (productoSeleccionado == null) {
+            return;
+        }
+
+        String inputCantidad = JOptionPane.showInputDialog(this,
+                "Producto: " + productoSeleccionado.getNombre() + "\n"
+                + "Precio Unitario: S/ " + productoSeleccionado.getPrecioVenta() + "\n"
+                + "Stock Disponible: " + productoSeleccionado.getStockActual() + "\n\n"
+                + "Ingrese cantidad:",
+                "Agregar al Carrito", JOptionPane.QUESTION_MESSAGE);
+
+        if (inputCantidad != null && !inputCantidad.trim().isEmpty()) {
+            try {
+                int cantidad = Integer.parseInt(inputCantidad);
+
+                if (cantidad > 0 && cantidad <= productoSeleccionado.getStockActual()) {
+
+                    // AQUÍ ESTÁ EL CAMBIO: Pasamos los campos de texto de tu interfaz
+                    // para que el controlador ponga los montos calculados con la promoción.
+                    ventaController.agregarAlCarrito(productoSeleccionado,
+                            cantidad, modeloCarrito,
+                            txtSubtotalVenta,
+                            txtDescuentoVenta,
+                            txtTotalVenta);
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Cantidad inválida o stock insuficiente.");
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Ingrese un número entero.");
+            }
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
+        int filaSeleccionada = tblCarrito.getSelectedRow();
+
+        // 2. Validar que se haya seleccionado un ítem
+        if (filaSeleccionada == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Seleccione un producto del carrito para quitar.",
+                    "Advertencia",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // 3. Confirmar la acción (Opcional, pero recomendable para UX)
+        int confirmacion = javax.swing.JOptionPane.showConfirmDialog(this,
+                "¿Está seguro de quitar este producto del carrito?",
+                "Confirmar eliminación",
+                javax.swing.JOptionPane.YES_NO_OPTION);
+
+        if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
+
+            // 4. Llamar al controlador para quitar el ítem y recalcular todo
+            ventaController.quitarDelCarrito(
+                    filaSeleccionada,
+                    modeloCarrito,
+                    txtSubtotalVenta, 
+                    txtDescuentoVenta,
+                    txtTotalVenta
+            );
+        }
+
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -478,8 +562,26 @@ public class Ventas extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarClActionPerformed
 
-    private void btnAgregarProductos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductos1ActionPerformed
-    }//GEN-LAST:event_btnAgregarProductos1ActionPerformed
+    private void btnRegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarVentaActionPerformed
+
+        // Obtener IDs reales de tu interfaz o sesión
+        int idCliente = 1;
+        int idUsuario = 1;
+
+        ventaController.procesarVenta(
+                idCliente,
+                idUsuario,
+                0.0,
+                txtSubtotalVenta,
+                txtDescuentoVenta,
+                txtTotalVenta,
+                modeloCarrito
+        );
+
+        // Recargar productos para ver el stock actualizado
+        ventaController.buscarProductos("", modeloProductos);
+
+    }//GEN-LAST:event_btnRegistrarVentaActionPerformed
 
     private void btnListaVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaVentasActionPerformed
 
@@ -490,13 +592,25 @@ public class Ventas extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnListaVentasActionPerformed
 
+    private void txtSubtotalVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubtotalVentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSubtotalVentaActionPerformed
+
+    private void txtDescuentoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescuentoVentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescuentoVentaActionPerformed
+
+    private void txtTotalVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalVentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalVentaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarProductos;
-    private javax.swing.JButton btnAgregarProductos1;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnListaVentas;
+    private javax.swing.JButton btnRegistrarVenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -505,17 +619,19 @@ public class Ventas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel panel2;
     private javax.swing.JSeparator separador;
     private javax.swing.JSeparator separador1;
-    private javax.swing.JTable tbCarrito;
-    private javax.swing.JTable tbProductosDisp;
-    private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTable tblCarrito;
+    private javax.swing.JTable tblProductos;
     private javax.swing.JTextField txtBuscarCl;
+    private javax.swing.JTextField txtBuscarProducto;
+    private javax.swing.JTextField txtDescuentoVenta;
+    private javax.swing.JTextField txtSubtotalVenta;
+    private javax.swing.JTextField txtTotalVenta;
     // End of variables declaration//GEN-END:variables
 }

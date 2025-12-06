@@ -39,10 +39,7 @@ public class VentaFacade {
     private final ILoteRepository loteRepository;
     private final IPromocionRepository promocionRepository;
 
-    // El inner class DetalleVentaConLote ya no es necesario, pero lo mantengo
-    // para no alterar la estructura del archivo original si ya está referenciada.
     public VentaFacade() {
-        // CORRECCIÓN 1: Inicializar todos los Repositorios
         this.ventaRepository = new VentaRepositoryImpl();
         this.productoRepository = new ProductoRepositoryImpl();
         this.loteRepository = new LoteRepositoryImpl();
@@ -51,9 +48,6 @@ public class VentaFacade {
 
     public ResultadoVenta procesarVenta(VentaDTO ventaDTO) {
 
-        // NOTA: La lógica para establecer setAutoCommit(false), commit() y rollback()
-        // debe ser implementada en la clase ConexionDb y orquestada aquí, 
-        // pero por la limitación de no modificar ConexionDb, nos centraremos en la lógica.
         try {
 
             if (ventaDTO.getItems() == null || ventaDTO.getItems().isEmpty()) {
@@ -70,7 +64,6 @@ public class VentaFacade {
             double descuentoTotal = 0;
 
             List<DetalleVenta> detallesVentaFinales = new ArrayList<>();
-
             List<LoteConsumidoDTO> lotesConsumidos = new ArrayList<>();
 
             // 2. Procesar cada ItemVentaDTO y aplicar lógica FEFO y de precios
@@ -107,27 +100,26 @@ public class VentaFacade {
 
                 for (Lote lote : lotesDisponibles) {
                     if (cantidadPendiente == 0) {
-                        break; // Cantidad del item cubierta
+                        break; 
                     }
 
-                    // Usamos cantidad_inicial como el stock restante del lote
                     int stockEnLote = lote.getCantidadInicial();
 
                     if (stockEnLote > 0) {
                         int cantidadAConsumir = Math.min(cantidadPendiente, stockEnLote);
 
-                        // 3. Crear DetalleVenta y registrar lote consumido
+                        // 3. Crear DetalleVenta
                         DetalleVenta detalle = new DetalleVenta();
                         detalle.setIdLote(lote.getIdLote());
                         detalle.setCantidad(cantidadAConsumir);
                         detalle.setPrecioUnitario(producto.getPrecioVenta());
-                        // Descuento específico para este detalle
                         detalle.setDescuentoAplicado(descuentoUnitarioPromedio * cantidadAConsumir);
 
                         detallesVentaFinales.add(detalle);
 
-                        // Registrar la cantidad consumida para la actualización real
-                        lotesConsumidos.add(new LoteConsumidoDTO(lote.getIdLote(), cantidadAConsumir));
+                        // --- CORRECCIÓN AQUÍ --- 
+                        // Pasamos explícitamente el ID del producto para evitar el error 'prodConsumido is null'
+                        lotesConsumidos.add(new LoteConsumidoDTO(lote.getIdLote(), cantidadAConsumir, producto.getIdProducto()));
 
                         cantidadPendiente -= cantidadAConsumir;
                     }
@@ -137,12 +129,11 @@ public class VentaFacade {
                     return new ResultadoVenta(false, "Fallo crítico en inventario: El producto " + producto.getNombre() + " no tiene suficientes lotes activos para cubrir la demanda.");
                 }
             }
+
             // --- REGISTRO DE VENTA Y DETALLE ---
-            // Aplicar descuento general de la venta
             descuentoTotal += ventaDTO.getDescuentoGeneral();
             double total = subtotal - descuentoTotal;
 
-            // 4. Registrar Venta Principal
             Venta venta = new Venta();
             venta.setIdCliente(ventaDTO.getIdCliente());
             venta.setIdUsuario(ventaDTO.getIdUsuario());
@@ -152,11 +143,9 @@ public class VentaFacade {
 
             int idVenta = ventaRepository.insertarYRetornarID(venta);
             if (idVenta == -1) {
-                // [Lógica conceptual: ROLLBACK en caso de error]
                 return new ResultadoVenta(false, "Error al registrar la venta principal en la base de datos.");
             }
 
-            // 5. Registrar Detalle de Venta
             IDetalleVentaRepository detalleVentaRepo = new DetalleVentaRepositoryImpl();
             for (DetalleVenta detalle : detallesVentaFinales) {
                 detalle.setIdVenta(idVenta);
@@ -165,31 +154,28 @@ public class VentaFacade {
                 }
             }
 
-            // Actualizar Stock de Lotes y Producto 
+            // Actualizar Stock de Lotes y Producto
             for (LoteConsumidoDTO consumo : lotesConsumidos) {
                 loteRepository.actualizarCantidadLote(consumo.getIdLote(), consumo.getCantidadConsumida());
 
+                // Ahora consumo.getIdProducto() ya tendrá el valor correcto
                 Producto prodConsumido = productoRepository.buscarPorID(consumo.getIdProducto());
-                productoRepository.actualizarStock(prodConsumido.getIdProducto(), -consumo.getCantidadConsumida());
+                
+                if (prodConsumido != null) {
+                    productoRepository.actualizarStock(prodConsumido.getIdProducto(), -consumo.getCantidadConsumida());
+                } else {
+                    System.err.println("Advertencia: No se pudo actualizar el stock global para el producto ID " + consumo.getIdProducto());
+                }
             }
 
             return new ResultadoVenta(true, "Venta registrada exitosamente", idVenta, total);
         } catch (Exception e) {
-            System.err.println("Error crítico al procesar la venta: " + e.getMessage());
+            e.printStackTrace(); // Imprimir stack trace completo para depuración
             return new ResultadoVenta(false, "Error crítico al procesar la venta. Detalle: " + e.getMessage());
         }
-
     }
 
-    /**
-     * Validar si el stock actual de los productos es suficiente para la venta.
-     * Solo verificar el stock total
-     *
-     * @param ventaDTO
-     * @return
-     */
     private ResultadoVenta validarStockTotalDisponible(VentaDTO ventaDTO) {
-
         for (ItemVentaDTO item : ventaDTO.getItems()) {
             Producto producto = productoRepository.buscarPorID(item.getIdProducto());
 
@@ -206,19 +192,21 @@ public class VentaFacade {
                         + ", Solicitado: " + item.getCantidad());
             }
         }
-
         return new ResultadoVenta(true, "Stock validado correctamente");
     }
 
+    // CLASE INTERNA CORREGIDA
     private class LoteConsumidoDTO {
 
         private int idLote;
         private int idProducto;
         private int cantidadConsumida;
 
-        public LoteConsumidoDTO(int idLote, int cantidadConsumida) {
+        // CORRECCIÓN: Se agrega idProducto al constructor
+        public LoteConsumidoDTO(int idLote, int cantidadConsumida, int idProducto) {
             this.idLote = idLote;
             this.cantidadConsumida = cantidadConsumida;
+            this.idProducto = idProducto;
         }
 
         public int getIdLote() {
@@ -232,6 +220,5 @@ public class VentaFacade {
         public int getIdProducto() {
             return idProducto;
         }
-
     }
 }

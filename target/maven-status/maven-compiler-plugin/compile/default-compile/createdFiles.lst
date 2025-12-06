@@ -16,6 +16,7 @@ com\mycompany\farmaciasystem\Presentacion\Principal\Principal$6.class
 com\mycompany\farmaciasystem\modelo\entidades\Cliente.class
 com\mycompany\farmaciasystem\Presentacion\Login\Login$4.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Clientes.class
+com\mycompany\farmaciasystem\repository\Implementaciones\DetalleCompraRepositoryImpl.class
 com\mycompany\farmaciasystem\Presentacion\Principal\Principal$5.class
 com\mycompany\farmaciasystem\observer\InventarioObservable.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\ListaVentas$2.class
@@ -48,6 +49,7 @@ com\mycompany\farmaciasystem\observer\IObserver.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Productos$4.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Ventas$7.class
 com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevosUsuarios.class
+com\mycompany\farmaciasystem\facade\VentaFacade$LoteConsumidoDTO.class
 com\mycompany\farmaciasystem\configuración\ConexionDb.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Productos$7.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Proveedores$6.class
@@ -72,6 +74,7 @@ com\mycompany\farmaciasystem\decorator\PrecioBase.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Perfil$1.class
 com\mycompany\farmaciasystem\decorator\DescuentoFijoDecorator.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Productos$5.class
+com\mycompany\farmaciasystem\modelo\entidades\DetalleCompra.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Ventas$5.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Ventas$8.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Productos$3.class
@@ -141,6 +144,7 @@ com\mycompany\farmaciasystem\Presentacion\Login\Login$3.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Ventas$1.class
 com\mycompany\farmaciasystem\decorator\IPrecio.class
 com\mycompany\farmaciasystem\Presentacion\Login\Login.class
+com\mycompany\farmaciasystem\Presentacion\Modulos\Ventas$10.class
 com\mycompany\farmaciasystem\controladores\ReporteController.class
 com\mycompany\farmaciasystem\decorator\DescuentoPorcentajeDecorator.class
 com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevaContrasenia$1.class
@@ -154,7 +158,6 @@ com\mycompany\farmaciasystem\Presentacion\Modulos\Productos.class
 com\mycompany\farmaciasystem\Presentacion\Principal\Principal$1.class
 com\mycompany\farmaciasystem\Presentacion\Login\Login$2.class
 com\mycompany\farmaciasystem\controladores\UsuarioController.class
-com\mycompany\farmaciasystem\facade\VentaFacade$DetalleVentaConLote.class
 com\mycompany\farmaciasystem\modelo\entidades\Promocion.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Promociones.class
 com\mycompany\farmaciasystem\servicios\VentaService.class
@@ -164,6 +167,7 @@ com\mycompany\farmaciasystem\Presentacion\Modulos\ListaVentas$5.class
 com\mycompany\farmaciasystem\Presentacion\Principal\Principal$2.class
 com\mycompany\farmaciasystem\Presentacion\FormsEditar\EditarProveedor.class
 com\mycompany\farmaciasystem\controladores\DashboardController.class
+com\mycompany\farmaciasystem\repository\Interfaces\IDetalleCompraRepository.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Clientes$5.class
 com\mycompany\farmaciasystem\modelo\entidades\Usuario.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\ListaVentas$6.class

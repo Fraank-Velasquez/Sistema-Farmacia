@@ -228,7 +228,7 @@ public class LoteRepositoryImpl implements ILoteRepository {
 
         lote.setIdLote(rs.getInt("id_lote"));
         lote.setIdProducto(rs.getInt("id_producto"));
-        lote.setIdEmpresaProveedor(rs.getInt("id_empresa_fabricante"));
+        lote.setIdEmpresaProveedor(rs.getInt("id_empresa_proveedor"));
         lote.setNumeroLote(rs.getString("numero_lote"));
 
         Date fechaFab = rs.getDate("fecha_fabricacion");
@@ -264,5 +264,23 @@ public class LoteRepositoryImpl implements ILoteRepository {
             e.toString();
             return false;
         }
+    }
+
+    @Override
+    public int obtenerIdPorNumeroLote(String numeroLote) {
+        String sql = "SELECT id_lote FROM lotes WHERE numero_lote = ? ORDER BY id_lote DESC LIMIT 1";
+
+        try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setString(1, numeroLote);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("id_lote");
+            }
+        } catch (SQLException e) {
+            e.toString();
+        }
+        return -1;
     }
 }

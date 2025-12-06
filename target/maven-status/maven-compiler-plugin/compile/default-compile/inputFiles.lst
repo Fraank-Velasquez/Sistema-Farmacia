@@ -33,6 +33,7 @@ C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycom
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\modelo\DTO\VentaDTO.java
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\modelo\entidades\Cliente.java
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\modelo\entidades\Compra.java
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\modelo\entidades\DetalleCompra.java
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\modelo\entidades\DetalleVenta.java
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\modelo\entidades\Empresa.java
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\modelo\entidades\Lote.java
@@ -70,6 +71,7 @@ C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycom
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\presentacion\Principal\Principal.java
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\repository\Implementaciones\ClienteRepositoryImpl.java
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\repository\Implementaciones\CompraRepositoryImpl.java
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\repository\Implementaciones\DetalleCompraRepositoryImpl.java
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\repository\Implementaciones\DetalleVentaRepositoryImpl.java
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\repository\Implementaciones\EmpresaRepositoryImpl.java
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\repository\Implementaciones\LoteRepositoryImpl.java
@@ -79,6 +81,7 @@ C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycom
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\repository\Implementaciones\VentaRepositoryImpl.java
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\repository\Interfaces\IClienteRepository.java
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\repository\Interfaces\ICompraRepository.java
+C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\repository\Interfaces\IDetalleCompraRepository.java
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\repository\Interfaces\IDetalleVentaRepository.java
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\repository\Interfaces\IEmpresaRepository.java
 C:\Users\Frank\Documents\NetBeansProjects\FarmaciaSystem\src\main\java\com\mycompany\farmaciasystem\repository\Interfaces\ILoteRepository.java

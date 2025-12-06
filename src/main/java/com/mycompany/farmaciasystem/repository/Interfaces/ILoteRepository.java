@@ -23,4 +23,6 @@ public interface ILoteRepository extends IRepository<Lote> {
 
     public boolean actualizarCantidadLote(int idLote, int cantidadConsumida);
 
+    int obtenerIdPorNumeroLote(String numeroLote);
+
 }
