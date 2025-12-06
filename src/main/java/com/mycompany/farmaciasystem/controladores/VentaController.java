@@ -11,15 +11,23 @@ import com.mycompany.farmaciasystem.decorator.PrecioBase;
 import com.mycompany.farmaciasystem.decorator.PromocionDecorator;
 import com.mycompany.farmaciasystem.modelo.DTO.ItemVentaDTO;
 import com.mycompany.farmaciasystem.modelo.DTO.VentaDTO;
+import com.mycompany.farmaciasystem.modelo.entidades.Cliente;
+import com.mycompany.farmaciasystem.modelo.entidades.DetalleVenta;
 import com.mycompany.farmaciasystem.modelo.entidades.Producto;
 import com.mycompany.farmaciasystem.modelo.entidades.Promocion;
+import com.mycompany.farmaciasystem.modelo.entidades.Venta;
+import com.mycompany.farmaciasystem.repository.Implementaciones.DetalleVentaRepositoryImpl;
 import com.mycompany.farmaciasystem.repository.Implementaciones.PromocionRepositoryImpl;
+import com.mycompany.farmaciasystem.repository.Implementaciones.VentaRepositoryImpl;
+import com.mycompany.farmaciasystem.repository.Interfaces.IDetalleVentaRepository;
 import com.mycompany.farmaciasystem.repository.Interfaces.IPromocionRepository;
+import com.mycompany.farmaciasystem.repository.Interfaces.IVentaRepository;
+import com.mycompany.farmaciasystem.servicios.ClienteService;
 import com.mycompany.farmaciasystem.servicios.ProductoService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField; // Importante para actualizar los labels
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,12 +36,15 @@ import javax.swing.table.DefaultTableModel;
  * @author Frank
  */
 public class VentaController {
-
+    
     private final ProductoService productoService;
-    private final IPromocionRepository promocionRepository; // Necesario para ver descuentos
+    private final IPromocionRepository promocionRepository;
     private final List<ItemVentaDTO> carritoCompras;
     private final List<Producto> listaProductosBusqueda;
-
+    private final IVentaRepository ventaRepository = new VentaRepositoryImpl();
+    private final IDetalleVentaRepository detalleRepository = new DetalleVentaRepositoryImpl();
+    private final ClienteService clienteService = new ClienteService();
+    
     public VentaController() {
         this.productoService = new ProductoService();
         this.promocionRepository = new PromocionRepositoryImpl(); // Inicializamos el repo
@@ -56,7 +67,7 @@ public class VentaController {
             }
         }
     }
-
+    
     public Producto obtenerProductoDeBusqueda(int fila) {
         if (fila >= 0 && fila < listaProductosBusqueda.size()) {
             return listaProductosBusqueda.get(fila);
@@ -95,7 +106,7 @@ public class VentaController {
         // 4. CALCULAR TOTALES Y DESCUENTOS (Aquí está la magia)
         calcularYMostrarTotales(txtSubtotal, txtDescuento, txtTotal);
     }
-
+    
     public void quitarDelCarrito(int fila, DefaultTableModel modelo,
             JTextField txtSubtotal, JTextField txtDescuento, JTextField txtTotal) {
         if (fila >= 0) {
@@ -104,7 +115,7 @@ public class VentaController {
             calcularYMostrarTotales(txtSubtotal, txtDescuento, txtTotal);
         }
     }
-
+    
     private void refrescarTablaCarrito(DefaultTableModel modelo) {
         modelo.setRowCount(0);
         for (ItemVentaDTO item : carritoCompras) {
@@ -112,7 +123,7 @@ public class VentaController {
 
             // Calculamos precio unitario con descuento para mostrar en tabla (opcional)
             double precioFinal = calcularPrecioConPromocion(p, item.getCantidad()) / item.getCantidad();
-
+            
             modelo.addRow(new Object[]{
                 p.getIdProducto(),
                 p.getNombre(),
@@ -127,7 +138,7 @@ public class VentaController {
     public void calcularYMostrarTotales(JTextField txtSubtotal, JTextField txtDescuento, JTextField txtTotal) {
         double subtotalBruto = 0;
         double totalNeto = 0;
-
+        
         for (ItemVentaDTO item : carritoCompras) {
             Producto p = productoService.buscarPorId(item.getIdProducto());
 
@@ -142,7 +153,7 @@ public class VentaController {
             // Guardamos el descuento aplicado en el DTO por si se necesita al procesar
             item.setDescuentoAplicado(precioLista - precioReal);
         }
-
+        
         double totalDescuento = subtotalBruto - totalNeto;
 
         // Actualizar los textfields de la interfaz
@@ -163,12 +174,12 @@ public class VentaController {
 
         // Buscar si hay promoción activa en la BD
         List<Promocion> promociones = promocionRepository.listarPorProductos(p.getIdProducto());
-
+        
         if (!promociones.isEmpty()) {
             // Aplicar el decorador si existe promo (ej: ID 8 con 10 soles de descuento)
             precio = new PromocionDecorator(precio, promociones.get(0));
         }
-
+        
         return precio.calcularPrecio();
     }
 
@@ -179,16 +190,16 @@ public class VentaController {
             JOptionPane.showMessageDialog(null, "El carrito está vacío.");
             return false;
         }
-
+        
         VentaDTO ventaDTO = new VentaDTO();
         ventaDTO.setIdCliente(idCliente);
         ventaDTO.setIdUsuario(idUsuario);
         ventaDTO.setItems(new ArrayList<>(carritoCompras));
         ventaDTO.setDescuentoGeneral(descuentoGeneral);
-
+        
         RegistrarVentaCommand comando = new RegistrarVentaCommand(ventaDTO);
         CommandInvoker.ejecutar(comando);
-
+        
         if (comando.getResultado() != null && comando.getResultado().isExitoso()) {
             JOptionPane.showMessageDialog(null, "Venta Procesada! ID: " + comando.getResultado().getIdVenta());
             limpiarCarrito(modelo, txtSubtotal, txtDescuento, txtTotal);
@@ -199,7 +210,7 @@ public class VentaController {
             return false;
         }
     }
-
+    
     public void limpiarCarrito(DefaultTableModel modelo, JTextField txtSub, JTextField txtDesc, JTextField txtTot) {
         carritoCompras.clear();
         refrescarTablaCarrito(modelo);
@@ -213,4 +224,91 @@ public class VentaController {
             txtTot.setText("0.00");
         }
     }
+    
+    public void cargarHistorialVentas(DefaultTableModel modelo) {
+        modelo.setRowCount(0);
+        // Asumimos que ventaRepository tiene listarTodos()
+        List<com.mycompany.farmaciasystem.modelo.entidades.Venta> ventas = ventaRepository.listarTodos();
+        
+        for (Venta v : ventas) {
+            // Obtener nombre cliente para mostrar (Opcional, si tienes el servicio)
+            String nombreCliente = "Cliente ID " + v.getIdCliente();
+            Cliente c = clienteService.buscarPorId(v.getIdCliente());
+            if (c != null) {
+                nombreCliente = c.getNombres() + " " + c.getApellidos();
+            }
+            
+            Object[] fila = {
+                v.getIdVenta(),
+                v.getFechaVenta(),
+                nombreCliente,
+                String.format("S/. %.2f", v.getTotal())
+            };
+            modelo.addRow(fila);
+        }
+    }
+    
+    public void cargarDetallesDeVenta(int idVenta, DefaultTableModel modeloDetalle) {
+        modeloDetalle.setRowCount(0);
+        List<DetalleVenta> detalles = detalleRepository.listarPorVenta(idVenta);
+        
+        for (DetalleVenta d : detalles) {
+            // Buscar nombre del producto usando el lote
+            // Esto requiere una pequeña "trampa" si no tienes un join directo: 
+            // Buscar Lote -> Buscar Producto. O mostrar solo ID Lote por ahora.
+            // Para hacerlo bien rápido:
+            String descripcion = "Lote: " + d.getIdLote();
+            
+            double subtotal = (d.getCantidad() * d.getPrecioUnitario()) - d.getDescuentoAplicado();
+            
+            Object[] fila = {
+                d.getIdLote(),
+                d.getCantidad(),
+                String.format("%.2f", d.getPrecioUnitario()),
+                String.format("%.2f", d.getDescuentoAplicado()),
+                String.format("%.2f", subtotal)
+            };
+            modeloDetalle.addRow(fila);
+        }
+    }
+    
+    public Venta buscarVentaPorId(int id) {
+        return ventaRepository.buscarPorID(id);
+    }
+    
+    public void cargarDatosCabeceraVenta(int idVenta,
+            JTextField txtId,
+            JTextField txtFecha,
+            JTextField txtCliente,
+            JTextField txtDni,
+            JTextField txtTotal
+    ) {
+
+        // 1. Buscar la Venta
+        Venta venta = ventaRepository.buscarPorID(idVenta);
+        
+        if (venta != null) {
+            // Llenar datos básicos
+            if (txtId != null) {
+                txtId.setText(String.valueOf(venta.getIdVenta()));
+            }
+            if (txtFecha != null) {
+                txtFecha.setText(venta.getFechaVenta().toString());
+            }
+            if (txtTotal != null) {
+                txtTotal.setText(String.format("%.2f", venta.getTotal()));
+            }
+
+            // 2. Buscar y Llenar Cliente
+            Cliente cliente = clienteService.buscarPorId(venta.getIdCliente());
+            if (cliente != null && txtCliente != null) {
+                txtCliente.setText(cliente.getNombres() + " " + cliente.getApellidos());
+                txtDni.setText(cliente.getDni());
+            } else if (txtCliente != null) {
+                txtCliente.setText("Cliente General / No Encontrado");
+            }
+            
+        }
+    }
+    
 }

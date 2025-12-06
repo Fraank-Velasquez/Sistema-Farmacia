@@ -37,13 +37,18 @@ public class DetalleVentaRepositoryImpl implements IDetalleVentaRepository {
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                detalles.add(guardarDatosDetVentas(rs));
+                DetalleVenta detalle = new DetalleVenta();
+                detalle.setIdDetalle(rs.getInt("id_detalle"));
+                detalle.setIdVenta(rs.getInt("id_venta"));
+                detalle.setIdLote(rs.getInt("id_lote"));
+                detalle.setCantidad(rs.getInt("cantidad"));
+                detalle.setPrecioUnitario(rs.getDouble("precio_unitario"));
+                detalle.setDescuentoAplicado(rs.getDouble("descuento_aplicado"));
+                detalles.add(detalle);
             }
-
         } catch (SQLException e) {
-            e.toString();
+            e.printStackTrace();
         }
-
         return detalles;
     }
 

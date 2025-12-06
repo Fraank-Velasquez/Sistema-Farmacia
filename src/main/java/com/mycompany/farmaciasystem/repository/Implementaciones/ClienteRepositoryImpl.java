@@ -29,30 +29,27 @@ public class ClienteRepositoryImpl implements IClienteRepository {
     @Override
     public Cliente buscarPorDni(String dni) {
 
-        List<Cliente> listaPorDni = new ArrayList<>();
-        String sql = "call buscarClientesPorDNI(?)";
+        String sql = "SELECT * FROM clientes WHERE dni = ? AND activo = true";
 
         try (Connection conn = conectarDB.establecerConexion(); PreparedStatement st = conn.prepareStatement(sql)) {
 
             st.setString(1, dni);
             ResultSet rs = st.executeQuery();
 
-            while (rs.next()) {
-                listaPorDni.add(guardarDatosClientes(rs));
+            if (rs.next()) {
+                return guardarDatosClientes(rs);
             }
         } catch (SQLException e) {
             e.toString();
         }
-
-        return (Cliente) listaPorDni;
+        return null;
     }
 
     @Override
     public List<Cliente> buscarPorNombre(String nombre) {
 
         List<Cliente> listaPorNombre = new ArrayList<>();
-        String sql = "call buscarClientesPorNombre(?)";
-
+        String sql = "SELECT * FROM clientes WHERE (LOWER(nombres) LIKE LOWER(?) OR LOWER(apellidos) LIKE LOWER(?)) AND activo = true";
         try (Connection conn = conectarDB.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
             pst.setString(1, nombre);
@@ -74,8 +71,7 @@ public class ClienteRepositoryImpl implements IClienteRepository {
     public List<Cliente> listarTodos() {
 
         List<Cliente> listaClientes = new ArrayList<>();
-        String sql = "select * from clientes";
-
+        String sql = "SELECT * FROM clientes WHERE activo = true ORDER BY id_cliente";
         try (Connection conn = conectarDB.establecerConexion(); PreparedStatement pst = conn.prepareCall(sql)) {
 
             ResultSet rs = pst.executeQuery();
@@ -93,8 +89,7 @@ public class ClienteRepositoryImpl implements IClienteRepository {
     @Override
     public Cliente buscarPorID(int id) {
 
-        String sql = "call buscarClientePorID(?)";
-
+        String sql = "SELECT * FROM clientes WHERE id_cliente = ?";
         try (Connection conn = conectarDB.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
             pst.setInt(1, id);
@@ -113,8 +108,7 @@ public class ClienteRepositoryImpl implements IClienteRepository {
     @Override
     public boolean insertar(Cliente entidad) {
 
-        String sql = "call insertarClientes(?,?,?,?,?,?)";
-
+        String sql = "INSERT INTO clientes (dni, nombres, apellidos, telefono, email, activo) VALUES (?,?,?,?,?,?)";
         try (Connection conn = conectarDB.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
             pst.setString(1, entidad.getDni());
@@ -135,8 +129,7 @@ public class ClienteRepositoryImpl implements IClienteRepository {
     @Override
     public boolean actualizar(int id_entidad, Cliente entidad) {
 
-        String sql = "call actualizarClientes(?,?,?,?,?)";
-
+        String sql = "UPDATE clientes SET dni=?, nombres=?, apellidos=?, telefono=?, email=? WHERE id_cliente=?";
         try (Connection conn = conectarDB.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
             pst.setString(1, entidad.getDni());
@@ -157,10 +150,8 @@ public class ClienteRepositoryImpl implements IClienteRepository {
     @Override
     public boolean eliminar(int id) {
 
-        String sql = " call eliminarCliente(?)";
-
-        try (Connection conn = conectarDB.establecerConexion(); 
-                PreparedStatement pst = conn.prepareStatement(sql)) {
+        String sql = "UPDATE clientes SET activo = false WHERE id_cliente = ?";
+        try (Connection conn = conectarDB.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
             pst.setInt(1, id);
             return pst.executeUpdate() > 0;

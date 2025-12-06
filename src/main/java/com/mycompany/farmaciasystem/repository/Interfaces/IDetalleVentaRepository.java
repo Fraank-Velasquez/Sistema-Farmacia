@@ -13,6 +13,7 @@ import java.util.List;
  */
 public interface IDetalleVentaRepository extends IRepository<DetalleVenta> {
 
+
     List<DetalleVenta> listarPorVenta(int idVenta);
 
 }

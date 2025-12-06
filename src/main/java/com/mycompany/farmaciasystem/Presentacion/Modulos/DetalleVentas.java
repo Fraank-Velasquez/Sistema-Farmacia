@@ -4,22 +4,55 @@
  */
 package com.mycompany.farmaciasystem.Presentacion.Modulos;
 
+import com.mycompany.farmaciasystem.controladores.VentaController;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Frank
  */
-public class DetalleVentas extends javax.swing.JDialog {
+public final class DetalleVentas extends javax.swing.JDialog {
+
+    VentaController ventaController = new VentaController();
+    DefaultTableModel modeloDetalles;
 
     /**
      * Creates new form DetalleVentas
+     *
      * @param Ventana
+     * @param idVenta
      */
-    public DetalleVentas(JFrame Ventana) {
+    public DetalleVentas(JFrame Ventana, int idVenta) {
         super(Ventana, true);
         initComponents();
         setLocationRelativeTo(Ventana);
+        cargarDatosVenta(idVenta);
+
+    }
+
+    private void configurarTabla() {
+        String[] cabecera = {"ID Lote/Prod", "Cantidad", "P. Unit", "Descuento", "Subtotal"};
+        modeloDetalles = new DefaultTableModel(null, cabecera);
+        tblDetalleVenta.setModel(modeloDetalles); // Asegúrate que tu tabla se llame tblDetalleVenta
+    }
+
+    public void cargarDatosVenta(int idVenta) {
+        if (modeloDetalles == null) {
+            configurarTabla();
+        }
+
+        // 1. Cargar la tabla de productos (Items)
+        ventaController.cargarDetallesDeVenta(idVenta, modeloDetalles);
+
+        // 2. Cargar los datos de la cabecera (Cliente, Fecha, Total)
+        ventaController.cargarDatosCabeceraVenta(idVenta,
+                txtIdVenta, 
+                txtFechaVenta,
+                txtnombres,
+                txtDni,
+                txtTotalVenta
+        );
     }
 
     /**
@@ -34,20 +67,17 @@ public class DetalleVentas extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtnombre4 = new javax.swing.JTextField();
-        btnGuardar = new javax.swing.JButton();
-        btnGuardar1 = new javax.swing.JButton();
+        txtFechaVenta = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        txtnombre13 = new javax.swing.JTextField();
-        txtnombre14 = new javax.swing.JTextField();
+        txtnombres = new javax.swing.JTextField();
+        txtDni = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbProductos = new javax.swing.JTable();
-        jLabel20 = new javax.swing.JLabel();
-        txtnombre15 = new javax.swing.JTextField();
+        tblDetalleVenta = new javax.swing.JTable();
         jLabel21 = new javax.swing.JLabel();
-        txtnombre16 = new javax.swing.JTextField();
+        txtTotalVenta = new javax.swing.JTextField();
+        txtIdVenta = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -57,7 +87,7 @@ public class DetalleVentas extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Poppins", 0, 28)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(17, 53, 87));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Venta N° 0000-000-00");
+        jLabel3.setText("Venta N° ");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
@@ -66,28 +96,12 @@ public class DetalleVentas extends javax.swing.JDialog {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setText("Fecha:");
 
-        txtnombre4.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre4.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre4.setAutoscrolls(false);
-        txtnombre4.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
-
-        btnGuardar.setBackground(new java.awt.Color(153, 255, 153));
-        btnGuardar.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
-        btnGuardar.setForeground(new java.awt.Color(51, 51, 51));
-        btnGuardar.setText("Generar factura");
-        btnGuardar.setBorder(null);
-        btnGuardar.setBorderPainted(false);
-        btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnGuardar.setIconTextGap(18);
-
-        btnGuardar1.setBackground(new java.awt.Color(255, 51, 51));
-        btnGuardar1.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
-        btnGuardar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardar1.setText("Salir");
-        btnGuardar1.setBorder(null);
-        btnGuardar1.setBorderPainted(false);
-        btnGuardar1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnGuardar1.setIconTextGap(18);
+        txtFechaVenta.setEditable(false);
+        txtFechaVenta.setBackground(new java.awt.Color(238, 247, 225));
+        txtFechaVenta.setForeground(new java.awt.Color(51, 51, 51));
+        txtFechaVenta.setAutoscrolls(false);
+        txtFechaVenta.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtFechaVenta.setFocusable(false);
 
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
@@ -95,15 +109,19 @@ public class DetalleVentas extends javax.swing.JDialog {
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel15.setText("Cliente:");
 
-        txtnombre13.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre13.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre13.setAutoscrolls(false);
-        txtnombre13.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtnombres.setEditable(false);
+        txtnombres.setBackground(new java.awt.Color(238, 247, 225));
+        txtnombres.setForeground(new java.awt.Color(51, 51, 51));
+        txtnombres.setAutoscrolls(false);
+        txtnombres.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtnombres.setFocusable(false);
 
-        txtnombre14.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre14.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre14.setAutoscrolls(false);
-        txtnombre14.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtDni.setEditable(false);
+        txtDni.setBackground(new java.awt.Color(238, 247, 225));
+        txtDni.setForeground(new java.awt.Color(51, 51, 51));
+        txtDni.setAutoscrolls(false);
+        txtDni.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtDni.setFocusable(false);
 
         jLabel19.setBackground(new java.awt.Color(0, 0, 0));
         jLabel19.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
@@ -116,7 +134,7 @@ public class DetalleVentas extends javax.swing.JDialog {
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel16.setText("PRODUCTOS COMPRADOS: ");
 
-        tbProductos.setModel(new javax.swing.table.DefaultTableModel(
+        tblDetalleVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -127,29 +145,30 @@ public class DetalleVentas extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane1.setViewportView(tbProductos);
-
-        jLabel20.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel20.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel20.setText("Nota de venta: ");
-
-        txtnombre15.setBackground(new java.awt.Color(238, 247, 225));
-        txtnombre15.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre15.setAutoscrolls(false);
-        txtnombre15.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        tblDetalleVenta.setEnabled(false);
+        tblDetalleVenta.setFocusable(false);
+        jScrollPane1.setViewportView(tblDetalleVenta);
 
         jLabel21.setBackground(new java.awt.Color(0, 0, 0));
         jLabel21.setFont(new java.awt.Font("Poppins Medium", 0, 24)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(51, 51, 51));
         jLabel21.setText("TOTAL PAGADO:   S/.");
 
-        txtnombre16.setBackground(new java.awt.Color(204, 204, 255));
-        txtnombre16.setFont(new java.awt.Font("Poppins Medium", 0, 24)); // NOI18N
-        txtnombre16.setForeground(new java.awt.Color(51, 51, 51));
-        txtnombre16.setText(" 00.00");
-        txtnombre16.setAutoscrolls(false);
-        txtnombre16.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtTotalVenta.setEditable(false);
+        txtTotalVenta.setBackground(new java.awt.Color(204, 204, 255));
+        txtTotalVenta.setFont(new java.awt.Font("Poppins Medium", 0, 24)); // NOI18N
+        txtTotalVenta.setForeground(new java.awt.Color(51, 51, 51));
+        txtTotalVenta.setAutoscrolls(false);
+        txtTotalVenta.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        txtTotalVenta.setFocusable(false);
+
+        txtIdVenta.setEditable(false);
+        txtIdVenta.setBackground(new java.awt.Color(204, 204, 255));
+        txtIdVenta.setFont(new java.awt.Font("Poppins", 0, 28)); // NOI18N
+        txtIdVenta.setForeground(new java.awt.Color(17, 53, 87));
+        txtIdVenta.setAutoscrolls(false);
+        txtIdVenta.setBorder(null);
+        txtIdVenta.setFocusable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -161,65 +180,56 @@ public class DetalleVentas extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtnombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFechaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtnombre14, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtnombre13, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtnombres, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtnombre15, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel21)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtnombre16, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtTotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(22, Short.MAX_VALUE))))
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(220, 220, 220)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtIdVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtnombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19)
-                    .addComponent(txtnombre14, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15)
-                    .addComponent(txtnombre13, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdVenta))
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtnombre15, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel5)
+                    .addComponent(txtFechaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19)
+                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(txtnombres, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtnombre16, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(txtTotalVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                     .addComponent(jLabel21))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnGuardar1, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(12, 12, 12))
+                .addGap(42, 42, 42))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -230,31 +240,27 @@ public class DetalleVentas extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnGuardar1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbProductos;
-    private javax.swing.JTextField txtnombre13;
-    private javax.swing.JTextField txtnombre14;
-    private javax.swing.JTextField txtnombre15;
-    private javax.swing.JTextField txtnombre16;
-    private javax.swing.JTextField txtnombre4;
+    private javax.swing.JTable tblDetalleVenta;
+    private javax.swing.JTextField txtDni;
+    private javax.swing.JTextField txtFechaVenta;
+    private javax.swing.JTextField txtIdVenta;
+    private javax.swing.JTextField txtTotalVenta;
+    private javax.swing.JTextField txtnombres;
     // End of variables declaration//GEN-END:variables
 }

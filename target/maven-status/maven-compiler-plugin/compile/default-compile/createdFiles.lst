@@ -3,7 +3,6 @@ com\mycompany\farmaciasystem\repository\Implementaciones\UsuarioRepositoryImpl.c
 com\mycompany\farmaciasystem\command\ICommand.class
 com\mycompany\farmaciasystem\repository\Implementaciones\ProductoRepositoryImpl.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Inicio$3.class
-com\mycompany\farmaciasystem\Presentacion\Modulos\ListaVentas$7.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Promociones$4.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\ListaVentas.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Clientes$3.class
@@ -170,4 +169,3 @@ com\mycompany\farmaciasystem\controladores\DashboardController.class
 com\mycompany\farmaciasystem\repository\Interfaces\IDetalleCompraRepository.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Clientes$5.class
 com\mycompany\farmaciasystem\modelo\entidades\Usuario.class
-com\mycompany\farmaciasystem\Presentacion\Modulos\ListaVentas$6.class
