@@ -23,9 +23,11 @@ import java.util.List;
 public class LoteRepositoryImpl implements ILoteRepository {
 
     private final ConexionDb conectardb;
+    private ProductoRepositoryImpl productoRepository;
 
     public LoteRepositoryImpl() {
         this.conectardb = ConexionDb.getInstancia();
+        this.productoRepository = new ProductoRepositoryImpl();
     }
 
     @Override
@@ -70,9 +72,9 @@ public class LoteRepositoryImpl implements ILoteRepository {
 
     @Override
     public boolean insertar(Lote entidad) {
-        String sql = "INSERT INTO lotes (id_producto, id_empresa_fabricante, numero_lote, "
+        String sql = "INSERT INTO lotes (id_producto, id_empresa_proveedor, numero_lote, "
                 + "fecha_fabricacion, fecha_vencimiento, precio_compra, cantidad_inicial, "
-                + "fecha_ingreso, activo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "activo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
@@ -83,9 +85,7 @@ public class LoteRepositoryImpl implements ILoteRepository {
             pst.setDate(5, Date.valueOf(entidad.getFechaVencimiento()));
             pst.setDouble(6, entidad.getPrecioCompra());
             pst.setInt(7, entidad.getCantidadInicial());
-
-            pst.setDate(8, Date.valueOf(LocalDate.now()));
-            pst.setBoolean(9, true);
+            pst.setBoolean(8, true);
 
             return pst.executeUpdate() > 0;
 
@@ -98,7 +98,7 @@ public class LoteRepositoryImpl implements ILoteRepository {
     @Override
     public boolean actualizar(int id_entidad, Lote entidad) {
         String sql = "UPDATE lotes SET numero_lote = ?, fecha_fabricacion = ?, "
-                + "fecha_vencimiento = ?, precio_compra = ?, cantidad_inicial = ? "
+                + "fecha_vencimiento = ?, precio_compra = ?, cantidad_inicial = ? " // 'cantidad_inicial' actúa como stock
                 + "WHERE id_lote = ?";
 
         try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
@@ -108,7 +108,7 @@ public class LoteRepositoryImpl implements ILoteRepository {
             pst.setDate(3, Date.valueOf(entidad.getFechaVencimiento()));
             pst.setDouble(4, entidad.getPrecioCompra());
             pst.setInt(5, entidad.getCantidadInicial());
-            pst.setInt(6, entidad.getIdLote());
+            pst.setInt(6, entidad.getIdLote()); // Se usa el ID del lote
 
             return pst.executeUpdate() > 0;
 
@@ -121,7 +121,7 @@ public class LoteRepositoryImpl implements ILoteRepository {
     @Override
     public boolean eliminar(int id) {
 
-        String sql = "DELETE FROM lotes WHERE id_lote = ?";
+        String sql = "UPDATE lotes SET activo = false WHERE id_lote = ?";
 
         try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
@@ -248,4 +248,21 @@ public class LoteRepositoryImpl implements ILoteRepository {
         return lote;
     }
 
+    @Override
+    public boolean actualizarCantidadLote(int idLote, int cantidadConsumida) {
+        // Esta consulta resta la cantidad vendida al campo 'cantidad_inicial'
+        String sql = "UPDATE lotes SET cantidad_inicial = cantidad_inicial - ? WHERE id_lote = ?";
+
+        try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setInt(1, cantidadConsumida); // La venta resta la cantidad
+            pst.setInt(2, idLote);
+
+            return pst.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.toString();
+            return false;
+        }
+    }
 }

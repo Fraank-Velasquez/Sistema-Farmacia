@@ -283,7 +283,6 @@ public class NuevosUsuarios extends javax.swing.JDialog {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
-// Validar campos
         if (!validarCampos()) {
             return;
         }

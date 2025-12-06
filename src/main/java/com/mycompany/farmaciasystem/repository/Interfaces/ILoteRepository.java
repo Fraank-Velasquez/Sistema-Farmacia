@@ -21,4 +21,6 @@ public interface ILoteRepository extends IRepository<Lote> {
 
     public Lote obtenerLoteMasAntiguoDisponible(int idProducto);
 
+    public boolean actualizarCantidadLote(int idLote, int cantidadConsumida);
+
 }

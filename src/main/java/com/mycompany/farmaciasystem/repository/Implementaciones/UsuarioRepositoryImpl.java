@@ -32,8 +32,7 @@ public class UsuarioRepositoryImpl implements IUsuarioRepository {
 
         String sql = "Select * from usuarios where nombre_usuario= ?  and contrasenia =?";
 
-        try (Connection conex = conectarBD.establecerConexion();
-             PreparedStatement pst = conex.prepareStatement(sql)) {
+        try (Connection conex = conectarBD.establecerConexion(); PreparedStatement pst = conex.prepareStatement(sql)) {
 
             pst.setString(1, nombreUsuario);
             pst.setString(2, contrasenia);
@@ -44,7 +43,7 @@ public class UsuarioRepositoryImpl implements IUsuarioRepository {
             }
 
         } catch (SQLException e) {
-            e.toString(); 
+            e.toString();
         }
         return null;
     }
@@ -53,11 +52,10 @@ public class UsuarioRepositoryImpl implements IUsuarioRepository {
     public List<Usuario> listarTodos() {
 
         List<Usuario> usuarios = new ArrayList<>();
-        String sql = "select * from usuarios";
+        String sql = "SELECT * FROM usuarios WHERE activo = true ORDER BY id_usuario";
 
-        try (Connection conx = conectarBD.establecerConexion();
-             PreparedStatement st = conx.prepareStatement(sql)) {
-             
+        try (Connection conx = conectarBD.establecerConexion(); PreparedStatement st = conx.prepareStatement(sql)) {
+
             ResultSet rs = st.executeQuery();
 
             while (rs.next()) {
@@ -73,12 +71,11 @@ public class UsuarioRepositoryImpl implements IUsuarioRepository {
 
     @Override
     public Usuario buscarPorID(int id) {
-        
-        String sql = "call buscar_usuarioID(?)";
 
-        try (Connection conn = conectarBD.establecerConexion();
-             PreparedStatement st = conn.prepareStatement(sql)) {
-             
+        String sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
+
+        try (Connection conn = conectarBD.establecerConexion(); PreparedStatement st = conn.prepareStatement(sql)) {
+
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
 
@@ -89,18 +86,18 @@ public class UsuarioRepositoryImpl implements IUsuarioRepository {
         } catch (SQLException e) {
             e.toString();
         }
-        
+
         return null;
     }
 
     @Override
     public boolean insertar(Usuario entidad) {
 
-        String sql = "call insertar_usuario(?,?,?,?,?,?)";
-        
-        try (Connection conn = conectarBD.establecerConexion();
-             PreparedStatement st = conn.prepareStatement(sql)) {
-             
+        String sql = "INSERT INTO usuarios (nombre_usuario, contrasenia, nombres, apellidos, email, rol) "
+                + "VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = conectarBD.establecerConexion(); PreparedStatement st = conn.prepareStatement(sql)) {
+
             st.setString(1, entidad.getNombreUsuario());
             st.setString(2, entidad.getContrasenia());
             st.setString(3, entidad.getNombres());
@@ -111,6 +108,7 @@ public class UsuarioRepositoryImpl implements IUsuarioRepository {
             return st.executeUpdate() > 0;
 
         } catch (SQLException e) {
+            System.err.println("Error al insertar usuario (revisar si nombre_usuario ya existe): " + e.getMessage());
             e.toString();
         }
         return false;
@@ -119,21 +117,24 @@ public class UsuarioRepositoryImpl implements IUsuarioRepository {
     @Override
     public boolean actualizar(int id_entidad, Usuario entidad) {
 
-        String sql = "call editar_usuario(?,?,?,?,?,?,?)";
+        String sql = "UPDATE usuarios SET nombre_usuario = ?, contrasenia = ?, nombres = ?, "
+                + "apellidos = ?, email = ?, rol = ? WHERE id_usuario = ?"; // 7 placeholders
 
-        try (Connection conn = conectarBD.establecerConexion();
-             PreparedStatement st = conn.prepareStatement(sql)) {
-             
+        try (Connection conn = conectarBD.establecerConexion(); PreparedStatement st = conn.prepareStatement(sql)) {
+
             st.setString(1, entidad.getNombreUsuario());
             st.setString(2, entidad.getContrasenia());
             st.setString(3, entidad.getNombres());
             st.setString(4, entidad.getApellidos());
             st.setString(5, entidad.getEmail());
             st.setString(6, entidad.getRol());
-            
+
+            st.setInt(7, id_entidad);
+
             return st.executeUpdate() > 0;
 
         } catch (SQLException e) {
+            System.err.println("Error al actualizar usuario: " + e.getMessage());
             e.toString();
         }
         return false;
@@ -142,11 +143,10 @@ public class UsuarioRepositoryImpl implements IUsuarioRepository {
     @Override
     public boolean eliminar(int id) {
 
-        String sql = "call eliminar_usuario(?)";
+        String sql = "UPDATE usuarios SET activo = false WHERE id_usuario = ?";
 
-        try (Connection conn = conectarBD.establecerConexion();
-             PreparedStatement st = conn.prepareStatement(sql)) {
-             
+        try (Connection conn = conectarBD.establecerConexion(); PreparedStatement st = conn.prepareStatement(sql)) {
+
             st.setInt(1, id);
             return st.executeUpdate() > 0;
 
@@ -170,7 +170,7 @@ public class UsuarioRepositoryImpl implements IUsuarioRepository {
 
         Timestamp fechaCreacion = rs.getTimestamp("fecha_creacion");
         if (fechaCreacion != null) {
-            usuario.setFechaCreacion(fechaCreacion); 
+            usuario.setFechaCreacion(fechaCreacion);
         }
         usuario.setActivo(rs.getBoolean("activo"));
 

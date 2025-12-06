@@ -19,4 +19,6 @@ public interface IProductoRepository extends IRepository<Producto> {
 
     List<Producto> listarPorCategoria(int idCategoria);
 
+    public boolean actualizarStock(int idProducto, int cantidad);
+
 }
