@@ -34,7 +34,7 @@ public final class DetalleVentas extends javax.swing.JDialog {
     private void configurarTabla() {
         String[] cabecera = {"ID Lote/Prod", "Cantidad", "P. Unit", "Descuento", "Subtotal"};
         modeloDetalles = new DefaultTableModel(null, cabecera);
-        tblDetalleVenta.setModel(modeloDetalles); // Asegúrate que tu tabla se llame tblDetalleVenta
+        tblDetalleVenta.setModel(modeloDetalles); 
     }
 
     public void cargarDatosVenta(int idVenta) {
@@ -42,10 +42,10 @@ public final class DetalleVentas extends javax.swing.JDialog {
             configurarTabla();
         }
 
-        // 1. Cargar la tabla de productos (Items)
+        // Cargar la tabla de productos 
         ventaController.cargarDetallesDeVenta(idVenta, modeloDetalles);
 
-        // 2. Cargar los datos de la cabecera (Cliente, Fecha, Total)
+        // Cargar los datos de la cabecera 
         ventaController.cargarDatosCabeceraVenta(idVenta,
                 txtIdVenta, 
                 txtFechaVenta,

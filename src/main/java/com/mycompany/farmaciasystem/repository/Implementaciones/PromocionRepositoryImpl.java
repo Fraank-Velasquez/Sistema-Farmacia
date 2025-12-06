@@ -75,7 +75,7 @@ public class PromocionRepositoryImpl implements IPromocionRepository {
 
             pst.setString(1, entidad.getNombre());
             pst.setString(2, entidad.getDescripcion());
-            pst.setString(3, entidad.getTipoDescuento()); // "porcentaje" o "monto"
+            pst.setString(3, entidad.getTipoDescuento()); 
             pst.setDouble(4, entidad.getValorDescuento());
             pst.setDate(5, java.sql.Date.valueOf(entidad.getFechaInicio()));
             pst.setDate(6, java.sql.Date.valueOf(entidad.getFechaFin()));

@@ -37,16 +37,14 @@ public class EditarProveedor extends javax.swing.JDialog {
         Empresa e = empresaService.buscarPorId(id);
 
         if (e != null) {
-            // Mismo mapeo que NuevosProveedores
             txtId.setText(e.getRuc());
-            txtId.setEditable(false); // RUC no debería cambiar usualmente
+            txtId.setEditable(false); 
 
             txtNombre.setText(e.getNombre());
             txtTelefono.setText(e.getTelefono());
             txtEmail.setText(e.getEmail());
             txtDireccion.setText(e.getDireccion());
             txtCiudad.setText(e.getCiudad());
-            // Tipo de empresa
         }
     }
 
@@ -338,10 +336,10 @@ public class EditarProveedor extends javax.swing.JDialog {
             e.setEmail(txtEmail.getText().trim());
             e.setDireccion(txtDireccion.getText().trim());
             e.setCiudad(txtCiudad.getText().trim());
-            e.setTipoEmpresa("proveedor"); // O valor de campo
+            e.setTipoEmpresa("proveedor"); 
             e.setActivo(true);
 
-            if (empresaService.actualizarEmpresa(e)) { // Método en Service que llama a repository.actualizar
+            if (empresaService.actualizarEmpresa(e)) { 
                 JOptionPane.showMessageDialog(this, "Proveedor actualizado.");
                 this.dispose();
             } else {

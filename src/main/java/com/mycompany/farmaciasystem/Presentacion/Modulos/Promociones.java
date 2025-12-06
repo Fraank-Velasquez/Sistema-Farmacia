@@ -245,7 +245,7 @@ public class Promociones extends javax.swing.JPanel {
         int id = Integer.parseInt(tbPromociones.getValueAt(fila, 0).toString());
 
         EditarPromocion ventanaP = new EditarPromocion(ventana);
-        ventanaP.cargarDatos(id); // Implementar en paso 4
+        ventanaP.cargarDatos(id); 
         ventanaP.setVisible(true);
 
         CargarTablaPromociones();

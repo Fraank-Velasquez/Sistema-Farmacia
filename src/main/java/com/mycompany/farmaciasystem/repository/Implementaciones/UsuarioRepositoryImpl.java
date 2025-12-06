@@ -118,8 +118,7 @@ public class UsuarioRepositoryImpl implements IUsuarioRepository {
     public boolean actualizar(int id_entidad, Usuario entidad) {
 
         String sql = "UPDATE usuarios SET nombre_usuario = ?, contrasenia = ?, nombres = ?, "
-                + "apellidos = ?, email = ?, rol = ? WHERE id_usuario = ?"; // 7 placeholders
-
+                + "apellidos = ?, email = ?, rol = ? WHERE id_usuario = ?"; 
         try (Connection conn = conectarBD.establecerConexion(); PreparedStatement st = conn.prepareStatement(sql)) {
 
             st.setString(1, entidad.getNombreUsuario());

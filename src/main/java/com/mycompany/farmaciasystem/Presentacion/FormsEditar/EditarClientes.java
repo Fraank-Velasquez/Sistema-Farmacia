@@ -36,7 +36,6 @@ public class EditarClientes extends javax.swing.JDialog {
         Cliente c = clienteController.buscarClientePorId(id);
 
         if (c != null) {
-            // Mismo mapeo que en NuevosClientes
             txtDNI.setText(c.getDni());
             txtNmbre.setText(c.getNombres());
             txtApelidos.setText(c.getApellidos());

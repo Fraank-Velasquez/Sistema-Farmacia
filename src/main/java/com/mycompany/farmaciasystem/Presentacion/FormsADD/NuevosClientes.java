@@ -271,14 +271,13 @@ public class NuevosClientes extends javax.swing.JDialog {
 
             Cliente c = new Cliente();
 
-            // MAPEO DE VARIABLES SEGÚN TU DISEÑO:
-            c.setDni(txtnombre4.getText().trim());       // DNI
-            c.setNombres(txtnombre7.getText().trim());   // Nombres
-            c.setApellidos(txtnombre10.getText().trim());// Apellidos
-            c.setTelefono(txtnombre13.getText().trim()); // Teléfono
-            c.setEmail(txtnombre8.getText().trim());     // Email
+            // MAPEO DE VARIABLES 
+            c.setDni(txtnombre4.getText().trim());       
+            c.setNombres(txtnombre7.getText().trim());   
+            c.setApellidos(txtnombre10.getText().trim());
+            c.setTelefono(txtnombre13.getText().trim()); 
+            c.setEmail(txtnombre8.getText().trim());     
 
-            // txtnombre12 es "Dirección" pero la BD no tiene ese campo, lo ignoramos.
             c.setActivo(true);
 
             if (clienteController.guardarCliente(c)) {

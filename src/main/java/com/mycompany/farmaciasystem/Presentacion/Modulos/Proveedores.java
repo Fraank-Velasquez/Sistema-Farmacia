@@ -310,27 +310,23 @@ public class Proveedores extends javax.swing.JPanel {
 
         if (criterio.isEmpty()) {
             // Si está vacío, mostramos todos
-            lista = empresaService.listarProveedores(); // O listarTodas()
+            lista = empresaService.listarProveedores(); 
         } else {
-            // Si escribieron algo, intentamos buscar por ID
+          
             try {
                 int id = Integer.parseInt(criterio);
 
-                // LLAMAMOS AL MÉTODO QUE ACABAS DE CORREGIR
                 Empresa encontrada = empresaService.buscarPorId(id);
 
                 if (encontrada != null) {
-                    lista.add(encontrada); // Agregamos el único resultado a la lista para mostrarlo
+                    lista.add(encontrada); 
                 }
 
             } catch (NumberFormatException e) {
-                // Si escribieron letras, no hacemos nada (la lista queda vacía)
-                // O podrías mostrar un mensaje: "Búsqueda por ID requiere números"
             }
         }
 
         for (Empresa e : lista) {
-            // Filtramos para no mostrar laboratorios puros en la vista de proveedores
             if (e.getTipoEmpresa().equalsIgnoreCase("laboratorio")) {
                 continue;
             }

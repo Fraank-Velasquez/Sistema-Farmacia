@@ -30,7 +30,7 @@ import javax.swing.table.DefaultTableModel;
 public class Productos extends javax.swing.JPanel {
 
     private ProductoController productoController = new ProductoController();
-    private DefaultTableModel modeloTabla; // Para tener acceso global al modelo
+    private DefaultTableModel modeloTabla; 
     JFrame Principal = (JFrame) SwingUtilities.getWindowAncestor(this);
 
     /**
@@ -311,7 +311,7 @@ public class Productos extends javax.swing.JPanel {
             ventanaEditar.cargarDatos(id);
             ventanaEditar.setVisible(true);
 
-            CargarTablaProductos(); // Refrescar al volver
+            CargarTablaProductos(); 
         } else {
             javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un producto.");
         }
@@ -378,21 +378,20 @@ public class Productos extends javax.swing.JPanel {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String criterio = txtBuscar.getText().trim();
 
-        // Limpiamos visualmente la tabla
+        // Limpiarvisualmente la tabla
         DefaultTableModel modelo = (DefaultTableModel) tbProductos.getModel();
         modelo.setRowCount(0);
 
         java.util.List<Producto> lista;
 
         if (criterio.isEmpty()) {
-            // Si está vacío, traemos todos (los activos, gracias al cambio del paso 1)
+            // Si está vacío, traemos todos los activos
             lista = productoController.obtenerTodosLosProductos();
         } else {
-            // Si hay texto, buscamos por nombre
             lista = productoController.buscarProductosPorNombre(criterio);
         }
 
-        // Rellenamos la tabla
+        // Rellenar la tabla
         for (Producto p : lista) {
             Object[] fila = {
                 p.getIdProducto(),

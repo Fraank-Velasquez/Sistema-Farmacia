@@ -250,30 +250,29 @@ public class ListaVentas extends javax.swing.JPanel {
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
 
         try {
-            // 1. Obtener los datos necesarios (Lista de ventas y Fechas)
             IVentaRepository repoVentas = new VentaRepositoryImpl();
 
-            // Por defecto sacamos el reporte del mes actual (puedes ajustarlo según tu lógica)
+            // Por defectoel reporte del mes actual
             LocalDate fechaFin = java.time.LocalDate.now();
             LocalDate fechaInicio = fechaFin.withDayOfMonth(1);
 
-            // Obtenemos la lista de ventas (puedes usar listarPorFecha si prefieres filtrar)
+            // Obtener la lista de ventas 
             List<Venta> listaVentas = repoVentas.listarTodos();
 
-            // 2. Usar la Fábrica pasando TODOS los parámetros requeridos
+            // Usar la Fábrica pasando  los parámetros requeridos
             // Parámetros: Tipo, Lista de Ventas, Fecha Inicio, Fecha Fin
             IReporte reporte
                     = ReportesFactory.crearReporte(
                             ReportesFactory.TipoReporte.VENTAS,
-                            listaVentas, // param[0]
-                            fechaInicio, // param[1]
-                            fechaFin // param[2]
+                            listaVentas, 
+                            fechaInicio, 
+                            fechaFin 
                     );
 
-            // 3. Generar el reporte (Lena el byte array interno)
+            // Generar el reporte 
             reporte.generarReporte();
 
-            // 4. Guardar el archivo (Usando JFileChooser para elegir donde guardar)
+            // Guardar el archivo (Usando JFileChooser para elegir donde guardar)
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setSelectedFile(new File(reporte.obtenerNombreArchivo()));
 
@@ -289,7 +288,7 @@ public class ListaVentas extends javax.swing.JPanel {
             }
 
         } catch (HeadlessException e) {
-            e.printStackTrace(); // Imprime el error en consola para ver detalles
+            e.printStackTrace(); 
             javax.swing.JOptionPane.showMessageDialog(this, "Error al generar el reporte: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
 
@@ -302,7 +301,7 @@ public class ListaVentas extends javax.swing.JPanel {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
-        // 1. Obtener la fila seleccionada
+        //Obtener la fila seleccionada
         int fila = tblVentas.getSelectedRow();
 
         if (fila == -1) {
@@ -310,19 +309,18 @@ public class ListaVentas extends javax.swing.JPanel {
             return;
         }
 
-        // 2. Obtener el ID de la venta (Columna 0)
+        // Obtener el ID de la venta (Columna 0)
         int idVenta = Integer.parseInt(tblVentas.getValueAt(fila, 0).toString());
 
-        // 3. Confirmación de seguridad
-        int confirmacion = javax.swing.JOptionPane.showConfirmDialog(this,
+        // Confirmación de seguridad
+        int confirmacion = JOptionPane.showConfirmDialog(this,
                 "¿Está seguro de ANULAR la venta ID: " + idVenta + "?\nEsta acción es irreversible.",
                 "Confirmar Anulación",
-                javax.swing.JOptionPane.YES_NO_OPTION,
-                javax.swing.JOptionPane.WARNING_MESSAGE);
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE);
 
         if (confirmacion == JOptionPane.YES_OPTION) {
-            // 4. Llamar al repositorio directamente o a través del controller
-            // Nota: VentaRepositoryImpl.eliminar(id) ya hace el DELETE
+            // Llamar al repositorio directamente o a través del controller
             VentaRepositoryImpl repo = new VentaRepositoryImpl();
 
             boolean eliminado = repo.eliminar(idVenta);
@@ -358,15 +356,11 @@ public class ListaVentas extends javax.swing.JPanel {
     }//GEN-LAST:event_btnVerDetalleActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-// Esta acción se dispara al dar Enter
         String criterio = txtBuscar.getText().trim();
         if (criterio.isEmpty()) {
-            ventaController.cargarHistorialVentas(modeloVentas); // Restaurar todo
+            ventaController.cargarHistorialVentas(modeloVentas); 
         } else {
-            // Necesitarías implementar buscarVentas(criterio) en tu VentaController
-            // Por ahora, recargamos todo para evitar errores si no tienes ese método específico
             ventaController.cargarHistorialVentas(modeloVentas);
-            // TODO: Implementar filtro específico en Controller
         }
 
 

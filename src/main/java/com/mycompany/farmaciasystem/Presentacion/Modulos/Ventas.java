@@ -507,8 +507,7 @@ public class Ventas extends javax.swing.JPanel {
 
                 if (cantidad > 0 && cantidad <= productoSeleccionado.getStockActual()) {
 
-                    // AQUÍ ESTÁ EL CAMBIO: Pasamos los campos de texto de tu interfaz
-                    // para que el controlador ponga los montos calculados con la promoción.
+                    // poner los montos calculados con la promoción.
                     ventaController.agregarAlCarrito(productoSeleccionado,
                             cantidad, modeloCarrito,
                             txtSubtotalVenta,
@@ -528,24 +527,24 @@ public class Ventas extends javax.swing.JPanel {
 
         int filaSeleccionada = tblCarrito.getSelectedRow();
 
-        // 2. Validar que se haya seleccionado un ítem
+        // Validar que se haya seleccionado un ítem
         if (filaSeleccionada == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this,
+            JOptionPane.showMessageDialog(this,
                     "Seleccione un producto del carrito para quitar.",
                     "Advertencia",
                     javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // 3. Confirmar la acción (Opcional, pero recomendable para UX)
-        int confirmacion = javax.swing.JOptionPane.showConfirmDialog(this,
+        // Confirmar la acción 
+        int confirmacion = JOptionPane.showConfirmDialog(this,
                 "¿Está seguro de quitar este producto del carrito?",
                 "Confirmar eliminación",
-                javax.swing.JOptionPane.YES_NO_OPTION);
+                JOptionPane.YES_NO_OPTION);
 
-        if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
+        if (confirmacion == JOptionPane.YES_OPTION) {
 
-            // 4. Llamar al controlador para quitar el ítem y recalcular todo
+            //Llamar al controlador para quitar el ítem y recalcular todo
             ventaController.quitarDelCarrito(
                     filaSeleccionada,
                     modeloCarrito,
@@ -564,7 +563,7 @@ public class Ventas extends javax.swing.JPanel {
 
     private void btnRegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarVentaActionPerformed
 
-        // Obtener IDs reales de tu interfaz o sesión
+        // Obtener IDs
         int idCliente = 1;
         int idUsuario = 1;
 

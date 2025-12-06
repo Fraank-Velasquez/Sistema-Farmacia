@@ -5,6 +5,8 @@
 package com.mycompany.farmaciasystem.modelo.DTO;
 
 /**
+ * Clase para transferir los datos de un producto individual en el carrito de
+ * ventas.
  *
  * @author Frank
  */
@@ -56,11 +58,5 @@ public class ItemVentaDTO {
     public void setDescuentoAplicado(double descuentoAplicado) {
         this.descuentoAplicado = descuentoAplicado;
     }
-    
-    
-    
-    
-    
-    
 
 }

@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -5,7 +6,6 @@
 package com.mycompany.farmaciasystem.command;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -16,38 +16,35 @@ import java.util.Stack;
  */
 public class CommandInvoker {
 
-    // 1. INSTANCIA SINGLETON (Para que el historial sea compartido en toda la app)
+    // INSTANCIA SINGLETON Para que el historial sea compartido 
     private static final CommandInvoker INSTANCE = new CommandInvoker();
 
     private Stack<ICommand> historialEjecutados;
     private Stack<ICommand> historialDeshechos;
     private List<RegistroComando> registroAuditoria;
 
-    // Constructor privado para el Singleton
+    
     public CommandInvoker() {
         this.historialEjecutados = new Stack<>();
         this.historialDeshechos = new Stack<>();
         this.registroAuditoria = new ArrayList<>();
     }
 
-    // Método para obtener la instancia única (si la necesitas manualmente)
+    // Método para obtener la instancia única
     public static CommandInvoker getInstance() {
         return INSTANCE;
     }
 
-    // 2. MÉTODO ESTÁTICO (El puente que necesita VentaController)
     public static void ejecutar(ICommand comando) {
         INSTANCE.ejecutarComando(comando);
     }
 
-    // Lógica de instancia (Tu lógica original mejorada)
+    // Lógica de instancia 
     public boolean ejecutarComando(ICommand comando) {
         boolean resultado = comando.ejecutar();
 
         if (resultado) {
             historialEjecutados.push(comando);
-            // Al ejecutar un nuevo comando, se limpia la pila de "rehacer"
-            // porque se ha bifurcado la historia.
             historialDeshechos.clear();
 
             // Registrar en auditoria
@@ -70,7 +67,6 @@ public class CommandInvoker {
             historialDeshechos.push(comando);
             registrarEnAuditoria(comando, "DESHECHO");
         } else {
-            // Si falla el deshacer, lo devolvemos a la pila de ejecutados
             historialEjecutados.push(comando);
         }
 
@@ -101,7 +97,6 @@ public class CommandInvoker {
         historialDeshechos.clear();
     }
 
-    // ... (El resto de tus métodos getters y helpers se mantienen igual) ...
     private void registrarEnAuditoria(ICommand comando, String accion) {
         RegistroComando registro = new RegistroComando(
                 LocalDateTime.now(),
@@ -112,7 +107,7 @@ public class CommandInvoker {
         registroAuditoria.add(registro);
     }
 
-    // Clase interna para el registro (se mantiene igual)
+    // Clase interna para el registro 
     public class RegistroComando {
 
         private LocalDateTime fechaHora;
@@ -127,7 +122,6 @@ public class CommandInvoker {
             this.accion = accion;
         }
 
-        // Getters necesarios para los reportes o vistas
         public LocalDateTime getFechaHora() {
             return fechaHora;
         }

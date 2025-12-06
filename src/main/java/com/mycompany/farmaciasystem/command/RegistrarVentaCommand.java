@@ -40,8 +40,7 @@ public class RegistrarVentaCommand implements ICommand {
 
     @Override
     public boolean deshacer() {
-        // La reversión de una venta implica reingresar stock 
-        // Por ahora, retornamos false ya que requiere una implementación compleja de devoluciones.
+        // Por ahora, retornamos false, falta implementar.
         return false;
     }
 

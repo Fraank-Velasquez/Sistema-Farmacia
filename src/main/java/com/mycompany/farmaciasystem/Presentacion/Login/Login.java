@@ -193,7 +193,7 @@ public class Login extends javax.swing.JFrame {
         if (nombreUsuario.isEmpty() || contrasenia.isEmpty()) {
             JOptionPane.showMessageDialog(this,
                     "Complete todos los campos",
-                    " ⚠ Error de inicio de sesión",
+                    " Error de inicio de sesión",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }

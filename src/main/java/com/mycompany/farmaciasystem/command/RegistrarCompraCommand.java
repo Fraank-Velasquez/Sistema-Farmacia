@@ -62,7 +62,7 @@ public class RegistrarCompraCommand implements ICommand {
             }
             this.idCompraGenerada = idGenerado;
 
-            //  Procesar cada Lote (Item de la compra)
+            //  Procesar cada Lote 
             for (Lote lote : nuevosLotes) {
 
                 // Insertar el Lote en la BD

@@ -307,7 +307,7 @@ public class NuevosProveedores extends javax.swing.JDialog {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         try {
-            // Validar obligatorios
+            // Validacion
             if (txtNombreEmpresa.getText().trim().isEmpty() || txtidProveedor.getText().trim().isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Nombre y RUC son obligatorios.");
                 return;
@@ -315,24 +315,20 @@ public class NuevosProveedores extends javax.swing.JDialog {
 
             com.mycompany.farmaciasystem.modelo.entidades.Empresa e = new com.mycompany.farmaciasystem.modelo.entidades.Empresa();
 
-            // --- ASIGNACIÓN DE VARIABLES (Ajusta si tu diseño difiere) ---
-            e.setRuc(txtidProveedor.getText().trim());       // RUC
-            e.setNombre(txtNombreEmpresa.getText().trim());    // Nombre
-            e.setTelefono(txtTelefono.getText().trim()); // Teléfono
-            e.setEmail(txtEmail.getText().trim());     // Email
+            //ASIGNACIÓN DE VARIABLES
+            e.setRuc(txtidProveedor.getText().trim());      
+            e.setNombre(txtNombreEmpresa.getText().trim());   
+            e.setTelefono(txtTelefono.getText().trim());
+            e.setEmail(txtEmail.getText().trim());     
 
-            // Dirección y Ciudad (Ajusta los txt según corresponda en tu diseño)
             e.setDireccion(txtDireccion.getText().trim());
             e.setCiudad(txtCiudad.getText().trim());
 
-            // Tipo de Empresa (Puede ser 'proveedor', 'laboratorio' o 'ambos')
-            // Si tienes un JTextField, lee el texto. Si tienes JComboBox, usa getSelectedItem().
-            // Asumiremos Texto por ahora o un valor por defecto.
-            e.setTipoEmpresa("proveedor"); // O txtnombre14.getText()
+            e.setTipoEmpresa("proveedor"); 
 
             e.setActivo(true);
 
-            if (empresaService.guardarEmpresa(e)) { // Método en Service que llama a repository.insertar
+            if (empresaService.guardarEmpresa(e)) { 
                 javax.swing.JOptionPane.showMessageDialog(this, "Proveedor registrado.");
                 this.dispose();
             } else {

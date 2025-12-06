@@ -47,7 +47,7 @@ public class Clientes extends javax.swing.JPanel {
             }
         };
 
-        // Columnas alineadas a la BD (Omitimos Direccion porque no está en BD)
+        // Columnas de la tablas
         String titulos[] = {"ID", "DNI", "Nombres", "Apellidos", "Teléfono", "Email"};
         modeloTabla.setColumnIdentifiers(titulos);
 
@@ -274,7 +274,7 @@ public class Clientes extends javax.swing.JPanel {
         int id = Integer.parseInt(tbClientes.getValueAt(fila, 0).toString());
 
         EditarClientes ventanaEditar = new EditarClientes(principal);
-        ventanaEditar.cargarDatos(id); // Método que crearemos en el paso 4
+        ventanaEditar.cargarDatos(id); 
         ventanaEditar.setVisible(true);
 
         CargarTablaClientes();

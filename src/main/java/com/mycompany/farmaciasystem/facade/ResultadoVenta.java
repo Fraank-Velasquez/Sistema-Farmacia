@@ -5,7 +5,8 @@
 package com.mycompany.farmaciasystem.facade;
 
 /**
- *
+ * Clase para encapsular el resultado de la operación de venta.
+ * Permitir devolver el estado, mensaje y los datos finales de la transacción.
  * @author Frank
  */
 public class ResultadoVenta {

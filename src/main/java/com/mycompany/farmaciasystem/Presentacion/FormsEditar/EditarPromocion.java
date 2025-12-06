@@ -334,27 +334,24 @@ public class EditarPromocion extends javax.swing.JDialog {
                 return;
             }
 
-            // 2. Crear el objeto y asignar el ID que estamos editando
+            // Crear el objeto y asignar el ID que estamos editando
             Promocion p = new Promocion();
 
-            // ASIGNACIÓN DEL ID (Vital para que el UPDATE sepa cuál registro tocar)
+            // ASIGNACIÓN DEL ID 
             p.setIdPromocion(this.idPromo);
 
-            // 3. Recoger datos de los TextFields
             p.setNombre(txtNombre.getText().trim());           
             p.setDescripcion(txtDescripcion.getText().trim());     
             p.setTipoDescuento(txtID.getText().trim());    
 
-            // Conversión de número (Valor del descuento)
             p.setValorDescuento(Double.parseDouble(txtnombre5.getText().trim()));
 
-            // 4. Conversión de Fechas (Formato esperado: yyyy-MM-dd, ej: 2024-12-31)
             p.setFechaInicio(LocalDate.parse(txtFechaiN.getText().trim()));
             p.setFechaFin(LocalDate.parse(txtTipoDesceunto.getText().trim()));
 
             p.setActivo(true);
 
-            // 5. Enviar al controlador
+            // Enviar al controlador
             if (promocionController.actualizar(p)) {
                 JOptionPane.showMessageDialog(this, "Promoción actualizada correctamente.");
                 this.dispose(); // Cerrar ventana

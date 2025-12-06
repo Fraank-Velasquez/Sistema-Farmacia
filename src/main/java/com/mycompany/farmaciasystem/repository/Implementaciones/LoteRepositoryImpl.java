@@ -12,7 +12,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +43,7 @@ public class LoteRepositoryImpl implements ILoteRepository {
             }
 
         } catch (SQLException e) {
-            e.toString(); // Cambiado a printStackTrace
+            e.toString(); 
         }
 
         return lotes;
@@ -98,7 +97,7 @@ public class LoteRepositoryImpl implements ILoteRepository {
     @Override
     public boolean actualizar(int id_entidad, Lote entidad) {
         String sql = "UPDATE lotes SET numero_lote = ?, fecha_fabricacion = ?, "
-                + "fecha_vencimiento = ?, precio_compra = ?, cantidad_inicial = ? " // 'cantidad_inicial' actúa como stock
+                + "fecha_vencimiento = ?, precio_compra = ?, cantidad_inicial = ? " 
                 + "WHERE id_lote = ?";
 
         try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
@@ -108,7 +107,7 @@ public class LoteRepositoryImpl implements ILoteRepository {
             pst.setDate(3, Date.valueOf(entidad.getFechaVencimiento()));
             pst.setDouble(4, entidad.getPrecioCompra());
             pst.setInt(5, entidad.getCantidadInicial());
-            pst.setInt(6, entidad.getIdLote()); // Se usa el ID del lote
+            pst.setInt(6, entidad.getIdLote()); 
 
             return pst.executeUpdate() > 0;
 
@@ -250,12 +249,11 @@ public class LoteRepositoryImpl implements ILoteRepository {
 
     @Override
     public boolean actualizarCantidadLote(int idLote, int cantidadConsumida) {
-        // Esta consulta resta la cantidad vendida al campo 'cantidad_inicial'
         String sql = "UPDATE lotes SET cantidad_inicial = cantidad_inicial - ? WHERE id_lote = ?";
 
         try (Connection conn = conectardb.establecerConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
-            pst.setInt(1, cantidadConsumida); // La venta resta la cantidad
+            pst.setInt(1, cantidadConsumida); 
             pst.setInt(2, idLote);
 
             return pst.executeUpdate() > 0;

@@ -49,15 +49,11 @@ public class ConexionDb {
             if (conexion == null || conexion.isClosed()) {
                 conexion = DriverManager.getConnection(url, user, password);
                 System.out.println("Conexion establecida con la base de datos");
-//                JOptionPane.showMessageDialog(null,"Conexión establecida con la base de datos",
-//                        "Exitoso",JOptionPane.INFORMATION_MESSAGE);
+
             }
         } catch (SQLException e) {
             System.out.println("Error al conectar: " + e.getMessage());
 
-//            JOptionPane.showMessageDialog(null,
-//                    "Error al conectar: " + e.getMessage(),
-//                    "Error", JOptionPane.ERROR_MESSAGE);
         }
         return conexion;
     }
@@ -72,10 +68,7 @@ public class ConexionDb {
                 System.out.println("Conexión cerrada exitosamente");
             }
         } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null,
-//                    "Error al cerrar conexión: " + e.getMessage(),
-//                    "Error",
-//                    JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
