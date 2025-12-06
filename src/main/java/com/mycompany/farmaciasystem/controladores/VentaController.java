@@ -261,8 +261,7 @@ public class VentaController {
     // Llena los datos de cabecera en la ventana de detalle
     public void cargarDatosCabeceraVenta(int idVenta,
             JTextField txtId, JTextField txtFecha,
-            JTextField txtCliente, JTextField txtTotal,
-            JTextField txtVendedor) {
+            JTextField txtCliente, JTextField txtTotal) {
 
         Venta venta = ventaRepository.buscarPorID(idVenta);
 
@@ -280,11 +279,6 @@ public class VentaController {
             Cliente cliente = clienteService.buscarPorId(venta.getIdCliente());
             if (cliente != null && txtCliente != null) {
                 txtCliente.setText(cliente.getNombres() + " " + cliente.getApellidos());
-            }
-
-            Usuario usuario = usuarioService.buscarPorId(venta.getIdUsuario());
-            if (usuario != null && txtVendedor != null) {
-                txtVendedor.setText(usuario.getNombreUsuario());
             }
         }
     }

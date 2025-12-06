@@ -50,7 +50,6 @@ public final class DetalleVentas extends javax.swing.JDialog {
                 txtIdVenta, 
                 txtFechaVenta,
                 txtnombres,
-                txtDni,
                 txtTotalVenta
         );
     }
