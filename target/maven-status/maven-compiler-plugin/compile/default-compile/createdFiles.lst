@@ -22,6 +22,7 @@ com\mycompany\farmaciasystem\Presentacion\Modulos\ListaVentas$2.class
 com\mycompany\farmaciasystem\Presentacion\Login\Login$5.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Productos$1.class
 com\mycompany\farmaciasystem\factory\ReporteLotesVencidos.class
+com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevosProductos$1.class
 com\mycompany\farmaciasystem\repository\Implementaciones\LoteRepositoryImpl.class
 com\mycompany\farmaciasystem\observer\Observable.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Inicio$4.class
@@ -30,6 +31,7 @@ com\mycompany\farmaciasystem\servicios\UsuarioService.class
 com\mycompany\farmaciasystem\Presentacion\FormsEditar\EditarPromocion$1.class
 com\mycompany\farmaciasystem\factory\ReportesFactory.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Clientes$2.class
+com\mycompany\farmaciasystem\Presentacion\FormsEditar\EditarProducto$1.class
 com\mycompany\farmaciasystem\command\EliminarProductoCommand.class
 com\mycompany\farmaciasystem\controladores\VentaController.class
 com\mycompany\farmaciasystem\repository\Interfaces\IDetalleVentaRepository.class
@@ -105,7 +107,6 @@ com\mycompany\farmaciasystem\Presentacion\Modulos\Ventas$3.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Clientes$1.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Inicio$5.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\DetalleVentas.class
-com\mycompany\farmaciasystem\Presentacion\Modulos\Productos$8.class
 com\mycompany\farmaciasystem\Presentacion\FormsADD\NuevosProveedores.class
 com\mycompany\farmaciasystem\Presentacion\Modulos\Promociones$2.class
 com\mycompany\farmaciasystem\servicios\ClienteService.class

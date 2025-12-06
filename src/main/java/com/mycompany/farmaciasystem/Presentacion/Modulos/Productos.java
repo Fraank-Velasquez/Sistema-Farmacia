@@ -6,9 +6,20 @@ package com.mycompany.farmaciasystem.Presentacion.Modulos;
 
 import com.mycompany.farmaciasystem.Presentacion.FormsADD.NuevosProductos;
 import com.mycompany.farmaciasystem.Presentacion.FormsEditar.EditarProducto;
+import com.mycompany.farmaciasystem.controladores.ProductoController;
+import com.mycompany.farmaciasystem.factory.IReporte;
+import com.mycompany.farmaciasystem.factory.ReportesFactory;
+import com.mycompany.farmaciasystem.modelo.entidades.Producto;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.HeadlessException;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,6 +29,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Productos extends javax.swing.JPanel {
 
+    private ProductoController productoController = new ProductoController();
+    private DefaultTableModel modeloTabla; // Para tener acceso global al modelo
     JFrame Principal = (JFrame) SwingUtilities.getWindowAncestor(this);
 
     /**
@@ -30,30 +43,26 @@ public class Productos extends javax.swing.JPanel {
 
     public final void CargarTablaProductos() {
 
-        DefaultTableModel tablaProductos = new DefaultTableModel() {
+        modeloTabla = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int colum) {
                 return false;
             }
         };
 
-        String titulos[] = {"ID producto", "Nombre", "Categoria", "Laboratorio", "Precio", "Stock Actual", "Stock minimo", "Descripcion"};
-        tablaProductos.setColumnIdentifiers(titulos);
+        // Nombres de columnas coincidiendo con tus datos
+        String titulos[] = {"ID", "Nombre", "Descripción", "Precio", "Stock Actual", "Stock Mínimo", "Estado"};
+        modeloTabla.setColumnIdentifiers(titulos);
 
-        // CargarDatos:
-        
-        
-        //
-        
-        tbProductos.setModel(tablaProductos);
+        tbProductos.setModel(modeloTabla);
+
+        // Configuración visual (tu código original)
         tbProductos.getTableHeader().setReorderingAllowed(false);
-        
         tbProductos.getTableHeader().setFont(new Font("poppins semibold", Font.BOLD, 12));
         tbProductos.getTableHeader().setBackground(new Color(207, 250, 254));
-        
-       
-        //tbProductos.getTableHeader().setResizingAllowed(false);
 
+        // CARGAR DATOS REALES
+        productoController.cargarProductosEnTabla(modeloTabla);
     }
 
     /**
@@ -73,12 +82,11 @@ public class Productos extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbProductos = new javax.swing.JTable();
         btnRepInvent = new javax.swing.JButton();
         btnRepoBajoStock = new javax.swing.JButton();
-        btnUltimaOper = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -147,9 +155,6 @@ public class Productos extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/search_30dp_000000_FILL0_wght400_GRAD0_opsz24.png"))); // NOI18N
-        jLabel3.setFocusable(false);
-
         tbProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -195,19 +200,18 @@ public class Productos extends javax.swing.JPanel {
             }
         });
 
-        btnUltimaOper.setBackground(new java.awt.Color(242, 242, 242));
-        btnUltimaOper.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        btnUltimaOper.setForeground(new java.awt.Color(51, 51, 51));
-        btnUltimaOper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/edit_square_30dp_5084C1_FILL0_wght400_GRAD0_opsz24.png"))); // NOI18N
-        btnUltimaOper.setText("Deshacer ultima operacion");
-        btnUltimaOper.setBorder(null);
-        btnUltimaOper.setBorderPainted(false);
-        btnUltimaOper.setFocusPainted(false);
-        btnUltimaOper.setFocusable(false);
-        btnUltimaOper.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnUltimaOper.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setBackground(new java.awt.Color(242, 242, 242));
+        btnBuscar.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        btnBuscar.setForeground(new java.awt.Color(51, 51, 51));
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources_img/search_30dp_000000_FILL0_wght400_GRAD0_opsz24.png"))); // NOI18N
+        btnBuscar.setBorder(null);
+        btnBuscar.setFocusPainted(false);
+        btnBuscar.setFocusable(false);
+        btnBuscar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnBuscar.setIconTextGap(5);
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUltimaOperActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -219,8 +223,6 @@ public class Productos extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnUltimaOper, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
                         .addComponent(btnRepInvent, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(btnRepoBajoStock, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -231,21 +233,21 @@ public class Productos extends javax.swing.JPanel {
                         .addComponent(btnAgregarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(16, 16, 16))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,20 +258,19 @@ public class Productos extends javax.swing.JPanel {
                     .addComponent(btnAgregarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRepInvent, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRepoBajoStock, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUltimaOper, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRepoBajoStock, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -298,39 +299,106 @@ public class Productos extends javax.swing.JPanel {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
-        EditarProducto ventanaEditar = new EditarProducto(Principal);
-        ventanaEditar.setVisible(true);
+        int fila = tbProductos.getSelectedRow();
+        if (fila >= 0) {
+            int id = Integer.parseInt(tbProductos.getValueAt(fila, 0).toString());
 
+            EditarProducto ventanaEditar = new EditarProducto(Principal);
+            ventanaEditar.cargarDatos(id); 
+            ventanaEditar.setVisible(true);
+
+            CargarTablaProductos(); // Refrescar al volver
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un producto.");
+        }
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
+        int fila = tbProductos.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione el producto a eliminar.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int idProducto = Integer.parseInt(tbProductos.getValueAt(fila, 0).toString());
+        String nombre = tbProductos.getValueAt(fila, 1).toString();
+
+        int confirmacion = JOptionPane.showConfirmDialog(this,
+                "¿Está seguro de eliminar el producto '" + nombre + "'?\nEsto lo desactivará del sistema.",
+                "Confirmar Eliminación",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            boolean exito = productoController.eliminarProducto(idProducto);
+            if (exito) {
+                JOptionPane.showMessageDialog(this, "Producto eliminado correctamente.");
+                CargarTablaProductos(); // Recargar tabla
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al eliminar el producto.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRepInventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRepInventActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRepInventActionPerformed
+        try {
+            List<Producto> lista = productoController.obtenerTodosLosProductos();
+
+            IReporte reporte = ReportesFactory.crearReporte(ReportesFactory.TipoReporte.INVENTARIO, lista);
+
+            generarYGuardarReporte(reporte);
+
+        } catch (Exception e) {
+            e.toString();
+        }    }//GEN-LAST:event_btnRepInventActionPerformed
 
     private void btnRepoBajoStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRepoBajoStockActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRepoBajoStockActionPerformed
+        try {
+            List<Producto> lista = productoController.obtenerProductosBajoStock();
 
-    private void btnUltimaOperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimaOperActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUltimaOperActionPerformed
+            if (lista.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No hay productos con bajo stock.");
+                return;
+            }
 
+            IReporte reporte = ReportesFactory.crearReporte(ReportesFactory.TipoReporte.BAJO_STOCK, lista);
 
+            generarYGuardarReporte(reporte);
+
+        } catch (HeadlessException e) {
+            e.printStackTrace();
+        }    }//GEN-LAST:event_btnRepoBajoStockActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+       
+
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void generarYGuardarReporte(IReporte reporte) {
+        reporte.generarReporte();
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setSelectedFile(new File(reporte.obtenerNombreArchivo()));
+
+        if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            try (FileOutputStream fos = new FileOutputStream(fileChooser.getSelectedFile())) {
+                fos.write(reporte.obtenerBytes());
+                JOptionPane.showMessageDialog(this, "Reporte guardado exitosamente.");
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Error IO: " + ex.getMessage());
+            }
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarProductos;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnRepInvent;
     private javax.swing.JButton btnRepoBajoStock;
-    private javax.swing.JButton btnUltimaOper;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
